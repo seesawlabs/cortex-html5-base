@@ -1,0 +1,33 @@
+{
+  "name": "cortex-html5-base",
+  "version": "1.0.0",
+  "description": "Base HTML5 application to be run on Cortex player",
+  "main": "index.js",
+  "scripts": {
+    "prod": "./node_modules/.bin/webpack --define process.env.NODE_ENV='\"production\"' --progress --colors",
+    "dev": "./node_modules/.bin/webpack --define process.env.NODE_ENV='\"development\"' --progress --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://"
+  },
+  "author": "Hamza Kaya",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "devDependencies": {
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "copy-webpack-plugin": "^3.0.1",
+    "css-loader": "^0.23.1",
+    "eslint": "^2.13.1",
+    "eslint-config-google": "^0.6.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1"
+  }
+}
