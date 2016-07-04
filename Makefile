@@ -1,12 +1,15 @@
 SHELL := /bin/bash
 
+lint:
+	./node_modules/.bin/eslint src
+
 clean:
 	rm -rf ./build
 
-dev: clean
+dev: clean lint
 	npm run dev
 
-build: clean
+build: clean lint
 	npm run prod
 
 pack:
