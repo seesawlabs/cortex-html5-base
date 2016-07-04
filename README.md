@@ -33,6 +33,7 @@ zip file as well by running `make dist`. **The application will only work on Cor
 - `./src/`: Source files. `src/main.js` is the entry point. All source files will get compiled into `./build/bundle.js` by webpack.
 
 ## Customizing the App
+Search for TODOs in the code. Current TODO items for new apps are:
 * Change the app name in `package.json`. We use the app name in log messages.
 * Change the `DATASET_ID` in `src/main.js` to the production dataset id.
 * Update `src/test-data.js` with the test data. Make sure the test data is similar to the production data.
