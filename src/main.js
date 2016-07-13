@@ -8,7 +8,6 @@ import Simulator from './simulator.js';
 import Logger from './logger.js';
 import {READY_EVENT} from './events.js';
 
-// TODO: Update this with your production dataset id.
 const DATASET_ID = 'com.intersection.media.campaigns.nycco.albums';
 
 /**
