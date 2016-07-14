@@ -1,3 +1,8 @@
+@font-face {
+    font-family: HelveticaNeueLTStd;
+    src: url("../font/HelveticaNeueLTStd-Md.otf");
+}
+
 .nyc-co-main {
   background-color: #fff;
   color: #000;
@@ -29,19 +34,22 @@
 
 .nyc-co-main .nyc-co-bar {
   background:rgba(0,0,0,0.5);
-  height: 140px;
-  width: 773px;
+  width: 719px;
   top: 936px;
   left: 225px;
   position: absolute;
   z-index: 1;
+  color: #fff;
+  font-size: 38px;
+  padding: 75px 27px 22px;
+  font-family: HelveticaNeueLTStd;
 }
 
 .nyc-co-main .nyc-co-avatar {
   background:#fff;
   height: 138px;
   width: 138px;
-  top: 936px;
+  top: 937px;
   left: 87px;
   position: absolute;
   z-index: 1;

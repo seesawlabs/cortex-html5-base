@@ -47,8 +47,6 @@ class View {
    *   img.className = 'visible';
    * }
    *
-   * TODO: Implement this method according to your needs.
-   *
    * @param {array} data The data rows.
    */
   setData(data) {
@@ -69,9 +67,6 @@ class View {
 
       this.mainDiv.appendChild(img);
       this.images.push({element: img});
-
-      this.
-      row.user.username
     });
   }
 
@@ -131,6 +126,8 @@ class View {
 
     const img = window.document.getElementById(NYC_CO_NAMESCAPE + row.id);
     img.className = 'visible slide';
+    this.mainBar.innerHTML = row.user.username;
+    this.mainAvatar.src = row.user.avatar;
   }
 
   createInitialDom() {
@@ -150,7 +147,7 @@ class View {
     this.mainBar = window.document.createElement('div');
     this.mainBar.className = 'nyc-co-bar';
 
-    this.mainAvatar = window.document.createElement('div');
+    this.mainAvatar = window.document.createElement('img');
     this.mainAvatar.className = 'nyc-co-avatar';
 
     this.div.appendChild(this.mainDiv);
