@@ -1,5 +1,5 @@
 /* global window */
-
+require('../css/nyc-co.css');
 import Logger from './logger.js';
 
 const PLACEHOLDER_ID = 'placeholder';
@@ -26,7 +26,7 @@ class Placeholder {
     Logger.log('Rendering the placeholder image.');
 
     const img = new window.Image();
-    img.src = "assets/images/placeholder.jpg";
+    img.src = "assets/images/nyc-co-getintouch.jpg";
     img.onerror = e => {
       console.error("Failed to load the placeholder image: ", e);
     };

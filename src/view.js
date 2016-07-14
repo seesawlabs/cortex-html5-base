@@ -3,20 +3,16 @@
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 
+const NYC_CO_NAMESCAPE = 'nyc-co-';
+
 class View {
   constructor() {
     this.placeholder = new Placeholder();
 
     this.rows = [];
-    this.currentRow = 0;
+    this.images = [];
 
-    this.container = window.document.getElementById('container');
-
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    this.createInitialDom();
   }
 
   /**
@@ -57,6 +53,26 @@ class View {
    */
   setData(data) {
     this.rows = data;
+
+    // Clean up container
+    this.images.forEach(item => {
+      this.mainDiv.removeChild(item.element);
+    });
+
+    this.images = [];
+
+    this.rows.forEach(row => {
+      const img = new window.Image();
+      img.id = `nyc-co-${row.id}`;
+      img.src = row.thumbnail;
+      img.className = 'invisible slide';
+
+      this.mainDiv.appendChild(img);
+      this.images.push({element: img});
+
+      this.
+      row.user.username
+    });
   }
 
   /**
@@ -111,14 +127,37 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    if (this.currentRow >= this.rows.length) {
-      this.currentRow = 0;
-    }
-    Logger.log(`The view has ${this.rows.length} data rows. ` +
-               `Displaying row #${this.currentRow}.`);
-    const row = this.rows[this.currentRow];
-    this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+    const row = this.rows[Math.floor(Math.random() * this.rows.length)];
+
+    const img = window.document.getElementById(NYC_CO_NAMESCAPE + row.id);
+    img.className = 'visible slide';
+  }
+
+  createInitialDom() {
+    this.div = window.document.getElementById('container');
+
+    this.mainDiv = window.document.createElement('div');
+    this.mainDiv.className = 'placeholder nyc-co-main';
+
+    this.mainImg = window.document.createElement('img');
+    this.mainImg.src = "assets/images/nyc-co-copy.png";
+    this.mainImg.className = 'nyc-co-copy';
+
+    this.mainLogo = window.document.createElement('img');
+    this.mainLogo.src = "assets/images/nyc-co.png";
+    this.mainLogo.className = 'nyc-co-logo';
+
+    this.mainBar = window.document.createElement('div');
+    this.mainBar.className = 'nyc-co-bar';
+
+    this.mainAvatar = window.document.createElement('div');
+    this.mainAvatar.className = 'nyc-co-avatar';
+
+    this.div.appendChild(this.mainDiv);
+    this.mainDiv.appendChild(this.mainAvatar);
+    this.mainDiv.appendChild(this.mainBar);
+    this.mainDiv.appendChild(this.mainImg);
+    this.mainDiv.appendChild(this.mainLogo);
   }
 }
 

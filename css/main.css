@@ -21,6 +21,7 @@ html, body {
   left: 0;
   width: 1080px;
   height: 1920px;
+  z-index: 2;
 }
 
 .placeholder.invisible {

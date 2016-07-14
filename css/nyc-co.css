@@ -1,0 +1,48 @@
+.nyc-co-main {
+  background-color: #fff;
+  color: #000;
+}
+
+.nyc-co-main .invisible {
+  display: none;
+}
+
+.nyc-co-main img.nyc-co-copy  {
+  position: absolute;
+  bottom: 0;
+}
+
+.nyc-co-main img.slide {
+  width: 910px;
+  height: 910px;
+  position: absolute;
+  top: 163px;
+  left: 85px;
+  border: 2px solid #2b286b;
+}
+
+.nyc-co-main .nyc-co-logo {
+  position: absolute;
+  top: 29px;
+  left: 29px;
+}
+
+.nyc-co-main .nyc-co-bar {
+  background:rgba(0,0,0,0.5);
+  height: 140px;
+  width: 773px;
+  top: 936px;
+  left: 225px;
+  position: absolute;
+  z-index: 1;
+}
+
+.nyc-co-main .nyc-co-avatar {
+  background:#fff;
+  height: 138px;
+  width: 138px;
+  top: 936px;
+  left: 87px;
+  position: absolute;
+  z-index: 1;
+}
