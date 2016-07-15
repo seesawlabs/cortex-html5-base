@@ -5,6 +5,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var srcDir = path.resolve(__dirname, 'src');
 var assetsDir = path.resolve(__dirname, 'assets');
+var fontDir = path.resolve(__dirname, 'font');
 var htmlDir = path.resolve(__dirname, 'html');
 var outDir = path.resolve(__dirname, 'build');
 
@@ -17,7 +18,8 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       { from: htmlDir },
-      { from: assetsDir, to: 'assets' }
+      { from: assetsDir, to: 'assets' },
+      { from: fontDir, to: 'font' }
     ]),
     new webpack.DefinePlugin({
       'APP_NAME': JSON.stringify(require("./package.json").name)

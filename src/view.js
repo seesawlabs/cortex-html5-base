@@ -123,8 +123,8 @@ class View {
    */
   _render() {
     const row = this.rows[Math.floor(Math.random() * this.rows.length)];
-
     const img = window.document.getElementById(NYC_CO_NAMESCAPE + row.id);
+
     img.className = 'visible slide';
     this.mainBar.innerHTML = row.user.username;
     this.mainAvatar.src = row.user.avatar;
