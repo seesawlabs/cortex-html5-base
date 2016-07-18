@@ -38,8 +38,11 @@ Search for TODOs in the code. Current TODO items for new apps are:
 * Change the `DATASET_ID` in `src/main.js` to the production dataset id.
 * Update `src/test-data.js` with the test data. Make sure the test data is similar to the production data.
 * Update the placeholder view in `src/placeholder.js`. Current implementation loads `assets/images/placeholder.jpg`. You can simply replace this image with your version or update `src/placeholder.js` to create custom DOM elements.
+* Change the `TOKEN` in `src/tracker.js`. You can obtain a token from Cortex support.
 * Update `src/view.js` to handle data updates and rendering.
+  * Set the `CAMPAIGN` constant.
   * Update View.setData() if you need to manipulate the incoming data or preload images.
   * Update View._render() to present the data on screen.
   * Update View.updateView() if you need to update the screen right before the app gets displayed.
+  * Use `Tracker.track()` to track a view. Ideally, you should call this method in `View.render()`.
 * Build the app in production mode and deploy.
