@@ -2,6 +2,10 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
+import Tracker from './tracker.js';
+
+// TODO: Change this.
+const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
 
 class View {
   constructor() {
@@ -9,6 +13,7 @@ class View {
 
     this.rows = [];
     this.currentRow = 0;
+    this.deviceId = '';
 
     this.container = window.document.getElementById('container');
 
@@ -57,6 +62,10 @@ class View {
    */
   setData(data) {
     this.rows = data;
+
+    if (data && data.length > 0) {
+      this.deviceId = data[0]._device_id;
+    }
   }
 
   /**
@@ -67,11 +76,13 @@ class View {
   render() {
     Logger.log('Rendering a new view.');
     if (this.rows === null || this.rows.length === 0) {
+      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
       this.placeholder.render();
       return;
     }
 
     this.placeholder.hide();
+    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
