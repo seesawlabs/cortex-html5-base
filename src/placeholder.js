@@ -26,7 +26,7 @@ class Placeholder {
     Logger.log('Rendering the placeholder image.');
 
     const img = new window.Image();
-    img.src = "assets/images/placeholder.jpg";
+    img.src = "assets/images/Link_Digi_Announcements_USB_04214.jpg";
     img.onerror = e => {
       console.error("Failed to load the placeholder image: ", e);
     };
