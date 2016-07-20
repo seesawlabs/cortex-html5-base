@@ -62,7 +62,7 @@ class View {
     this.rows.forEach(row => {
       const img = new window.Image();
       img.id = `nyc-co-${row.id}`;
-      img.src = row.url;
+      img.src = row.source.source_url;
       img.className = 'invisible slide';
 
       this.mainDiv.appendChild(img);
