@@ -11,6 +11,7 @@ class View {
 
     this.rows = [];
     this.images = [];
+    this.currentRow = 0;
 
     this.createInitialDom();
   }
@@ -122,7 +123,12 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    const row = this.rows[Math.floor(Math.random() * this.rows.length)];
+    if (this.currentRow >= this.rows.length) {
+      this.currentRow = 0;
+    }
+
+    const row = this.rows[this.currentRow];
+    this.currentRow += 1;
     const img = window.document.getElementById(NYC_CO_NAMESCAPE + row.id);
 
     img.className = 'visible slide';
