@@ -28,7 +28,7 @@ const TEST_DATA = [
                 "cloudCover": 0.29,
                 "dewPoint": 74.18,
                 "humidity": 0.72,
-                "icon": "partly-cloudy-day",
+                "icon": "rain",
                 "nearestStormBearing": 262,
                 "nearestStormDistance": 52,
                 "ozone": 321.14,
@@ -1515,6 +1515,28 @@ const TEST_DATA = [
             "offset": -4,
             "timezone": "America/New_York"
         }
+    }, {
+      "data": {
+        "currently": {
+            "apparentTemperature": 91.77,
+            "cloudCover": 0.29,
+            "dewPoint": 74.18,
+            "humidity": 0.72,
+            "icon": "data",
+            "nearestStormBearing": 262,
+            "nearestStormDistance": 52,
+            "ozone": 321.14,
+            "precipIntensity": 0,
+            "precipProbability": 0,
+            "pressure": 1010.93,
+            "summary": "Partly Cloudy",
+            "temperature": 84.32,
+            "time": 1468520564,
+            "visibility": 8.79,
+            "windBearing": 192,
+            "windSpeed": 7.94
+        }
+      }
     }
 ];
 

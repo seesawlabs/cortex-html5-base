@@ -4,8 +4,10 @@ import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 import Tracker from './tracker.js';
 
-// TODO: Change this.
 const CAMPAIGN = 'com.intersection.campaigns.samsung-weather';
+const WEATHER_RAIN = 'rain';
+const SAMSUNG_AD = 'samsung-ad';
+const ANNOUCEMENTS_AD = 'annoucements-ad';
 
 class View {
   constructor() {
@@ -14,14 +16,10 @@ class View {
     this.rows = [];
     this.currentRow = 0;
     this.deviceId = '';
+    this.viewAd = undefined;
+    this.annoucementsAd = undefined;
 
     this.container = window.document.getElementById('container');
-
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
   }
 
   /**
@@ -66,6 +64,25 @@ class View {
     if (data && data.length > 0) {
       this.deviceId = data[0]._device_id;
     }
+
+    if (this.viewAd)
+      this.container.removeChild(this.viewAd);
+
+    if (this.annoucementsAd)
+      this.container.removeChild(this.annoucementsAd);
+
+    this.viewAd = new window.Image();
+    this.viewAd.id = 'samsung-ad';
+    this.viewAd.src = 'assets/images/V1_Water-Resistance_(1)_rain only.png';
+    this.viewAd.className = 'invisible';
+
+    this.annoucementsAd = new window.Image();
+    this.annoucementsAd.id = 'annoucements-ad';
+    this.annoucementsAd.src = 'assets/images/Link_Digi_Announcements_USB_04214.jpg';
+    this.annoucementsAd.className = 'invisible';
+
+    this.container.appendChild(this.viewAd);
+    this.container.appendChild(this.annoucementsAd);
   }
 
   /**
@@ -119,17 +136,24 @@ class View {
    * make as few DOM manipulations as possible. Reusing DOM elements is better
    * than recreating them every time this method is called.
    *
-   * TODO: Implement this method according to your needs.
    */
   _render() {
     if (this.currentRow >= this.rows.length) {
       this.currentRow = 0;
     }
-    Logger.log(`The view has ${this.rows.length} data rows. ` +
-               `Displaying row #${this.currentRow}.`);
     const row = this.rows[this.currentRow];
     this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+
+    const samsung = window.document.getElementById(SAMSUNG_AD);
+    const usb = window.document.getElementById(ANNOUCEMENTS_AD);
+    if (row.data.currently.icon === WEATHER_RAIN) {
+      usb.className = 'invisible';
+      samsung.className = 'visible';
+      Tracker.track(this.deviceId, CAMPAIGN, 'rain');
+    } else {
+      samsung.className = 'invisible';
+      usb.className = 'visible';
+    }
   }
 }
 

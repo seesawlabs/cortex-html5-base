@@ -26,3 +26,8 @@ html, body {
 .placeholder.invisible {
   opacity: 0;
 }
+
+
+.invisible {
+  display: none;
+}
