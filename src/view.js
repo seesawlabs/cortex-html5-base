@@ -3,8 +3,6 @@
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 
-const NYC_CO_NAMESCAPE = 'nyc-co-';
-
 class View {
   constructor() {
     this.placeholder = new Placeholder();
@@ -14,6 +12,22 @@ class View {
     this.currentRow = 0;
 
     this.createInitialDom();
+  }
+
+  cleanImages() {
+    // Sanity Checks
+    if (!this.mainDiv || !this.rows || this.rows.length === 0)
+      return;
+
+    // Clean up container
+    if (this.mainDiv && this.rows && this.rows.length) {
+      this.rows.forEach(row => {
+        // If this element isn't the parent
+        if (row.img.parentNode !== this.mainDiv)
+          return;
+        this.mainDiv.removeChild(row.img);
+      });
+    }
   }
 
   /**
@@ -51,23 +65,20 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
-    this.rows = data;
+    if (!data || data.length === 0)
+      return;
 
-    // Clean up container
-    this.images.forEach(item => {
-      this.mainDiv.removeChild(item.element);
-    });
-
-    this.images = [];
-
-    this.rows.forEach(row => {
+    this.cleanImages();
+    this.rows = data.map(row => {
       const img = new window.Image();
-      img.id = `nyc-co-${row.id}`;
       img.src = row.source.source_url;
-      img.className = 'invisible slide';
+      img.className = 'slide';
 
-      this.mainDiv.appendChild(img);
-      this.images.push({element: img});
+      return {
+        img,
+        username: row.user.username,
+        avatar: row.user.avatar
+      };
     });
   }
 
@@ -123,17 +134,19 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
+    this.cleanImages();
     if (this.currentRow >= this.rows.length) {
       this.currentRow = 0;
     }
 
-    const row = this.rows[this.currentRow];
-    this.currentRow += 1;
-    const img = window.document.getElementById(NYC_CO_NAMESCAPE + row.id);
+    const row = this.rows[this.currentRow++];
+    this.setItem(row);
+  }
 
-    img.className = 'visible slide';
-    this.mainBar.innerHTML = row.user.username;
-    this.mainAvatar.src = row.user.avatar;
+  setItem(item) {
+    this.mainDiv.appendChild(item.img);
+    this.mainBar.innerHTML = item.username;
+    this.mainAvatar.src = item.avatar;
   }
 
   createInitialDom() {
@@ -156,11 +169,11 @@ class View {
     this.mainAvatar = window.document.createElement('img');
     this.mainAvatar.className = 'nyc-co-avatar';
 
-    this.div.appendChild(this.mainDiv);
     this.mainDiv.appendChild(this.mainAvatar);
     this.mainDiv.appendChild(this.mainBar);
     this.mainDiv.appendChild(this.mainImg);
     this.mainDiv.appendChild(this.mainLogo);
+    this.div.appendChild(this.mainDiv);
   }
 }
 
