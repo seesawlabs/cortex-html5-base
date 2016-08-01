@@ -80,7 +80,6 @@ class View {
       this.rows = data.map(row => {
         const img = new window.Image();
         img.src = row.image.url;
-        img.className = 'slide';
         return {img};
       });
     }
