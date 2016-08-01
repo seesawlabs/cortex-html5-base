@@ -16,12 +16,22 @@ class View {
     this.deviceId = '';
 
     this.container = window.document.getElementById('container');
+  }
 
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+  cleanImages() {
+    // Sanity Checks
+    if (!this.container || !this.rows || this.rows.length === 0)
+      return;
+
+    // Clean up container
+    if (this.container && this.rows && this.rows.length) {
+      this.rows.forEach(row => {
+        // If this element isn't the parent
+        if (row.img.parentNode !== this.container)
+          return;
+        this.container.removeChild(row.img);
+      });
+    }
   }
 
   /**
@@ -61,10 +71,18 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
-    this.rows = data;
+    if (!data || data.length === 0)
+      return;
 
     if (data && data.length > 0) {
       this.deviceId = data[0]._device_id;
+      this.cleanImages();
+      this.rows = data.map(row => {
+        const img = new window.Image();
+        img.src = row.image.url;
+        img.className = 'slide';
+        return {img};
+      });
     }
   }
 
@@ -122,15 +140,18 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
+    this.cleanImages();
     if (this.currentRow >= this.rows.length) {
       this.currentRow = 0;
     }
-    Logger.log(`The view has ${this.rows.length} data rows. ` +
-               `Displaying row #${this.currentRow}.`);
-    const row = this.rows[this.currentRow];
-    this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+    const row = this.rows[this.currentRow++];
+    this.setItem(row);
   }
+
+  setItem(item) {
+    this.container.appendChild(item.img);
+  }
+
 }
 
 module.exports = View;
