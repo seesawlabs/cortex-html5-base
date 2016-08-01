@@ -9,7 +9,7 @@ import Logger from './logger.js';
 import {READY_EVENT} from './events.js';
 
 // TODO: Update this with your production dataset id.
-const DATASET_ID = 'om.intersection.instagram.data';
+const DATASET_ID = 'com.intersection.instagram.data';
 
 /**
  * Starts the app in simulation mode.
