@@ -4,8 +4,7 @@ import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 import Tracker from './tracker.js';
 
-// TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+const CAMPAIGN = 'com.intersection.instagram.data';
 
 class View {
   constructor() {
