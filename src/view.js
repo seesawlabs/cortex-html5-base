@@ -16,12 +16,7 @@ class View {
     this.deviceId = '';
 
     this.container = window.document.getElementById('container');
-
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    this.createInitialDom();
   }
 
   /**
@@ -61,11 +56,10 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
-    this.rows = data;
+    if (!data || data.length === 0)
+      return;
 
-    if (data && data.length > 0) {
-      this.deviceId = data[0]._device_id;
-    }
+    this.rows = data;
   }
 
   /**
@@ -122,15 +116,46 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    if (this.currentRow >= this.rows.length) {
-      this.currentRow = 0;
-    }
-    Logger.log(`The view has ${this.rows.length} data rows. ` +
-               `Displaying row #${this.currentRow}.`);
-    const row = this.rows[this.currentRow];
-    this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+    this.img.className = 'animated fadeInUp';
+    this.up1.className = 'animated fadeInUp hinge';
+    this.up2.className = 'animated fadeInUp slowness';
   }
+
+  createInitialDom() {
+    this.img = new window.Image();
+    this.up1 = new window.Image();
+    this.up2 = new window.Image();
+    this.bottle = new window.Image();
+    this.title = new window.Image();
+
+    this.bottle.src = 'assets/images/bottle.png';
+    this.img.src = 'assets/images/up.png';
+    this.up1.src = 'assets/images/up.png';
+    this.up2.src = 'assets/images/up.png';
+    this.title.src = 'assets/images/title.png';
+
+    this.img.className = 'animated pull-right';
+    this.up1.className = 'animated pull-right';
+    this.up2.className = 'animated pull-right';
+    this.bottle.className = 'pull-left';
+    this.title.className = 'bottle';
+
+    const bubbles = window.document.createElement('div');
+    bubbles.id = 'bubbles';
+    for (var i = 1; i < 23; i++) {
+      let div = window.document.createElement('div');
+      div.className = `bubble x${i}`;
+      bubbles.appendChild(div);
+    }
+
+    this.container.appendChild(this.title);
+    this.container.appendChild(this.bottle);
+    this.container.appendChild(bubbles);
+    this.container.appendChild(this.img);
+    this.container.appendChild(this.up1);
+    this.container.appendChild(this.up2);
+  }
+
 }
 
 module.exports = View;
