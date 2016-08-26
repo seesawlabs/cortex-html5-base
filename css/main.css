@@ -1,3 +1,14 @@
+@font-face {
+    font-family: FrankfurterMediumPlain;
+    src: url("../font/FrankfurterMediumPlain.otf");
+}
+
+
+@font-face {
+    font-family: FrankfurterStd;
+    src: url("../font/FrankfurterStd.otf");
+}
+
 html, body {
   width: 100%;
   height: 100%;
@@ -5,14 +16,99 @@ html, body {
   margin: 0;
   overflow: hidden;
   background-color: #000;
+  font-family: FrankfurterMediumPlain,sans-serif;
+}
+
+.iony {
+  position: absolute;
+  left: 767px;
+  top: 1566px;
+}
+
+.bottle {
+  position: absolute;
+  left: 127px;
+  top: 829px;
 }
 
 #container {
-  width: 100%;
-  height: 100%;
+  width: 1080px;
+  height: 1920px;
   margin: 0;
   overflow: hidden;
-  color: #fff;
+  background-color: #f3cf1f;
+  position: relative;
+}
+
+.degree {
+  font-size: 45px;
+  display: inline-block;
+  position: relative;
+  top: -60px;
+}
+
+h1, h2 {
+  font-size: 122px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  top: 196px;
+  color: #11ae05;
+}
+
+h2 {
+  top: 411px;
+  color: #ff7200;
+}
+
+.animate-logo {
+  animation: App-logo-spin 0 2s linear;
+  animation-iteration-count: 1;
+  float: right;
+  margin: 1100px 50px;
+}
+
+@keyframes App-logo-spin {
+  from {
+     -webkit-transform-origin: left bottom;
+     transform-origin: left bottom;
+     -webkit-transform: translateZ(0) rotate3d(0, 0, 1, -90deg);
+     transform: translateZ(0) rotate3d(0, 0, 1, -90deg);
+   }
+
+   to {
+     -webkit-transform-origin: left bottom;
+     transform-origin: left bottom;
+     -webkit-transform: none;
+     transform: none;
+   }
+}
+
+
+.animate-after {
+  animation: pulse infinite 4s linear;
+}
+
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: translateZ(0) scale3d(1, 1, 1);
+    transform: translateZ(0) scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: translateZ(0) scale3d(1.20, 1.20, 1.20);
+    transform: translateZ(0) scale3d(1.20, 1.20, 1.20);
+  }
+
+  to {
+    -webkit-transform: translateZ(0) scale3d(1, 1, 1);
+    transform: translateZ(0) scale3d(1, 1, 1);
+  }
 }
 
 .placeholder {
@@ -25,4 +121,44 @@ html, body {
 
 .placeholder.invisible {
   opacity: 0;
+}
+
+.animated {
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+
+@-webkit-keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translateZ(0) translate3d(0, 100%, 0);
+    transform: translateZ(0) translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translateZ(0) translate3d(0, 100%, 0);
+    transform: translateZ(0) translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
 }

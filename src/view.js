@@ -16,12 +16,7 @@ class View {
     this.deviceId = '';
 
     this.container = window.document.getElementById('container');
-
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    this.createInitialDom();
   }
 
   /**
@@ -105,6 +100,38 @@ class View {
     // For this app, we don't need to do anything.
   }
 
+  createInitialDom() {
+    this.bottleBanner = new window.Image();
+    this.bottle = new window.Image();
+    this.iony = new window.Image();
+
+    this.bottle.src = 'assets/images/bottle.png';
+    this.bottleBanner.src = 'assets/images/bottle-banner.png';
+    this.iony.src = 'assets/images/iony.png';
+
+    this.bottle.className = 'bottle';
+    this.iony.className = 'iony';
+
+    this.banner = window.document.createElement('div');
+    this.banner.appendChild(this.bottleBanner);
+
+    this.header = window.document.createElement('h1');
+    this.subheader = window.document.createElement('h2');
+    this.degree = window.document.createElement('span');
+
+    this.header.innerText = "IT'S 90";
+    this.subheader.innerText = 'GRAB SOME SUNSHINE';
+    this.degree.innerText = 'O';
+    this.degree.className = 'degree';
+
+    this.header.appendChild(this.degree);
+    this.container.appendChild(this.header);
+    this.container.appendChild(this.subheader);
+    this.container.appendChild(this.banner);
+    this.container.appendChild(this.bottle);
+    this.container.appendChild(this.iony);
+  }
+
   /**
    * Handles rendering of the main view.
    *
@@ -122,14 +149,9 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    if (this.currentRow >= this.rows.length) {
-      this.currentRow = 0;
-    }
-    Logger.log(`The view has ${this.rows.length} data rows. ` +
-               `Displaying row #${this.currentRow}.`);
-    const row = this.rows[this.currentRow];
-    this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+    this.bottleBanner.className = 'animate-after';
+    this.banner.className = 'banner animate-logo';
+    this.subheader.className = 'animated fadeInUp';
   }
 }
 
