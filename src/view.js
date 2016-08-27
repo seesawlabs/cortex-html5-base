@@ -137,8 +137,7 @@ class View {
     this.img.className = 'animated pull-right';
     this.up1.className = 'animated pull-right';
     this.up2.className = 'animated pull-right';
-    this.bottle.className = 'pull-left';
-    this.title.className = 'bottle';
+    this.bottle.className = 'bottle pull-left';
 
     const bubbles = window.document.createElement('div');
     bubbles.id = 'bubbles';
