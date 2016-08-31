@@ -69,13 +69,6 @@ class View {
    */
   render() {
     Logger.log('Rendering a new view.');
-    if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
-      this.placeholder.render();
-      return;
-    }
-
-    this.placeholder.hide();
     Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
