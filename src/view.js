@@ -90,6 +90,11 @@ class View {
    */
   updateView() {
     // For this app, we don't need to do anything.
+    setTimeout(() => {
+      this.img.className = 'animated fadeInUp';
+      this.up1.className = 'animated fadeInUp hinge';
+      this.up2.className = 'animated fadeInUp slowness';
+    }, 1000);
   }
 
   /**
@@ -109,9 +114,9 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    this.img.className = 'animated fadeInUp';
-    this.up1.className = 'animated fadeInUp hinge';
-    this.up2.className = 'animated fadeInUp slowness';
+    this.img.className = '';
+    this.up1.className = '';
+    this.up2.className = '';
   }
 
   createInitialDom() {

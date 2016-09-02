@@ -39,10 +39,10 @@ function main() {
 
   window.addEventListener(READY_EVENT, () => {
     Logger.log('Received the cortex-ready event.');
-
-    const data = new Data(DATASET_ID, view);
-    data.init();
   });
+
+  const data = new Data(DATASET_ID, view);
+  data.init();
 
   if (process.env.NODE_ENV === 'development') {
     simulateCortexEnvironment();
