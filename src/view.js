@@ -70,6 +70,13 @@ class View {
    */
   render() {
     Logger.log('Rendering a new view.');
+    // if (this.rows === null || this.rows.length === 0) {
+    //   Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
+    //   this.placeholder.render();
+    //   return;
+    // }
+
+    Logger.log('Rendering a new view.');
     Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
@@ -90,7 +97,11 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   updateView() {
-    // For this app, we don't need to do anything.
+    setTimeout(() => {
+      this.bottleBanner.className = 'animate-after';
+      this.banner.className = 'banner animate-logo';
+      this.subheader.className = 'animated fadeInUp';
+    }, 500);
   }
 
   createInitialDom() {
@@ -142,9 +153,9 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    this.bottleBanner.className = 'animate-after';
-    this.banner.className = 'banner animate-logo';
-    this.subheader.className = 'animated fadeInUp';
+    this.bottleBanner.className = 'bottle-banner';
+    this.banner.className = '';
+    this.subheader.className = '';
   }
 }
 

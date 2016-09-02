@@ -31,6 +31,11 @@ html, body {
   top: 829px;
 }
 
+.bottle-banner {
+  float: right;
+  margin: 1100px 50px;
+}
+
 #container {
   width: 1080px;
   height: 1920px;

@@ -27,15 +27,15 @@ class Data {
     });
 
     Logger.log(`Listening to dataset: ${this.datasetId}`);
-    window.Cortex.onData(this.datasetId, (data, cached) => {
-      Logger.log('Received data from Silo.', {cached: cached, data: data});
-
-      if (data === null || data.length === 0) {
-        return Logger.log('Ignoring empty data from Silo.');
-      }
-
-      this.newData = data;
-    });
+    // window.Cortex.onData(this.datasetId, (data, cached) => {
+    //   Logger.log('Received data from Silo.', {cached: cached, data: data});
+    //
+    //   if (data === null || data.length === 0) {
+    //     return Logger.log('Ignoring empty data from Silo.');
+    //   }
+    //
+    //   this.newData = data;
+    // });
   }
 }
 
