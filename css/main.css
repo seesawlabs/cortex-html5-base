@@ -8,8 +8,8 @@ html, body {
 }
 
 #container {
-  width: 100%;
-  height: 100%;
+  width: 1080px;
+  height: 1920px;
   margin: 0;
   overflow: hidden;
   color: #fff;
@@ -21,7 +21,7 @@ html, body {
   left: 0;
   width: 1080px;
   height: 1920px;
-  z-index: 2;
+  z-index: 20;
 }
 
 .placeholder.invisible {

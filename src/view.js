@@ -70,13 +70,12 @@ class View {
 
     this.cleanImages();
     this.rows = data.map(row => {
-      const img = new window.Image();
-      img.src = row.source.source_url;
-      img.className = 'slide';
+      const img = this.create('figure', 'mainImg');
+      img.style.backgroundImage = "url(" + row.url + ")";
 
       return {
         img,
-        username: row.user.username,
+        username: row.user.name,
         avatar: row.user.avatar
       };
     });
@@ -146,33 +145,30 @@ class View {
   setItem(item) {
     this.mainDiv.appendChild(item.img);
     this.mainBar.innerHTML = item.username;
-    this.mainAvatar.src = item.avatar;
+
+    // Set the avatar
+    const avatar = window.document.getElementById('avatar');
+    avatar.style.backgroundImage = "url(" + item.avatar + ")";
+  }
+
+  create(tag, className) {
+    const el = window.document.createElement(tag);
+    el.className = className;
+    el.id = className;
+    return el;
   }
 
   createInitialDom() {
     this.div = window.document.getElementById('container');
 
-    this.mainDiv = window.document.createElement('div');
-    this.mainDiv.className = 'placeholder nyc-co-main';
-
-    this.mainImg = window.document.createElement('img');
-    this.mainImg.src = "assets/images/nyc-co-copy.png";
-    this.mainImg.className = 'nyc-co-copy';
-
-    this.mainLogo = window.document.createElement('img');
-    this.mainLogo.src = "assets/images/nyc-co.png";
-    this.mainLogo.className = 'nyc-co-logo';
-
-    this.mainBar = window.document.createElement('div');
-    this.mainBar.className = 'nyc-co-bar';
-
-    this.mainAvatar = window.document.createElement('img');
-    this.mainAvatar.className = 'nyc-co-avatar';
+    this.mainDiv = this.create('div', 'container');
+    this.mainBar = this.create('div', 'bar');
+    this.mainAvatar = this.create('figure', 'avatar');
+    this.overlay = this.create('div', 'overlay');
 
     this.mainDiv.appendChild(this.mainAvatar);
     this.mainDiv.appendChild(this.mainBar);
-    this.mainDiv.appendChild(this.mainImg);
-    this.mainDiv.appendChild(this.mainLogo);
+    this.mainDiv.appendChild(this.overlay);
     this.div.appendChild(this.mainDiv);
   }
 }

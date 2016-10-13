@@ -1,5 +1,6 @@
 /* global window */
-require('../css/nyc-co.css');
+require('../css/asset.css');
+require('../css/custom.css');
 import Logger from './logger.js';
 
 const PLACEHOLDER_ID = 'placeholder';
