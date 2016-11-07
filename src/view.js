@@ -3,31 +3,18 @@
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 
+// import moment from 'moment';
+// import moment from 'moment-timezone';
+
 class View {
   constructor() {
     this.placeholder = new Placeholder();
-
-    this.rows = [];
-    this.images = [];
-    this.currentRow = 0;
-
     this.createInitialDom();
+    this.timeZone = 'America/New_York';
   }
 
   cleanImages() {
     // Sanity Checks
-    if (!this.mainDiv || !this.rows || this.rows.length === 0)
-      return;
-
-    // Clean up container
-    if (this.mainDiv && this.rows && this.rows.length) {
-      this.rows.forEach(row => {
-        // If this element isn't the parent
-        if (row.img.parentNode !== this.mainDiv)
-          return;
-        this.mainDiv.removeChild(row.img);
-      });
-    }
   }
 
   /**
@@ -64,38 +51,14 @@ class View {
    *
    * @param {array} data The data rows.
    */
-  setData(data) {
-    if (!data || data.length === 0)
-      return;
-
-    this.cleanImages();
-    this.rows = data.map(row => {
-      const img = this.create('figure', 'mainImg');
-      img.style.backgroundImage = "url(" + row.url + ")";
-
-      return {
-        img,
-        username: row.user.username,
-        avatar: row.user.avatar
-      };
-    });
-  }
+  setData(data) { }
 
   /**
    * Render the placeholder or the main view.
    *
    * Every time the app receives a 'hidden' event this method will get called.
    */
-  render() {
-    Logger.log('Rendering a new view.');
-    if (this.rows === null || this.rows.length === 0) {
-      this.placeholder.render();
-      return;
-    }
-
-    this.placeholder.hide();
-    this._render();
-  }
+  render() { }
 
   /**
    * Update the view before displaying it on the screen.
@@ -132,44 +95,38 @@ class View {
    *
    * TODO: Implement this method according to your needs.
    */
-  _render() {
-    this.cleanImages();
-    if (this.currentRow >= this.rows.length) {
-      this.currentRow = 0;
-    }
+  _render() { }
 
-    const row = this.rows[this.currentRow++];
-    this.setItem(row);
-  }
-
-  setItem(item) {
-    this.mainDiv.appendChild(item.img);
-    this.mainBar.innerHTML = item.username;
-
-    // Set the avatar
-    const avatar = window.document.getElementById('avatar');
-    avatar.style.backgroundImage = "url(" + item.avatar + ")";
-  }
-
-  create(tag, className) {
-    const el = window.document.createElement(tag);
-    el.className = className;
-    el.id = className;
-    return el;
-  }
+  setItem(item) { }
 
   createInitialDom() {
+    Logger.log('Creating initial DOM');
+
+    let elect = 1478656800000;
+    console.log(this.calculate(elect - (new Date()).valueOf()));
     this.div = window.document.getElementById('container');
+  }
+  calculate(t) {
+    let cd = 24 * 60 * 60 * 1000;
+    let ch = 60 * 60 * 1000;
+    let days = Math.floor(t / cd);
+    let hours = Math.floor((t - days * cd) / ch);
+    let minutes = Math.round((t - days * cd - hours * ch) / 60000);
 
-    this.mainDiv = this.create('div', 'container');
-    this.mainBar = this.create('div', 'bar');
-    this.mainAvatar = this.create('figure', 'avatar');
-    this.overlay = this.create('div', 'overlay');
-
-    this.mainDiv.appendChild(this.mainAvatar);
-    this.mainDiv.appendChild(this.mainBar);
-    this.mainDiv.appendChild(this.overlay);
-    this.div.appendChild(this.mainDiv);
+    let pad = function(n) {
+      return n < 10 ? '0' + n : n;
+    };
+    if (minutes === 60) {
+      hours++;
+      minutes = 0;
+    }
+    if (hours === 24) {
+      days++;
+      hours = 0;
+    }
+    hours = pad(hours);
+    minutes = pad(minutes);
+    return {days, hours, minutes};
   }
 }
 
