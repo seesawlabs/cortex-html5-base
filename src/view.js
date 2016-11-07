@@ -75,7 +75,7 @@ class View {
 
       return {
         img,
-        username: row.user.name,
+        username: row.user.username,
         avatar: row.user.avatar
       };
     });

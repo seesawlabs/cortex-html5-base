@@ -37,6 +37,7 @@ export default StyleSheet.create({
     "container overlay": {
         "width": 1080,
         "height": 1920,
+        "backgroundSize": "cover",
         "overflow": "hidden",
         "position": "absolute",
         "top": 0,

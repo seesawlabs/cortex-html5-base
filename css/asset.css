@@ -32,6 +32,7 @@
 .container .overlay {
   width: 1080px;
   height: 1920px;
+  background-size: cover;
   overflow: hidden;
   position: absolute;
   top: 0;
