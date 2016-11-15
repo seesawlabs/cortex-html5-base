@@ -77,6 +77,15 @@ class View {
    */
   updateView() {
     // For this app, we don't need to do anything.
+
+    const elect = 1478656800000;
+    const rightNow = (new Date()).valueOf();
+    const duration = this.calculate(elect - rightNow);
+    this.hoursDiv.innerHTML = duration.hours;
+    const mins = String(duration.minutes).split('');
+
+    this.minFirstDiget.innerHTML = mins[0];
+    this.minSecondDiget.innerHTML = mins[1];
   }
 
   /**
@@ -99,13 +108,34 @@ class View {
 
   setItem(item) { }
 
+  create(tag, className) {
+    const el = window.document.createElement(tag);
+    el.className = className;
+    el.id = className;
+    return el;
+  }
+
   createInitialDom() {
     Logger.log('Creating initial DOM');
+    this.hoursDiv = this.create('div', 'hours');
+    this.minutesDiv = this.create('div', 'minutes');
 
-    let elect = 1478656800000;
-    console.log(this.calculate(elect - (new Date()).valueOf()));
+    this.minFirstDiget = this.create('div', 'minFirst');
+    this.minSecondDiget = this.create('div', 'minSecond');
+    this.minutesDiv.appendChild(this.minFirstDiget);
+    this.minutesDiv.appendChild(this.minSecondDiget);
+
+    this.numbers = this.create('div', 'numbers');
+
+    this.numbers.appendChild(this.hoursDiv);
+    this.numbers.appendChild(this.minutesDiv);
+
     this.div = window.document.getElementById('container');
+    this.div.appendChild(this.numbers);
+
+    this.updateView();
   }
+
   calculate(t) {
     let cd = 24 * 60 * 60 * 1000;
     let ch = 60 * 60 * 1000;
@@ -124,7 +154,6 @@ class View {
       days++;
       hours = 0;
     }
-    hours = pad(hours);
     minutes = pad(minutes);
     return {days, hours, minutes};
   }

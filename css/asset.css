@@ -1,9 +1,40 @@
 .container {
   font-family: digital;
 }
-.number {
-  font-size: 100px;
+.numbers {
+  position: absolute;
+  top: 1002px;
   color: #FFF000;
+  font-size: 220px;
+}
+
+.hours {
+  position: absolute;
+  left: 265px;
+  font-size: 220px;
+  width: 151px;
+  text-align: center;
+}
+
+.minutes {
+  left: 496px;
+  width: 350px;
+  height: 200px;
+  position: absolute;
+}
+
+.minFirst {
+  position: absolute;
+  top: 0;
+  width: 151px;
+  text-align: center;
+}
+.minSecond {
+  position: absolute;
+  top: 0;
+  width: 151px;
+  text-align: center;
+  left: 176px;
 }
 
 .container .invisible {
@@ -14,11 +45,6 @@
   position: absolute;
   bottom: 0;
 }
-.container .numbers {
-  position: absolute;
-  top: 800px;
-}
-
 .container .overlay {
   width: 1080px;
   height: 1920px;
