@@ -6,28 +6,9 @@ import Logger from './logger.js';
 class View {
   constructor() {
     this.placeholder = new Placeholder();
-
     this.rows = [];
-    this.images = [];
-    this.currentRow = 0;
-
+    this.current = 0;
     this.createInitialDom();
-  }
-
-  cleanImages() {
-    // Sanity Checks
-    if (!this.mainDiv || !this.rows || this.rows.length === 0)
-      return;
-
-    // Clean up container
-    if (this.mainDiv && this.rows && this.rows.length) {
-      this.rows.forEach(row => {
-        // If this element isn't the parent
-        if (row.img.parentNode !== this.mainDiv)
-          return;
-        this.mainDiv.removeChild(row.img);
-      });
-    }
   }
 
   /**
@@ -67,19 +48,7 @@ class View {
   setData(data) {
     if (!data || data.length === 0)
       return;
-
-    this.cleanImages();
-    this.rows = data.map(row => {
-      const img = new window.Image();
-      img.src = row.source.source_url;
-      img.className = 'slide';
-
-      return {
-        img,
-        username: row.user.username,
-        avatar: row.user.avatar
-      };
-    });
+    this.rows = data;
   }
 
   /**
@@ -88,7 +57,7 @@ class View {
    * Every time the app receives a 'hidden' event this method will get called.
    */
   render() {
-    Logger.log('Rendering a new view.');
+    Logger.log('Rendering a new view.', this.rows);
     if (this.rows === null || this.rows.length === 0) {
       this.placeholder.render();
       return;
@@ -115,8 +84,24 @@ class View {
    */
   updateView() {
     // For this app, we don't need to do anything.
+    Logger.log(this.rows);
+
+    if (this.current >= this.rows.length) {
+      this.current = 0;
+    }
+    this.text.innerHTML = this._createTweet(this.rows[this.current]);
+
+    this.current++;
   }
 
+  _parseLinks(text) {
+    const r = /(^|\s)(#|@)(\w*[a-zA-Z_]+\w*)/ig;
+    return text.replace(r, ' <a href="#">$2$3</a>');
+  }
+
+  _createTweet(tweet) {
+    return `<div><strong>@${tweet.posted_by.screen_name}</strong><p>${this._parseLinks(tweet.text)}</p></div>`;
+  }
   /**
    * Handles rendering of the main view.
    *
@@ -134,46 +119,25 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    this.cleanImages();
-    if (this.currentRow >= this.rows.length) {
-      this.currentRow = 0;
-    }
-
-    const row = this.rows[this.currentRow++];
-    this.setItem(row);
   }
 
-  setItem(item) {
-    this.mainDiv.appendChild(item.img);
-    this.mainBar.innerHTML = item.username;
-    this.mainAvatar.src = item.avatar;
+  create(tag, className) {
+    const el = window.document.createElement(tag);
+    el.className = className;
+    el.id = className;
+    return el;
   }
 
   createInitialDom() {
     this.div = window.document.getElementById('container');
+    this.text = this.create('div', 'twitterText');
 
-    this.mainDiv = window.document.createElement('div');
-    this.mainDiv.className = 'placeholder nyc-co-main';
-
-    this.mainImg = window.document.createElement('img');
-    this.mainImg.src = "assets/images/nyc-co-copy.png";
-    this.mainImg.className = 'nyc-co-copy';
-
-    this.mainLogo = window.document.createElement('img');
-    this.mainLogo.src = "assets/images/nyc-co.png";
-    this.mainLogo.className = 'nyc-co-logo';
-
-    this.mainBar = window.document.createElement('div');
-    this.mainBar.className = 'nyc-co-bar';
-
-    this.mainAvatar = window.document.createElement('img');
-    this.mainAvatar.className = 'nyc-co-avatar';
-
-    this.mainDiv.appendChild(this.mainAvatar);
-    this.mainDiv.appendChild(this.mainBar);
-    this.mainDiv.appendChild(this.mainImg);
-    this.mainDiv.appendChild(this.mainLogo);
-    this.div.appendChild(this.mainDiv);
+    const bg = new window.Image();
+    bg.src = 'assets/images/thanksgiving.png';
+    bg.id = 'containerBackground';
+    bg.className = 'containerBackground';
+    this.div.appendChild(bg);
+    this.div.appendChild(this.text);
   }
 }
 

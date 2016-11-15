@@ -9,6 +9,9 @@ clean:
 dev: clean lint
 	npm run dev
 
+watch: clean lint
+	npm run watch
+
 build: clean lint
 	npm run prod
 
