@@ -1,16 +1,16 @@
 /* eslint-disable */
 
-const TEST_DATA = [ { text: '@LinkNYC is incredible! It\'s like 100 times faster than my hotel WiFi. #NYC #LinkNYC',
-    posted_by: { screen_name: 'MathRoen', name: 'Math Rön' },
+const TEST_DATA = [ { text: 'Thankful that I don\'t need to drive as long as I\'m living in NYC. #hellosubway #LinksgivingNYC',
+    posted_by: { screen_name: 'shirapalka', name: 'Shira Palka' },
     retweeted: null,
-    created_at: 'Mon Nov 14 16:31:15 +0000 2016',
 
+    created_at: 'Thu Nov 17 22:58:26 +0000 2016',
     user: { id: 2815061384, name: 'LinkNYC' },
     _index: 1 },
-  { text: 'Folks, that is fast wifi. Oh, and free, too. #LinkNYC https://t.co/0vvr9RnJ2Q0vvr9RnJ2Q0vvr9RnJ2Q0vvr9RnJ2Q0vvr9RnJ2Q0vvr9RnJ2Q0vvr9RnJ2Q Folks, that is fast wifi. Oh, and free, too. #LinkNYCFolks, that is fast wifi. Oh, and free, too. #LinkNYCFolks, that is fast wifi. Oh, and free, too. #LinkNYC',
-    posted_by: { screen_name: 'silberado', name: 'Mark Silber' },
+  { text: 'I\'m thankful to live in a city with late-night cookie deliveries #LinksgivingNYC',
+    posted_by: { screen_name: 'MsGrumble', name: 'Liz Love' },
     retweeted: null,
-    created_at: 'Mon Nov 14 15:35:17 +0000 2016',
+    created_at: 'Thu Nov 17 22:45:16 +0000 2016',
     user: { id: 2815061384, name: 'LinkNYC' },
     _index: 1 } ]
 

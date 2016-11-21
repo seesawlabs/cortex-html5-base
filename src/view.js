@@ -84,8 +84,6 @@ class View {
    */
   updateView() {
     // For this app, we don't need to do anything.
-    Logger.log(this.rows);
-
     if (this.current >= this.rows.length) {
       this.current = 0;
     }
@@ -100,7 +98,10 @@ class View {
   }
 
   _createTweet(tweet) {
-    return `<div><strong>@${tweet.posted_by.screen_name}</strong><p>${this._parseLinks(tweet.text)}</p></div>`;
+    return `<div>
+      <strong>@${tweet.posted_by.screen_name}</strong>
+      <p>${this._parseLinks(tweet.text)}</p>
+    </div>`;
   }
   /**
    * Handles rendering of the main view.
