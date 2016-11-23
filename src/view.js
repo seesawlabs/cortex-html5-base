@@ -2,6 +2,7 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
+import { propData } from './prop-data.js'
 
 class View {
   constructor() {
@@ -51,6 +52,20 @@ class View {
     this.rows = data;
   }
 
+  getData(prop) {
+    const daySection = this.getDaySection();
+    const data = propData[prop][daySection];
+
+    return data[Math.floor(Math.random()*data.length)];
+  }
+
+  getDaySection() {
+    const seconds = new Date();
+
+    console.log('SECONDS', seconds);
+    return 'morning';
+  }
+
   /**
    * Render the placeholder or the main view.
    *
@@ -83,6 +98,8 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   updateView() {
+    const d = this.getData('tablet');
+    console.log('THE DATA', d);
     // For this app, we don't need to do anything.
     if (this.current >= this.rows.length) {
       this.current = 0;
