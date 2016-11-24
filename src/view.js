@@ -2,14 +2,19 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import { propData } from './prop-data.js'
+import {propData} from './prop-data.js';
+
+const PROP = 'stand';
+const HOUR_OVERRIDE = false;
 
 class View {
   constructor() {
+    Logger.log('loading view');
     this.placeholder = new Placeholder();
-    this.rows = [];
-    this.current = 0;
+    this.currentData = this.getData(PROP);
+
     this.createInitialDom();
+    this.placeholder.render();
   }
 
   /**
@@ -56,14 +61,32 @@ class View {
     const daySection = this.getDaySection();
     const data = propData[prop][daySection];
 
-    return data[Math.floor(Math.random()*data.length)];
+    return data[Math.floor(Math.random() * data.length)];
   }
 
   getDaySection() {
-    const seconds = new Date();
+    let epochHours = (new Date()).getUTCHours();
 
-    console.log('SECONDS', seconds);
-    return 'morning';
+    // Hours are in UTC ... we need them in EST (-5:00)
+    if (epochHours < 5) {
+      epochHours += 24;
+    }
+    epochHours -= 5;
+
+    if (HOUR_OVERRIDE) {
+      epochHours = HOUR_OVERRIDE;
+    }
+
+    if (epochHours >= 5 && epochHours < 12) {
+      return 'morning';
+    }
+    if (epochHours >= 12 && epochHours < 17) {
+      return 'afternoon';
+    }
+    if (epochHours >= 17 && epochHours < 24) {
+      return 'evening';
+    }
+    return 'generic';
   }
 
   /**
@@ -72,12 +95,6 @@ class View {
    * Every time the app receives a 'hidden' event this method will get called.
    */
   render() {
-    Logger.log('Rendering a new view.', this.rows);
-    if (this.rows === null || this.rows.length === 0) {
-      this.placeholder.render();
-      return;
-    }
-
     this.placeholder.hide();
     this._render();
   }
@@ -98,28 +115,9 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   updateView() {
-    const d = this.getData('tablet');
-    console.log('THE DATA', d);
-    // For this app, we don't need to do anything.
-    if (this.current >= this.rows.length) {
-      this.current = 0;
-    }
-    this.text.innerHTML = this._createTweet(this.rows[this.current]);
-
-    this.current++;
+    this.currentData = this.getData(PROP);
   }
 
-  _parseLinks(text) {
-    const r = /(^|\s)(#|@)(\w*[a-zA-Z_]+\w*)/ig;
-    return text.replace(r, ' <a href="#">$2$3</a>');
-  }
-
-  _createTweet(tweet) {
-    return `<div>
-      <strong>@${tweet.posted_by.screen_name}</strong>
-      <p>${this._parseLinks(tweet.text)}</p>
-    </div>`;
-  }
   /**
    * Handles rendering of the main view.
    *
@@ -137,6 +135,11 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
+    if (!this.currentData) {
+      return;
+    }
+    this.titleElement.innerHTML = this.currentData.text;
+    this.subTextElement.innerHTML = this.currentData.subText;
   }
 
   create(tag, className) {
@@ -148,14 +151,24 @@ class View {
 
   createInitialDom() {
     this.div = window.document.getElementById('container');
-    this.text = this.create('div', 'twitterText');
+    this.textContainerElement = this.create('div', 'textContainerElement');
+
+    this.titleElement = this.create('div', 'titleElement');
+    this.subTextElement = this.create('div', 'subTextElement');
+    this.label = this.create('div', 'labelElement');
+    this.label.innerHTML = 'Lenovo Yoga 910<br><br>Available at<br>Microsoft Store';
+
+    this.textContainerElement.appendChild(this.titleElement);
+    this.textContainerElement.appendChild(this.label);
 
     const bg = new window.Image();
-    bg.src = 'assets/images/thanksgiving.png';
+    bg.src = `assets/images/${PROP}.png`;
     bg.id = 'containerBackground';
     bg.className = 'containerBackground';
+
     this.div.appendChild(bg);
-    this.div.appendChild(this.text);
+    this.div.appendChild(this.textContainerElement);
+    this.div.appendChild(this.subTextElement);
   }
 }
 
