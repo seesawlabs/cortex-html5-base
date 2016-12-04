@@ -12,8 +12,8 @@ html, body {
   height: 1920px;
   margin: 0;
   overflow: hidden;
-  color: #fff;
-  font-family: 'SegoePro-Regular', sans-serif;
+  color: #000;
+  font-family: 'HelveticaNeue', sans-serif;
   position: relative;
 }
 
@@ -30,29 +30,30 @@ html, body {
   opacity: 0;
 }
 
-.textContainerElement {
+.subwayline {
   position: absolute;
-  top: 340px;
-  left: 85px;
-  max-width: 930px;
+  top: 60px;
+  left: 560px;
 }
 
-.titleElement {
-  font-size: 74px;
-  font-family: SegoePro-Regular;
-  min-height: 300px;
-  margin-bottom: 50px;
+.subwayline > div {
+    float: left;
+    color: #fff;
+    height: 100px;
+    width: 100px;
+    margin-right: 15px;
+    font-size: 65px;
+    line-height: 120px;
+    text-align: center;
+    border-radius: 100%;
+    font-family: HelveticaNeue;
 }
 
-.labelElement {
-  font-size: 56px;
-  font-family: SegoePro-Light;
-}
-
-.subTextElement {
-  position: absolute;
-  bottom: 58px;
-  left: 85px;
-  font-size: 30px;
-  font-family: SegoePro-Light;
+.line123 { background-color: #f13224; }
+.line456 { background-color: #009437; }
+.line7 { background-color: #bb2baf; }
+.lineACE { background-color: #254db0; }
+.lineNQR {
+  background-color: #fdcd00;
+  color: #000000;
 }

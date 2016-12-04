@@ -8,7 +8,7 @@ import Simulator from './simulator.js';
 import Logger from './logger.js';
 import {READY_EVENT} from './events.js';
 
-const DATASET_ID = 'com.intersection.media.campaigns.lenovo';
+const DATASET_ID = 'com.intersection.media.campaigns.millercoors.mta';
 
 /**
  * Starts the app in simulation mode.

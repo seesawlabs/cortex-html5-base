@@ -24,18 +24,24 @@ class Placeholder {
   render() {
     Logger.log('Rendering the placeholder image.');
 
-    const img = new window.Image();
-    img.src = "assets/images/placeholder.jpg";
-    img.onerror = e => {
+    this.img = new window.Image();
+    this.img.onerror = e => {
       console.error("Failed to load the placeholder image: ", e);
     };
+
+    this.setRandomImage();
 
     const div = window.document.createElement('div');
     div.id = PLACEHOLDER_ID;
     div.className = 'placeholder';
-    div.appendChild(img);
+    div.appendChild(this.img);
 
     window.document.body.appendChild(div);
+  }
+
+  setRandomImage(append) {
+    const imgId = Math.ceil(Math.random() * 7);
+    this.img.src = `assets/images/placeholders/${imgId}.jpg`;
   }
 
   /**

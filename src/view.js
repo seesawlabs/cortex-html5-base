@@ -2,16 +2,14 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import {propData} from './prop-data.js';
 
-const PROP = 'stand';
-const HOUR_OVERRIDE = false;
+const SUBWAY_LINE = 'NQR';
 
 class View {
   constructor() {
     Logger.log('loading view');
     this.placeholder = new Placeholder();
-    this.currentData = this.getData(PROP);
+    this.activeDelay = null;
 
     this.createInitialDom();
     this.placeholder.render();
@@ -54,39 +52,15 @@ class View {
   setData(data) {
     if (!data || data.length === 0)
       return;
-    this.rows = data;
-  }
+    this.activeDelay = data
+      .filter(function(status) {
+        return status.name === SUBWAY_LINE;
+      })
+      .filter(function(status) {
+        return status.status === "DELAYS";
+      });
 
-  getData(prop) {
-    const daySection = this.getDaySection();
-    const data = propData[prop][daySection];
-
-    return data[Math.floor(Math.random() * data.length)];
-  }
-
-  getDaySection() {
-    let epochHours = (new Date()).getUTCHours();
-
-    // Hours are in UTC ... we need them in EST (-5:00)
-    if (epochHours < 5) {
-      epochHours += 24;
-    }
-    epochHours -= 5;
-
-    if (HOUR_OVERRIDE) {
-      epochHours = HOUR_OVERRIDE;
-    }
-
-    if (epochHours >= 5 && epochHours < 12) {
-      return 'morning';
-    }
-    if (epochHours >= 12 && epochHours < 17) {
-      return 'afternoon';
-    }
-    if (epochHours >= 17 && epochHours < 24) {
-      return 'evening';
-    }
-    return 'generic';
+    this.activeDelay = this.activeDelay && this.activeDelay[0];
   }
 
   /**
@@ -95,7 +69,12 @@ class View {
    * Every time the app receives a 'hidden' event this method will get called.
    */
   render() {
-    this.placeholder.hide();
+    if (this.activeDelay === null) {
+      this.placeholder.setRandomImage();
+    } else {
+      this.placeholder.hide();
+    }
+
     this._render();
   }
 
@@ -115,7 +94,6 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   updateView() {
-    this.currentData = this.getData(PROP);
   }
 
   /**
@@ -135,40 +113,45 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    if (!this.currentData) {
+    // Sanity check
+    if (!this.activeDelay) {
       return;
     }
-    this.titleElement.innerHTML = this.currentData.text;
-    this.subTextElement.innerHTML = this.currentData.subText;
+
+    while (this.subwayline.firstChild) {
+      this.subwayline.removeChild(this.subwayline.firstChild);
+    }
+
+    this.activeDelay.name.split('').forEach(function(letter) {
+      this.subwayline
+        .appendChild(
+          this.create('div', `line${this.activeDelay.name}`, letter)
+        );
+    }.bind(this));
   }
 
-  create(tag, className) {
+  create(tag, className, text) {
     const el = window.document.createElement(tag);
     el.className = className;
     el.id = className;
+
+    if (text) {
+      el.innerHTML = text;
+    }
     return el;
   }
 
   createInitialDom() {
     this.div = window.document.getElementById('container');
-    this.textContainerElement = this.create('div', 'textContainerElement');
-
-    this.titleElement = this.create('div', 'titleElement');
-    this.subTextElement = this.create('div', 'subTextElement');
-    this.label = this.create('div', 'labelElement');
-    this.label.innerHTML = 'Lenovo Yoga 910<br><br>Available at<br>Microsoft Store';
-
-    this.textContainerElement.appendChild(this.titleElement);
-    this.textContainerElement.appendChild(this.label);
+    this.subwayline = this.create('div', 'subwayline');
 
     const bg = new window.Image();
-    bg.src = `assets/images/${PROP}.png`;
-    bg.id = 'containerBackground';
-    bg.className = 'containerBackground';
+    bg.src = `assets/images/bg.jpg`;
+    bg.id = 'bg';
+    bg.className = 'bg';
 
     this.div.appendChild(bg);
-    this.div.appendChild(this.textContainerElement);
-    this.div.appendChild(this.subTextElement);
+    this.div.appendChild(this.subwayline);
   }
 }
 
