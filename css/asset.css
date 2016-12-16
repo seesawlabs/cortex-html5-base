@@ -1,40 +1,35 @@
 .container {
-  font-family: digital;
+  font-family: Helvetica;
 }
 .numbers {
   position: absolute;
-  top: 1002px;
-  color: #FFF000;
+  top: 534px;
   font-size: 220px;
 }
 
-.hours {
+.hours, .minutes {
   position: absolute;
-  left: 265px;
+  left: 176px;
   font-size: 220px;
-  width: 151px;
+  line-height: 232px;
+  width: 360px;
+  text-align: center;
+  height: 232px;
   text-align: center;
 }
 
 .minutes {
-  left: 496px;
-  width: 350px;
-  height: 200px;
-  position: absolute;
+  left: 586px;
 }
 
-.minFirst {
-  position: absolute;
-  top: 0;
-  width: 151px;
-  text-align: center;
+.hours > div, .minutes > div {
+  width: 160px;
+  height: 232px;
+  float: left;
 }
-.minSecond {
-  position: absolute;
-  top: 0;
-  width: 151px;
-  text-align: center;
-  left: 176px;
+
+.hourFirst, .minFirst {
+  margin-right: 15px;
 }
 
 .container .invisible {
