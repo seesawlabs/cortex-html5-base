@@ -10,8 +10,28 @@
           src: url("font/HelveticaNeueLTStd Bd.otf");
       }
     </style>
+    <style type="text/css">
+      .log {
+        position: absolute;
+        top: 275px;
+        left: 50px;
+        z-index: 100;
+        color: #FFFFFF;
+        font-size: 20pt;
+        padding: 50px;
+        background: rgba(0,0,0,.8);
+      }
+      .log ul li {
+        font-size: 40pt;
+      }
+    </style>
   </head>
   <body>
+    <div class="log">
+      <h1>Name: <span style="color: #FFF000" id="dataName"></span></h1>
+      <h1>Cached: <span style="color: #FFF000" id="cached"></span></h1>
+      <ul id="data"></ul>
+    </div>
     <div id="container"></div>
     <script src="bundle.js"></script>
   </body>

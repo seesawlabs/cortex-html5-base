@@ -1,6 +1,7 @@
 /* global window */
 
 import TEST_DATA from './test-data.js';
+import TEST_DATA2 from './test-data2.js';
 import Logger from './logger.js';
 import {VISIBLE_EVENT, HIDDEN_EVENT, READY_EVENT} from './events.js';
 
@@ -13,6 +14,8 @@ const DISPATCH_VISTAR_HIDDEN_INTERVAL = 5000;
 // Send data updates every 4 seconds.
 const DISPATCH_DATA_UPDATES_INTERVAL = 4000;
 
+let _DELAY = false;
+
 class Simulator {
   run() {
     Logger.log('Running the app in simulation mode.');
@@ -20,7 +23,12 @@ class Simulator {
     window.Cortex = {
       onData: (dsId, fun) => {
         setInterval(() => {
-          fun(TEST_DATA, false);
+          let data = TEST_DATA;
+          if (_DELAY) {
+            data = TEST_DATA2;
+          }
+          _DELAY = !_DELAY;
+          fun(data, false);
         }, DISPATCH_DATA_UPDATES_INTERVAL);
       }
     };

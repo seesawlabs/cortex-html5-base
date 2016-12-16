@@ -65,6 +65,20 @@ class Placeholder {
 
     this.hidden = true;
   }
+
+  show() {
+    if (!this.hidden) {
+      // View is already hidden, no need to update the DOM again.
+      return;
+    }
+
+    Logger.log('Hiding the placeholder image.');
+
+    const div = window.document.getElementById(PLACEHOLDER_ID);
+    div.className = 'placeholder';
+
+    this.hidden = false;
+  }
 }
 
 module.exports = Placeholder;

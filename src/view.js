@@ -3,7 +3,7 @@
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 
-const SUBWAY_LINE = 'NQR';
+const SUBWAY_LINE = '7';
 
 class View {
   constructor() {
@@ -13,6 +13,13 @@ class View {
 
     this.createInitialDom();
     this.placeholder.render();
+
+    this.allData = null;
+    this.options = {};
+  }
+
+  setOptions(options) {
+    this.options = options;
   }
 
   /**
@@ -50,6 +57,7 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
+    this.allData = data;
     if (!data || data.length === 0)
       return;
     this.activeDelay = data
@@ -59,6 +67,11 @@ class View {
       .filter(function(status) {
         return status.status === "DELAYS";
       });
+
+    // If nothing was found ... weird bug
+    if (this.activeDelay === null || this.activeDelay.length === 0) {
+      this.activeDelay = null;
+    }
 
     this.activeDelay = this.activeDelay && this.activeDelay[0];
   }
@@ -71,11 +84,29 @@ class View {
   render() {
     if (this.activeDelay === null) {
       this.placeholder.setRandomImage();
+      this.placeholder.show();
     } else {
       this.placeholder.hide();
     }
 
     this._render();
+
+    // Logging data
+    window.document.getElementById('dataName').innerHTML = SUBWAY_LINE;
+    window.document.getElementById('cached').innerHTML = this.options.cached;
+    const ul = window.document.getElementById('data');
+
+    while (ul.firstChild) {
+      ul.removeChild(ul.firstChild);
+    }
+
+    if (this.allData) {
+      this.allData.forEach(function(item) {
+        const li = this.create('li', 'item');
+        li.innerHTML = `<strong>${item.name}</strong>: ${item.status}`;
+        ul.appendChild(li);
+      }.bind(this));
+    }
   }
 
   /**
@@ -122,11 +153,12 @@ class View {
       this.subwayline.removeChild(this.subwayline.firstChild);
     }
 
-    this.activeDelay.name.split('').forEach(function(letter) {
-      this.subwayline
-        .appendChild(
-          this.create('div', `line${this.activeDelay.name}`, letter)
-        );
+    const delayName = String(this.activeDelay.name);
+    let lineClass = `line${delayName}`;
+
+    delayName.split('').forEach(function(letter) {
+      const el = this.create('div', lineClass, letter);
+      this.subwayline.appendChild(el);
     }.bind(this));
   }
 
@@ -136,7 +168,7 @@ class View {
     el.id = className;
 
     if (text) {
-      el.innerHTML = text;
+      el.innerText = text;
     }
     return el;
   }
