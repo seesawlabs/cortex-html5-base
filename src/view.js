@@ -134,7 +134,7 @@ class View {
     this.text = this.create('div', 'twitterText');
 
     const bg = new window.Image();
-    bg.src = 'assets/images/thanksgiving.png';
+    bg.src = 'assets/images/bg.png';
     bg.id = 'containerBackground';
     bg.className = 'containerBackground';
     this.div.appendChild(bg);
