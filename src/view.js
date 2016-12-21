@@ -84,14 +84,23 @@ class View {
     const mins = String(duration.minutes).split('');
     const hours = String(duration.hours).split('');
 
-    this.hourFirstDigit.innerHTML = hours[0];
-    this.hourSecondDigit.innerHTML = hours[1];
-    this.minFirstDigit.innerHTML = mins[0];
-    this.minSecondDigit.innerHTML = mins[1];
+    if (hours.length && hours.length > 1) {
+      this.hourFirstDigit.innerHTML = hours[0];
+      this.hourSecondDigit.innerHTML = hours[1];
+    } else if (hours.length && hours.length === 1) {
+      this.hourFirstDigit.innerHTML = '0';
+      this.hourSecondDigit.innerHTML = hours[0];
+    }
+
+    if (mins.length && mins.length > 1) {
+      this.minFirstDigit.innerHTML = mins[0];
+      this.minSecondDigit.innerHTML = mins[1];
+    } else if (mins.length && mins.length === 1) {
+      this.minFirstDigit.innerHTML = '0';
+      this.minSecondDigit.innerHTML = mins[0];
+    }
 
     this.div.className = `container bg${Math.ceil(Math.random() * 2)}`;
-
-    Logger.log(this.div.className);
   }
 
   /**
@@ -153,8 +162,8 @@ class View {
     let hours = Math.floor((t - days * cd) / ch);
     let minutes = Math.round((t - days * cd - hours * ch) / 60000);
 
-    let pad = function(n) {
-      return n < 10 ? '0' + n : n;
+    const pad = function(n) {
+      return n < 10 ? '0' + String(n) : String(n);
     };
     if (minutes === 60) {
       hours++;
@@ -165,7 +174,8 @@ class View {
       hours = 0;
     }
     minutes = pad(minutes);
-    return {days, hours, minutes};
+    hours = pad(hours);
+    return { days, hours, minutes };
   }
 }
 
