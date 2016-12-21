@@ -78,14 +78,29 @@ class View {
   updateView() {
     // For this app, we don't need to do anything.
 
-    const elect = 1478656800000;
+    const countdownDate = 1483246800000;
     const rightNow = (new Date()).valueOf();
-    const duration = this.calculate(elect - rightNow);
-    this.hoursDiv.innerHTML = duration.hours;
+    const duration = this.calculate(countdownDate - rightNow);
     const mins = String(duration.minutes).split('');
+    const hours = String(duration.hours).split('');
 
-    this.minFirstDiget.innerHTML = mins[0];
-    this.minSecondDiget.innerHTML = mins[1];
+    if (hours.length && hours.length > 1) {
+      this.hourFirstDigit.innerHTML = hours[0];
+      this.hourSecondDigit.innerHTML = hours[1];
+    } else if (hours.length && hours.length === 1) {
+      this.hourFirstDigit.innerHTML = '0';
+      this.hourSecondDigit.innerHTML = hours[0];
+    }
+
+    if (mins.length && mins.length > 1) {
+      this.minFirstDigit.innerHTML = mins[0];
+      this.minSecondDigit.innerHTML = mins[1];
+    } else if (mins.length && mins.length === 1) {
+      this.minFirstDigit.innerHTML = '0';
+      this.minSecondDigit.innerHTML = mins[0];
+    }
+
+    this.div.className = `container bg${Math.ceil(Math.random() * 2)}`;
   }
 
   /**
@@ -116,14 +131,18 @@ class View {
   }
 
   createInitialDom() {
-    Logger.log('Creating initial DOM');
     this.hoursDiv = this.create('div', 'hours');
     this.minutesDiv = this.create('div', 'minutes');
 
-    this.minFirstDiget = this.create('div', 'minFirst');
-    this.minSecondDiget = this.create('div', 'minSecond');
-    this.minutesDiv.appendChild(this.minFirstDiget);
-    this.minutesDiv.appendChild(this.minSecondDiget);
+    this.minFirstDigit = this.create('div', 'minFirst');
+    this.minSecondDigit = this.create('div', 'minSecond');
+    this.minutesDiv.appendChild(this.minFirstDigit);
+    this.minutesDiv.appendChild(this.minSecondDigit);
+
+    this.hourFirstDigit = this.create('div', 'hourFirst');
+    this.hourSecondDigit = this.create('div', 'hourSecond');
+    this.hoursDiv.appendChild(this.hourFirstDigit);
+    this.hoursDiv.appendChild(this.hourSecondDigit);
 
     this.numbers = this.create('div', 'numbers');
 
@@ -143,8 +162,8 @@ class View {
     let hours = Math.floor((t - days * cd) / ch);
     let minutes = Math.round((t - days * cd - hours * ch) / 60000);
 
-    let pad = function(n) {
-      return n < 10 ? '0' + n : n;
+    const pad = function(n) {
+      return n < 10 ? '0' + String(n) : String(n);
     };
     if (minutes === 60) {
       hours++;
@@ -155,7 +174,8 @@ class View {
       hours = 0;
     }
     minutes = pad(minutes);
-    return {days, hours, minutes};
+    hours = pad(hours);
+    return { days, hours, minutes };
   }
 }
 
