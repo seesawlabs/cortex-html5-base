@@ -1,7 +1,6 @@
 /* global window */
 
 import Placeholder from './placeholder.js';
-import Logger from './logger.js';
 
 // import moment from 'moment';
 // import moment from 'moment-timezone';
@@ -175,7 +174,7 @@ class View {
     }
     minutes = pad(minutes);
     hours = pad(hours);
-    return { days, hours, minutes };
+    return {days, hours, minutes};
   }
 }
 
