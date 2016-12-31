@@ -1,6 +1,8 @@
 /* global window */
 
 import Placeholder from './placeholder.js';
+import axios from 'axios';
+import Logger from './logger.js';
 
 // import moment from 'moment';
 // import moment from 'moment-timezone';
@@ -8,8 +10,8 @@ import Placeholder from './placeholder.js';
 class View {
   constructor() {
     this.placeholder = new Placeholder();
+    this.media = null;
     this.createInitialDom();
-    this.timeZone = 'America/New_York';
   }
 
   cleanImages() {
@@ -50,14 +52,25 @@ class View {
    *
    * @param {array} data The data rows.
    */
-  setData(data) { }
+  setData(data) {
+  }
 
   /**
    * Render the placeholder or the main view.
    *
    * Every time the app receives a 'hidden' event this method will get called.
    */
-  render() { }
+  render() {
+    if (this.media) {
+      return;
+    }
+    axios
+      .get('https://api.wetmet.net/mediaapi/geturl.php?user_key=YXBpQHBtdmIuY29t&private_key=b034f751-f663-f557-2a82-76fdf69934b3&media_source=115-27-01&media_item=current&media_extension=mp4')
+      .then(response => {
+        Logger.log('RESPONSE', response.data);
+        this.media = response.data;
+      });
+  }
 
   /**
    * Update the view before displaying it on the screen.
@@ -75,31 +88,11 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   updateView() {
+    if (this.video.src === this.media) {
+      return;
+    }
     // For this app, we don't need to do anything.
-
-    const countdownDate = 1483246800000;
-    const rightNow = (new Date()).valueOf();
-    const duration = this.calculate(countdownDate - rightNow);
-    const mins = String(duration.minutes).split('');
-    const hours = String(duration.hours).split('');
-
-    if (hours.length && hours.length > 1) {
-      this.hourFirstDigit.innerHTML = hours[0];
-      this.hourSecondDigit.innerHTML = hours[1];
-    } else if (hours.length && hours.length === 1) {
-      this.hourFirstDigit.innerHTML = '0';
-      this.hourSecondDigit.innerHTML = hours[0];
-    }
-
-    if (mins.length && mins.length > 1) {
-      this.minFirstDigit.innerHTML = mins[0];
-      this.minSecondDigit.innerHTML = mins[1];
-    } else if (mins.length && mins.length === 1) {
-      this.minFirstDigit.innerHTML = '0';
-      this.minSecondDigit.innerHTML = mins[0];
-    }
-
-    this.div.className = `container bg${Math.ceil(Math.random() * 2)}`;
+    this.video.src = this.media;
   }
 
   /**
@@ -130,51 +123,19 @@ class View {
   }
 
   createInitialDom() {
-    this.hoursDiv = this.create('div', 'hours');
-    this.minutesDiv = this.create('div', 'minutes');
-
-    this.minFirstDigit = this.create('div', 'minFirst');
-    this.minSecondDigit = this.create('div', 'minSecond');
-    this.minutesDiv.appendChild(this.minFirstDigit);
-    this.minutesDiv.appendChild(this.minSecondDigit);
-
-    this.hourFirstDigit = this.create('div', 'hourFirst');
-    this.hourSecondDigit = this.create('div', 'hourSecond');
-    this.hoursDiv.appendChild(this.hourFirstDigit);
-    this.hoursDiv.appendChild(this.hourSecondDigit);
-
-    this.numbers = this.create('div', 'numbers');
-
-    this.numbers.appendChild(this.hoursDiv);
-    this.numbers.appendChild(this.minutesDiv);
-
     this.div = window.document.getElementById('container');
-    this.div.appendChild(this.numbers);
 
+    const tv = this.create('div', 'tv');
+    const img = this.create('img', 'tv-image');
+    img.src = 'assets/images/tv.png';
+    tv.appendChild(img);
+
+    this.video = this.create('video', 'content');
+    this.video.autoplay = true;
+
+    this.div.appendChild(this.video);
+    this.div.appendChild(tv);
     this.updateView();
-  }
-
-  calculate(t) {
-    let cd = 24 * 60 * 60 * 1000;
-    let ch = 60 * 60 * 1000;
-    let days = Math.floor(t / cd);
-    let hours = Math.floor((t - days * cd) / ch);
-    let minutes = Math.round((t - days * cd - hours * ch) / 60000);
-
-    const pad = function(n) {
-      return n < 10 ? '0' + String(n) : String(n);
-    };
-    if (minutes === 60) {
-      hours++;
-      minutes = 0;
-    }
-    if (hours === 24) {
-      days++;
-      hours = 0;
-    }
-    minutes = pad(minutes);
-    hours = pad(hours);
-    return {days, hours, minutes};
   }
 }
 

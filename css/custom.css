@@ -1,0 +1,17 @@
+.content {
+  width: 775px;
+  position: absolute;
+  top: 118px;
+  left: 37px;
+}
+
+.tv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+}
+
+.tv-image {
+  width: 1080px;
+}
