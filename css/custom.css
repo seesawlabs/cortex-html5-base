@@ -1,17 +1,36 @@
-.content {
-  width: 775px;
+.video {
   position: absolute;
-  top: 118px;
-  left: 37px;
 }
 
-.tv {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1080px;
+.large-format,
+.large-format .container,
+.large-format .placeholder {
+  width: 1920px;
+  height: 1080px;
 }
 
-.tv-image {
-  width: 1080px;
+.small-format,
+.small-format .container,
+.small-format .placeholder {
+  width: 640px;
+  height: 384px;
+}
+
+.large-format .video {
+  top: 191px;
+  left: 64px;
+}
+
+.small-format .video {
+  top: 64px;
+  left: 22px;
+}
+
+.large-format .content {
+  width: 1131px;
+  height: 637px;
+}
+
+.small-format .content {
+  width: 376px;
 }

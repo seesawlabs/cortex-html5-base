@@ -1,16 +1,19 @@
 /* global window */
 
 import Placeholder from './placeholder.js';
-import axios from 'axios';
-import Logger from './logger.js';
+import Wetmet from './wetmet';
+import Logger from './logger';
 
 // import moment from 'moment';
 // import moment from 'moment-timezone';
+
+const FORMAT = 'large';
 
 class View {
   constructor() {
     this.placeholder = new Placeholder();
     this.media = null;
+    this.wetmet = new Wetmet();
     this.createInitialDom();
   }
 
@@ -64,11 +67,19 @@ class View {
     if (this.media) {
       return;
     }
-    axios
-      .get('https://api.wetmet.net/mediaapi/geturl.php?user_key=YXBpQHBtdmIuY29t&private_key=b034f751-f663-f557-2a82-76fdf69934b3&media_source=115-27-01&media_item=current&media_extension=mp4')
-      .then(response => {
-        Logger.log('RESPONSE', response.data);
-        this.media = response.data;
+    this.wetmet
+      .getAsset({type: 'jpg'})
+      .then(url => {
+        Logger.log('POSTER URL', url);
+        this.video.poster = url;
+      });
+
+    this.wetmet
+      .getAsset({type: 'mp4'})
+      .then(url => {
+        setTimeout(() => {
+          this.media = url;
+        }, 100);
       });
   }
 
@@ -88,7 +99,7 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   updateView() {
-    if (this.video.src === this.media) {
+    if (!this.media || this.video.src === this.media) {
       return;
     }
     // For this app, we don't need to do anything.
@@ -123,18 +134,18 @@ class View {
   }
 
   createInitialDom() {
+    window.document.body.className += ` ${FORMAT}-format`;
     this.div = window.document.getElementById('container');
 
-    const tv = this.create('div', 'tv');
-    const img = this.create('img', 'tv-image');
-    img.src = 'assets/images/tv.png';
-    tv.appendChild(img);
-
+    this.div.className += ` ${FORMAT}-format`;
+    this.div
+      .style.backgroundImage = `url(./assets/images/${FORMAT}-format.png)`;
+    this.videoContainer = this.create('div', 'video');
     this.video = this.create('video', 'content');
     this.video.autoplay = true;
+    this.videoContainer.appendChild(this.video);
 
-    this.div.appendChild(this.video);
-    this.div.appendChild(tv);
+    this.div.appendChild(this.videoContainer);
     this.updateView();
   }
 }
