@@ -29,7 +29,6 @@ class Simulator {
           index = !index;
           fun(data, false);
         }, DISPATCH_DATA_UPDATES_INTERVAL);
-
       }
     };
 

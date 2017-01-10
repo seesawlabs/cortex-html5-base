@@ -18,8 +18,8 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       { from: htmlDir },
-      { from: assetsDir, to: 'assets' },
-      { from: fontDir, to: 'font' }
+      // { from: assetsDir, to: 'assets' },
+      // { from: fontDir, to: 'font' }
     ]),
     new webpack.DefinePlugin({
       'APP_NAME': JSON.stringify(require("./package.json").name)
