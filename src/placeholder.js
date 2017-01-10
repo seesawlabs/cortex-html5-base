@@ -2,6 +2,7 @@
 import Logger from './logger.js';
 
 const PLACEHOLDER_ID = 'placeholder';
+require('../css/placeholder.css');
 
 class Placeholder {
   constructor() {
@@ -58,6 +59,19 @@ class Placeholder {
     div.className = 'placeholder invisible';
 
     this.hidden = true;
+  }
+
+  show() {
+    if (!this.hidden) {
+      return;
+    }
+
+    Logger.log('Showing the placeholder image.');
+
+    const div = window.document.getElementById(PLACEHOLDER_ID);
+    div.className = 'placeholder';
+
+    this.hidden = false;
   }
 }
 

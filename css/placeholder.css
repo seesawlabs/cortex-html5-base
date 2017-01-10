@@ -1,5 +1,13 @@
-body {
+.placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 1080px;
   height: 1920px;
-  overflow: hidden;
+  z-index: 2;
+  background-image: url('../assets/images/placeholder.jpg');
+}
+
+.placeholder.invisible {
+  opacity: 0;
 }

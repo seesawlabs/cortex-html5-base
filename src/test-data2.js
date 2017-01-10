@@ -6,7 +6,7 @@ const TEST_DATA = [
             "lon":-64.75,
             "lat":32.33
          },
-         "sys":{  
+         "sys":{
             "type":1,
             "id":4169,
             "message":0.1755,
@@ -23,7 +23,7 @@ const TEST_DATA = [
             }
          ],
          "main":{
-            "temp":16,
+            "temp":22,
             "pressure":1029,
             "humidity":72,
             "temp_min":16,

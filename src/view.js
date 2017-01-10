@@ -3,10 +3,14 @@
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 
+const MAX_DIFFERENCE = 30;
+
 class View {
   constructor() {
     this.placeholder = new Placeholder();
+    this.placeholder.render();
     this.rows = [];
+    this.show = false;
     this.current = 0;
     this.createInitialDom();
   }
@@ -51,20 +55,43 @@ class View {
     this.rows = data;
   }
 
+  convertCtoF(val) {
+    return val * 1.8 + 32;
+  }
+
+  tempDifference(val1, val2, max) {
+    return Math.abs(val1 - val2) > max;
+  }
+
   /**
    * Render the placeholder or the main view.
    *
    * Every time the app receives a 'hidden' event this method will get called.
    */
   render() {
-    Logger.log('Rendering a new view.', this.rows);
-    if (this.rows === null || this.rows.length === 0) {
-      this.placeholder.render();
+    this.bermuda = this.rows.filter(item => {
+      return item.name === 'Bermuda';
+    });
+    this.manhattan = this.rows.filter(item => {
+      return item.name === 'Manhattan';
+    });
+
+    this.show = false;
+
+    if (this.bermuda.length === 0 || this.bermuda.length === 0) {
       return;
     }
 
-    this.placeholder.hide();
-    this._render();
+    this.bermuda = this.convertCtoF(this.bermuda[0].main.temp);
+    this.manhattan = this.convertCtoF(this.manhattan[0].main.temp);
+
+    this.show = this.tempDifference(
+      this.bermuda,
+      this.manhattan,
+      MAX_DIFFERENCE
+    );
+
+    Logger.log(this.show);
   }
 
   /**
@@ -83,26 +110,19 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   updateView() {
-    // For this app, we don't need to do anything.
-    if (this.current >= this.rows.length) {
-      this.current = 0;
+    if (this.show) {
+      // Update the DOM
+      this.manhattanDiv.innerHTML = `${Math.round(this.manhattan)}°`;
+      this.bermudaDiv.innerHTML = `${Math.round(this.bermuda)}°`;
+
+      // Hide the placeholder
+      this.placeholder.hide();
+      return;
     }
-    this.text.innerHTML = this._createTweet(this.rows[this.current]);
 
-    this.current++;
+    this.placeholder.show();
   }
 
-  _parseLinks(text) {
-    const r = /(^|\s)(#|@)(\w*[a-zA-Z_]+\w*)/ig;
-    return text.replace(r, ' <a href="#">$2$3</a>');
-  }
-
-  _createTweet(tweet) {
-    return `<div>
-      <strong>@${tweet.posted_by.screen_name}</strong>
-      <p>${this._parseLinks(tweet.text)}</p>
-    </div>`;
-  }
   /**
    * Handles rendering of the main view.
    *
@@ -120,6 +140,7 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
+    this.placeholder.show();
   }
 
   create(tag, className) {
@@ -131,14 +152,11 @@ class View {
 
   createInitialDom() {
     this.div = window.document.getElementById('container');
-    this.text = this.create('div', 'twitterText');
+    this.manhattanDiv = this.create('div', 'man-temp');
+    this.bermudaDiv = this.create('div', 'bermuda-temp');
 
-    const bg = new window.Image();
-    bg.src = 'assets/images/bg.png';
-    bg.id = 'containerBackground';
-    bg.className = 'containerBackground';
-    this.div.appendChild(bg);
-    this.div.appendChild(this.text);
+    this.div.appendChild(this.manhattanDiv);
+    this.div.appendChild(this.bermudaDiv);
   }
 }
 
