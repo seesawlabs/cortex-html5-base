@@ -139,7 +139,7 @@ class View {
 
     this.div.className += ` ${FORMAT}-format`;
     this.div
-      .style.backgroundImage = `url(./assets/images/${FORMAT}-format.png)`;
+      .style.backgroundImage = `url(./assets/images/${FORMAT}-format.jpg)`;
     this.videoContainer = this.create('div', 'video');
     this.video = this.create('video', 'content');
     this.video.autoplay = true;

@@ -22,8 +22,8 @@
 }
 
 .small-format .video {
-  top: 64px;
-  left: 22px;
+  top: 65px;
+  left: 9px;
 }
 
 .large-format .content {
@@ -32,5 +32,5 @@
 }
 
 .small-format .content {
-  width: 376px;
+  width: 387px;
 }
