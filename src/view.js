@@ -7,7 +7,7 @@ import Logger from './logger';
 // import moment from 'moment';
 // import moment from 'moment-timezone';
 
-const FORMAT = 'large';
+const FORMAT = 'small';
 
 class View {
   constructor() {
@@ -72,14 +72,17 @@ class View {
       .then(url => {
         Logger.log('POSTER URL', url);
         this.video.poster = url;
-      });
 
-    this.wetmet
-      .getAsset({type: 'mp4'})
-      .then(url => {
-        setTimeout(() => {
-          this.media = url;
-        }, 100);
+        this.wetmet
+          .getAsset({type: 'mp4'})
+          .then(url => {
+            setTimeout(() => {
+              this.media = url;
+            }, 100);
+          });
+      })
+      .catch(() => {
+        this.video.poster = './assets/images/placeholder-image.jpg';
       });
   }
 
