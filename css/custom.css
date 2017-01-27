@@ -1,36 +1,5 @@
-.video {
+.content1, .content2 {
   position: absolute;
-}
-
-.large-format,
-.large-format .container,
-.large-format .placeholder {
-  width: 1920px;
-  height: 1080px;
-}
-
-.small-format,
-.small-format .container,
-.small-format .placeholder {
-  width: 640px;
-  height: 384px;
-}
-
-.large-format .video {
-  top: 191px;
-  left: 64px;
-}
-
-.small-format .video {
-  top: 65px;
-  left: 9px;
-}
-
-.large-format .content {
-  width: 1131px;
-  height: 637px;
-}
-
-.small-format .content {
-  width: 387px;
+  top: 0;
+  left: 0;
 }

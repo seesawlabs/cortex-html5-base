@@ -1,19 +1,22 @@
 /* global window */
 
-import Placeholder from './placeholder.js';
-import Wetmet from './wetmet';
-import Logger from './logger';
+// import Placeholder from './placeholder.js';
+// import Wetmet from './wetmet';
+// import Logger from './logger';
 
 // import moment from 'moment';
 // import moment from 'moment-timezone';
 
-const FORMAT = 'small';
+// const FORMAT = 'small';
+
+const IFRAME = 'https://lpac.liveposter.com/load/prod?contentBucket=INT_US_LINK_1080W_1920H&frameid=10001';
 
 class View {
   constructor() {
-    this.placeholder = new Placeholder();
-    this.media = null;
-    this.wetmet = new Wetmet();
+    // this.placeholder = new Placeholder();
+    // this.media = null;
+    // this.wetmet = new Wetmet();
+    this.swapped = false;
     this.createInitialDom();
   }
 
@@ -64,26 +67,15 @@ class View {
    * Every time the app receives a 'hidden' event this method will get called.
    */
   render() {
-    if (this.media) {
-      return;
-    }
-    this.wetmet
-      .getAsset({type: 'jpg'})
-      .then(url => {
-        Logger.log('POSTER URL', url);
-        this.video.poster = url;
+    const src = `${IFRAME}&_=${Date.now()}`;
 
-        this.wetmet
-          .getAsset({type: 'mp4'})
-          .then(url => {
-            setTimeout(() => {
-              this.media = url;
-            }, 100);
-          });
-      })
-      .catch(() => {
-        this.video.poster = './assets/images/placeholder-image.jpg';
-      });
+    if (this.swapped) {
+      this.frame1.src = src;
+    } else {
+      this.frame2.src = src;
+    }
+
+    this.swap();
   }
 
   /**
@@ -102,11 +94,6 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   updateView() {
-    if (!this.media || this.video.src === this.media) {
-      return;
-    }
-    // For this app, we don't need to do anything.
-    this.video.src = this.media;
   }
 
   /**
@@ -125,7 +112,8 @@ class View {
    *
    * TODO: Implement this method according to your needs.
    */
-  _render() { }
+  _render() {
+  }
 
   setItem(item) { }
 
@@ -136,20 +124,44 @@ class View {
     return el;
   }
 
+  swap() {
+    if (this.swapped) {
+      this.frame1.style.zIndex = 10;
+      this.frame2.style.zIndex = 20;
+    } else {
+      this.frame2.style.zIndex = 10;
+      this.frame1.style.zIndex = 20;
+    }
+
+    this.swapped = !this.swapped;
+  }
+
   createInitialDom() {
-    window.document.body.className += ` ${FORMAT}-format`;
+    // window.document.body.className += ` ${FORMAT}-format`;
     this.div = window.document.getElementById('container');
+    this.frame1 = this.create('iframe', 'content1');
+    this.frame1.width = '100%';
+    this.frame1.height = '100%';
+    this.div.appendChild(this.frame1);
 
-    this.div.className += ` ${FORMAT}-format`;
-    this.div
-      .style.backgroundImage = `url(./assets/images/${FORMAT}-format.jpg)`;
-    this.videoContainer = this.create('div', 'video');
-    this.video = this.create('video', 'content');
-    this.video.autoplay = true;
-    this.videoContainer.appendChild(this.video);
+    this.frame2 = this.create('iframe', 'content2');
+    this.frame2.width = '100%';
+    this.frame2.height = '100%';
+    this.div.appendChild(this.frame2);
 
-    this.div.appendChild(this.videoContainer);
-    this.updateView();
+    this.render();
+
+    //
+    // this.div.className += ` ${FORMAT}-format`;
+    // this.div
+    //   .style.backgroundImage = `url(./assets/images/${FORMAT}-format.jpg)`;
+    // this.videoContainer = this.create('div', 'video');
+    // this.video = this.create('video', 'content');
+    // this.video.autoplay = true;
+    // this.videoContainer.appendChild(this.video);
+    //
+    // this.div.appendChild(this.videoContainer);
+    // this.updateView();
   }
 }
 
