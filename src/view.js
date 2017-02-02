@@ -1,22 +1,24 @@
 /* global window */
 
-// import Placeholder from './placeholder.js';
+import Placeholder from './placeholder.js';
 // import Wetmet from './wetmet';
-// import Logger from './logger';
+import Logger from './logger';
 
 // import moment from 'moment';
 // import moment from 'moment-timezone';
 
 // const FORMAT = 'small';
 
-const IFRAME = 'https://lpac.liveposter.com/load/prod?contentBucket=INT_US_LINK_1080W_1920H&frameid=10001';
-
 class View {
   constructor() {
-    // this.placeholder = new Placeholder();
+    this.placeholder = new Placeholder();
+    this.placeholder.render();
+
     // this.media = null;
     // this.wetmet = new Wetmet();
     this.swapped = false;
+    this.index = 0;
+    this.data = [];
     this.createInitialDom();
   }
 
@@ -59,6 +61,21 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
+    if (this.data.length === 0) {
+      this.placeholder.hide();
+    }
+    this.data = data;
+
+    if (this.data.length) {
+      this.data.forEach(function(item) {
+        const img = new window.Image();
+        img.src = item.asset;
+        img.style.display = 'none';
+        img.style.width = '1px';
+        img.style.height = '1px';
+        this.div.appendChild(img);
+      }.bind(this))
+    }
   }
 
   /**
@@ -67,15 +84,16 @@ class View {
    * Every time the app receives a 'hidden' event this method will get called.
    */
   render() {
-    const src = `${IFRAME}&_=${Date.now()}`;
-
-    if (this.swapped) {
-      this.frame1.src = src;
-    } else {
-      this.frame2.src = src;
+    if (this.data.length === 0) {
+      return;
     }
 
-    this.swap();
+    if (this.data.length <= this.index) {
+      this.index = 0;
+    }
+
+    this.image.src = this.data[this.index].asset;
+    this.index += 1;
   }
 
   /**
@@ -124,30 +142,13 @@ class View {
     return el;
   }
 
-  swap() {
-    if (this.swapped) {
-      this.frame1.style.zIndex = 10;
-      this.frame2.style.zIndex = 20;
-    } else {
-      this.frame2.style.zIndex = 10;
-      this.frame1.style.zIndex = 20;
-    }
-
-    this.swapped = !this.swapped;
-  }
-
   createInitialDom() {
     // window.document.body.className += ` ${FORMAT}-format`;
     this.div = window.document.getElementById('container');
-    this.frame1 = this.create('iframe', 'content1');
-    this.frame1.width = '100%';
-    this.frame1.height = '100%';
-    this.div.appendChild(this.frame1);
-
-    this.frame2 = this.create('iframe', 'content2');
-    this.frame2.width = '100%';
-    this.frame2.height = '100%';
-    this.div.appendChild(this.frame2);
+    this.image = this.create('img', 'content1');
+    this.image.width = '100%';
+    this.image.height = '100%';
+    this.div.appendChild(this.image);
 
     this.render();
 

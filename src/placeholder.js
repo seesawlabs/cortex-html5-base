@@ -27,7 +27,7 @@ class Placeholder {
     Logger.log('Rendering the placeholder image.');
 
     const img = new window.Image();
-    img.src = "assets/images/nyc-co-getintouch.jpg";
+    img.src = "assets/images/placeholder.jpg";
     img.onerror = e => {
       console.error("Failed to load the placeholder image: ", e);
     };
