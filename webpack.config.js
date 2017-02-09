@@ -39,6 +39,10 @@ module.exports = {
       {
         loader: "style-loader!css-loader",
         test: /\.css$/,
+      },
+      {
+        loader: 'file?hash=sha512&digest=hex&name=[hash].[ext]',
+        test: /\.(png|jpe?g|gif)$/,
       }
 
     ]

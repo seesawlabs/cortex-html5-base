@@ -32,20 +32,45 @@ html, body {
 
 #twitterText {
   position: absolute;
-  top: 1064px;
-  left: 134px;
+  top: 661px;
+  left: 71px;
   color: #404040;
   font-size: 68px;
-  width: 812px;
+  width: 936px;
   font-family: 'HelveticaNeue';
   letter-spacing: -2px;
-  height: 600px;
+  height: 966px;
+  background: url('../assets/images/twitter-bg.png') top left no-repeat transparent;
+}
+
+#twitterText.has-figure {
+  top: 591px;
+  height: 1180px;
+  font-size: 60px;
 }
 
 #twitterText strong {
   display: block;
   margin-bottom: 50px;
   font-family: 'HelveticaNeue-Bold';
+}
+
+#twitterText > div {
+  padding: 147px 47px 47px;
+}
+
+#twitterText figure {
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 932px;
+  height: 464px;
+  margin-left: -47px;
+  margin-right: -47px;
+  position: absolute;
+  left: 51px;
+  bottom: 0;
+  border-radius: 0 0 50px 50px;
 }
 
 #twitterText a {

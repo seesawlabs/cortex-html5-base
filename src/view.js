@@ -49,6 +49,14 @@ class View {
     if (!data || data.length === 0)
       return;
     this.rows = data;
+
+    data.forEach(tweet => {
+      if (!tweet.media)
+        return;
+
+      const img = new window.Image();
+      img.src = tweet.media.url;
+    });
   }
 
   /**
@@ -98,10 +106,21 @@ class View {
   }
 
   _createTweet(tweet) {
+    if (!tweet) {
+      return;
+    }
+    let image = null;
+    if (tweet.media) {
+      image = `<figure
+        style="background-image: url(${tweet.media.url})"></figure>`;
+      this.text.className = 'twitterText has-figure';
+    } else {
+      this.text.className = 'twitterText';
+    }
     return `<div>
       <strong>@${tweet.posted_by.screen_name}</strong>
       <p>${this._parseLinks(tweet.text)}</p>
-    </div>`;
+    </div>${image ? image : ''}`;
   }
   /**
    * Handles rendering of the main view.
