@@ -1,6 +1,7 @@
 /* global window */
 
 import TEST_DATA from './test-data.js';
+import TEST_DATA2 from './test-data2.js';
 import Logger from './logger.js';
 import {VISIBLE_EVENT, HIDDEN_EVENT, READY_EVENT} from './events.js';
 
@@ -19,9 +20,13 @@ class Simulator {
 
     window.Cortex = {
       onData: (dsId, fun) => {
-        setInterval(() => {
+        setTimeout(() => {
           fun(TEST_DATA, false);
         }, DISPATCH_DATA_UPDATES_INTERVAL);
+
+        setInterval(() => {
+          fun(TEST_DATA2, false);
+        }, DISPATCH_DATA_UPDATES_INTERVAL + 10500);
       }
     };
 

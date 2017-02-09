@@ -2,7 +2,7 @@
 
 import Placeholder from './placeholder.js';
 // import Wetmet from './wetmet';
-import Logger from './logger';
+// import Logger from './logger';
 
 // import moment from 'moment';
 // import moment from 'moment-timezone';
@@ -19,6 +19,7 @@ class View {
     this.swapped = false;
     this.index = 0;
     this.data = [];
+    this.imageCache = {};
     this.createInitialDom();
   }
 
@@ -61,20 +62,35 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
-    if (this.data.length === 0) {
+    if (data.length === 0) {
+      this.placeholder.show();
+    } else {
       this.placeholder.hide();
     }
+
+    if (this.data !== data) {
+      while (this.preloader.firstChild) {
+        this.preloader.removeChild(this.preloader.firstChild);
+      }
+    }
+
     this.data = data;
 
+    // Preload images
     if (this.data.length) {
       this.data.forEach(function(item) {
+        if (this.imageCache[item.asset]) {
+          return;
+        }
         const img = new window.Image();
         img.src = item.asset;
-        img.style.display = 'none';
         img.style.width = '1px';
         img.style.height = '1px';
-        this.div.appendChild(img);
-      }.bind(this))
+        img.style.opacity = '0';
+        this.preloader.appendChild(img);
+
+        this.imageCache[item.asset] = true;
+      }.bind(this));
     }
   }
 
@@ -149,6 +165,9 @@ class View {
     this.image.width = '100%';
     this.image.height = '100%';
     this.div.appendChild(this.image);
+
+    this.preloader = this.create('div', 'preloader');
+    this.div.appendChild(this.preloader);
 
     this.render();
 

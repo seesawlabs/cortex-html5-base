@@ -61,6 +61,18 @@ class Placeholder {
 
     this.hidden = true;
   }
+
+  show() {
+    if (!this.hidden) {
+      return;
+    }
+    Logger.log('Hiding the placeholder image.');
+
+    const div = window.document.getElementById(PLACEHOLDER_ID);
+    div.className = 'placeholder';
+
+    this.hidden = false;
+  }
 }
 
 module.exports = Placeholder;
