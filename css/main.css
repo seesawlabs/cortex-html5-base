@@ -84,7 +84,11 @@ html, body {
   word-wrap: break-word;
   display: block;
   width: 100%;
-  height: 420px;
+  height: 520px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+#twitterText.has-figure p {
+  height: 290px;
 }

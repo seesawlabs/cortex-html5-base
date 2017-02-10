@@ -10,7 +10,7 @@ const TEST_DATA = [ { text: 'First Aggies game! #utahstate #aggies thanks for ta
        screen_name: 'SportsRcollege',
        name: 'Sports are College' },
     _index: 1 },
-  { text: 'Men\'s Basketball prevails against Iowa State- REBLOG this Post!! https://t.co/6ldl2N5ktl #texas, #TX, #Aggies, #texassportsscene',
+  { text: 'Dear NYC, your magnetic energy draws in people from all over the world. For that reason, I\'m forever yours. #nycLoveLetters',
     media: null,
     posted_by: { screen_name: 'ColoHeadlines', name: 'Colorado Headlines' },
     retweeted: 2472560455,
