@@ -43,6 +43,10 @@ module.exports = {
       {
         loader: 'file?hash=sha512&digest=hex&name=[hash].[ext]',
         test: /\.(png|jpe?g|gif)$/,
+      },
+      {
+        loader: 'file?hash=sha512&digest=hex&name=[hash].[ext]',
+        test: /\.(ttf)$/,
       }
 
     ]

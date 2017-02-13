@@ -3,11 +3,14 @@
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 
+const CENTER_ID = 809;
+
 class View {
   constructor() {
     this.placeholder = new Placeholder();
     this.rows = [];
     this.current = 0;
+    this.center = null;
     this.createInitialDom();
   }
 
@@ -50,13 +53,8 @@ class View {
       return;
     this.rows = data;
 
-    data.forEach(tweet => {
-      if (!tweet.media)
-        return;
-
-      const img = new window.Image();
-      img.src = tweet.media.url;
-    });
+    const center = data.filter(item => item.center_id === CENTER_ID);
+    this.center = center && center.length && center[0];
   }
 
   /**
@@ -92,36 +90,8 @@ class View {
    */
   updateView() {
     // For this app, we don't need to do anything.
-    if (this.current >= this.rows.length) {
-      this.current = 0;
-    }
-    this.text.innerHTML = this._createTweet(this.rows[this.current]);
-
-    this.current++;
   }
 
-  _parseLinks(text) {
-    const r = /(^|\s)(#|@)(\w*[a-zA-Z_]+\w*)/ig;
-    return text.replace(r, ' <a href="#">$2$3</a>');
-  }
-
-  _createTweet(tweet) {
-    if (!tweet) {
-      return;
-    }
-    let image = null;
-    if (tweet.media) {
-      image = `<figure
-        style="background-image: url(${tweet.media.url})"></figure>`;
-      this.text.className = 'twitterText has-figure';
-    } else {
-      this.text.className = 'twitterText';
-    }
-    return `<div>
-      <strong>@${tweet.posted_by.screen_name}</strong>
-      <p>${this._parseLinks(tweet.text)}</p>
-    </div>${image ? image : ''}`;
-  }
   /**
    * Handles rendering of the main view.
    *
@@ -139,6 +109,21 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
+    if (!this.center) {
+      return;
+    }
+
+    this.div.className = this.buildContainerClassName();
+    this.current = this.current === 0 ? 1 : 0;
+    this.text.innerHTML = this.buildOutputTime();
+  }
+
+  buildOutputTime() {
+    let mins = parseInt(this.center.current_wait, 10);
+    const hours = "00" + String(Math.floor(mins / 60));
+    mins = "00" + String(mins % 60);
+
+    return `${hours.slice(hours.length - 2)}:${mins.slice(mins.length - 2)}`;
   }
 
   create(tag, className) {
@@ -148,15 +133,15 @@ class View {
     return el;
   }
 
+  buildContainerClassName() {
+    return `client-${CENTER_ID}-${this.current}`;
+  }
+
   createInitialDom() {
     this.div = window.document.getElementById('container');
-    this.text = this.create('div', 'twitterText');
+    this.div.className = this.buildContainerClassName();
+    this.text = this.create('div', 'output');
 
-    const bg = new window.Image();
-    bg.src = 'assets/images/bg.png';
-    bg.id = 'containerBackground';
-    bg.className = 'containerBackground';
-    this.div.appendChild(bg);
     this.div.appendChild(this.text);
   }
 }
