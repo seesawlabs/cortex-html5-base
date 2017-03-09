@@ -3,7 +3,7 @@
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 
-const CENTER_ID = 809;
+const CENTER_ID = 808;
 
 class View {
   constructor() {
@@ -119,11 +119,11 @@ class View {
   }
 
   buildOutputTime() {
-    let current_wait = this.center.current_wait;
-    if (!this.isNumeric(current_wait)) {
-      current_wait = 0
+    let currentWait = this.center.current_wait;
+    if (!this.isNumeric(currentWait)) {
+      currentWait = 0;
     }
-    let mins = parseInt(current_wait, 10);
+    let mins = parseInt(currentWait, 10);
     const hours = "00" + String(Math.floor(mins / 60));
     mins = "00" + String(mins % 60);
 
