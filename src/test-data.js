@@ -138,7 +138,7 @@ const TEST_DATA = [ { center_id: 808,
     latitude: 40.7349636,
     center_url: 'https://www.gohealthuc.com/nyc/manhattan/gramercy',
     distance: 2.9,
-    current_wait: 0,
+    current_wait: 15,
     _index: 1 } ];
 
 module.exports = TEST_DATA;

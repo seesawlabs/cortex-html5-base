@@ -8,7 +8,7 @@ import Simulator from './simulator.js';
 import Logger from './logger.js';
 import {READY_EVENT} from './events.js';
 
-const DATASET_ID = 'com.intersection.media.campaigns.loveletters';
+const DATASET_ID = 'com.intersection.media.campaigns.gohealth.waittimes';
 
 /**
  * Starts the app in simulation mode.

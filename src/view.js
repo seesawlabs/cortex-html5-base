@@ -119,11 +119,19 @@ class View {
   }
 
   buildOutputTime() {
-    let mins = parseInt(this.center.current_wait, 10);
+    let current_wait = this.center.current_wait;
+    if (!this.isNumeric(current_wait)) {
+      current_wait = 0
+    }
+    let mins = parseInt(current_wait, 10);
     const hours = "00" + String(Math.floor(mins / 60));
     mins = "00" + String(mins % 60);
 
     return `${hours.slice(hours.length - 2)}:${mins.slice(mins.length - 2)}`;
+  }
+
+  isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
   }
 
   create(tag, className) {
