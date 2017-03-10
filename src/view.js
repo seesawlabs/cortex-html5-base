@@ -15,7 +15,7 @@ class View {
   constructor() {
     // this.placeholder = new Placeholder();
     this.swapped = false;
-    // TODO: Get default frameid
+    /* TODO: Get default frameid */
     this.frameid = '10001';
     this.createInitialDom();
   }
@@ -59,8 +59,8 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
-    // TODO data validation
-    this.frameid = data && data.length && data[0]._index
+    window.document.getElementById('output').value = JSON.stringify(data);
+    this.frameid = data && data.length && data[0]._index;
   }
 
   /**
