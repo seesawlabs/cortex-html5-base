@@ -9,14 +9,14 @@
 
 // const FORMAT = 'small';
 
-const IFRAME = 'https://lpac.liveposter.com/load/prod?contentBucket=INT_US_LINK_1080W_1920H&frameid=10001';
+const IFRAME = 'https://lpac.liveposter.com/load/prod?contentBucket=INT_US_LINK_1080W_1920H&frameid=';
 
 class View {
   constructor() {
     // this.placeholder = new Placeholder();
-    // this.media = null;
-    // this.wetmet = new Wetmet();
     this.swapped = false;
+    // TODO: Get default frameid
+    this.frameid = '10001';
     this.createInitialDom();
   }
 
@@ -59,6 +59,8 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
+    // TODO data validation
+    this.frameid = data && data.length && data[0]._index
   }
 
   /**
@@ -67,7 +69,7 @@ class View {
    * Every time the app receives a 'hidden' event this method will get called.
    */
   render() {
-    const src = `${IFRAME}&_=${Date.now()}`;
+    const src = `${IFRAME}${this.frameid}&_=${Date.now()}`;
 
     if (this.swapped) {
       this.frame1.src = src;
