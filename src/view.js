@@ -59,7 +59,7 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
-    window.document.getElementById('output').value = JSON.stringify(data);
+    // window.document.getElementById('output').value = JSON.stringify(data || {dummy: true});
     this.frameid = data && data.length && data[0]._index;
   }
 
