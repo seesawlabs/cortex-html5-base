@@ -8,8 +8,8 @@ import Logger from './logger.js';
 
 class View {
   constructor() {
-      this.placeholder = new Placeholder();
-      this.placeholder.render();
+    this.placeholder = new Placeholder();
+    this.placeholder.render();
 
     this.rows = null;
     this.deviceId = '';
@@ -59,8 +59,8 @@ class View {
    *
    * @param {array} data The data rows.
    */
-    setData(data) {
-      this.rows = data;
+  setData(data) {
+    this.rows = data;
 
     if (data && data.length > 0) {
       this.deviceId = data[0]._device_id;
@@ -75,12 +75,12 @@ class View {
   render() {
     Logger.log('Rendering a new view.');
     if (this.rows === null) {
-      //Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
+      // Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
       return;
     }
 
     this.placeholder.hide();
-    //Tracker.track(this.deviceId, CAMPAIGN, 'normal');
+    // Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
