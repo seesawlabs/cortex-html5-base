@@ -13,7 +13,7 @@ class Data {
   init() {
     window.addEventListener(HIDDEN_EVENT, () => {
       Logger.log('Received vistar-hidden event.');
-      if (this.newData !== null && this.newData.length > 0) {
+      if (this.newData !== null) {
         this.view.setData(this.newData);
         this.newData = null;
       }
@@ -31,7 +31,7 @@ class Data {
       Logger.log('Received data from Silo.', {cached: cached, data: data});
 
       if (data === null || data.length === 0) {
-        return Logger.log('Ignoring empty data from Silo.');
+        Logger.log('Ignoring empty data from Silo.');
       }
 
       this.newData = data;

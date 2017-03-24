@@ -2,17 +2,16 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
+// import Tracker from './tracker.js';
 
-// TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+// const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
 
 class View {
   constructor() {
-    this.placeholder = new Placeholder();
+      this.placeholder = new Placeholder();
+      this.placeholder.render();
 
-    this.rows = [];
-    this.currentRow = 0;
+    this.rows = null;
     this.deviceId = '';
 
     this.container = window.document.getElementById('container');
@@ -60,8 +59,8 @@ class View {
    *
    * @param {array} data The data rows.
    */
-  setData(data) {
-    this.rows = data;
+    setData(data) {
+      this.rows = data;
 
     if (data && data.length > 0) {
       this.deviceId = data[0]._device_id;
@@ -75,14 +74,13 @@ class View {
    */
   render() {
     Logger.log('Rendering a new view.');
-    if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
-      this.placeholder.render();
+    if (this.rows === null) {
+      //Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
       return;
     }
 
     this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
+    //Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
@@ -112,9 +110,6 @@ class View {
    * and we have data stored in this.rows. This is the place where you actually
    * render some content on the screen based on the incoming dynamic data.
    *
-   * Current implementation simply iterates over rows and displays a single row
-   * every time the app is visible on the screen.
-   *
    * It is important to be as efficient as possible in this method. Try to
    * make as few DOM manipulations as possible. Reusing DOM elements is better
    * than recreating them every time this method is called.
@@ -122,14 +117,8 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    if (this.currentRow >= this.rows.length) {
-      this.currentRow = 0;
-    }
-    Logger.log(`The view has ${this.rows.length} data rows. ` +
-               `Displaying row #${this.currentRow}.`);
-    const row = this.rows[this.currentRow];
-    this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+    Logger.log(`The view has ${this.rows.length} data rows. `);
+    this.pre.innerText = JSON.stringify(this.rows, null, 2);
   }
 }
 
