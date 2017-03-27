@@ -6,7 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <div id="container"></div>
+    <div class="container">
+      <div class="labels">
+        <h1>Nearby Rental</h1>
+        <h2><img src="assets/images/location_pin.png"></h2>
+      </div>
+      <div class="carousel">
+        <div class="carousel-rail">
+          <div class="carousel-item">
+            <div class="item-container current">
+              <figure></figure>
+              <div class="info">
+                <div class="distance"></div>
+                <div class="details">
+                  <p><span ng-bind-template="{{item.bedrooms}} bed{{item.bedrooms != 1 ? \'s\' : \'\'}}"></span><span class="divider">•</span><span ng-bind-template="{{item.bathrooms}} bath{{item.bathrooms != 1 ? \'s\' : \'\'}}"></span><span class="divider">•</span><span ng-bind-template="{{item.size_sqft|number}}" class="sqft"></span></p>
+                  <p ng-bind="item.addr_street"></p>
+                </div>
+              </div>
+              <div ng-bind="item.price|currency:\'$\':0" class="price"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class=footer><img src=assets/images/StreetEasy_logo.png class=logo/>
+        <div class=right><img src=assets/images/phone.png class=phone/>
+          <h3>StreetEasy.com<br/>iOS <span>|</span> Android</h3>
+        </div>
+      </div>
+      <div class=placeholder><img src=assets/images/StreetEasy_Failover.jpg/></div>
+    </div>
     <script src="bundle.js"></script>
   </body>
 </html>
