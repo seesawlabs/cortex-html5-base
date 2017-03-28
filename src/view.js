@@ -124,7 +124,7 @@ class View {
     const _if = el.querySelectorAll(`[ssl-if]`);
     Array.prototype.map.call(_if, dom => {
       const visible = function(str) {
-        return eval(str);
+        return window.eval(str);
       }.call({row}, dom.getAttribute('ssl-if'));
       if (visible && !dom.classList.contains('hidden')) {
         dom.classList.add('hidden');
@@ -157,7 +157,7 @@ class View {
               value = this.numberWithCommas(value);
               break;
             default:
-              value = eval("`" + dom.getAttribute(key) + "`");
+              value = window.eval("`" + dom.getAttribute(key) + "`");
               break;
           }
         }
