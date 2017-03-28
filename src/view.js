@@ -50,9 +50,10 @@ class View {
       return;
     this.rows = data;
 
-    this.rows && this.rows.map( row => {
-      const img = new Image();
+    this.rows.map(row => {
+      const img = new window.Image();
       img.src = row.large_image_uri;
+      return true;
     });
   }
 
@@ -67,19 +68,27 @@ class View {
       this.placeholder.render();
       return;
     }
+    const current = this.current;
+
     if (this.rows.length < 3) {
       this.renderCard('itemPrevious', null);
     } else {
-      this.renderCard('itemPrevious', this.rows[this.current - 1 < 0 ? this.rows.length - 1 : this.current - 1]);
+      this.renderCard(
+        'itemPrevious',
+        this.rows[current - 1 < 0 ? this.rows.length - 1 : current - 1]
+      );
     }
 
-    this.renderCard('itemCurrent', this.rows[this.current]);
-    this.renderCard('labels', this.rows[this.current], this.rows.length);
+    this.renderCard('itemCurrent', this.rows[current]);
+    this.renderCard('labels', this.rows[current], this.rows.length);
 
     if (this.rows.length < 2) {
-      this.renderCard('itemNext', null);;
+      this.renderCard('itemNext', null);
     } else {
-      this.renderCard('itemNext', this.rows[this.current + 1 >= this.rows.length ? 0 : this.current + 1]);
+      this.renderCard(
+        'itemNext',
+        this.rows[current + 1 >= this.rows.length ? 0 : current + 1]
+      );
     }
 
     this.current++;
@@ -97,16 +106,16 @@ class View {
   }
 
   renderCard(id, row, total) {
-    const el = document.getElementById(id);
+    const el = window.document.getElementById(id);
 
-    if (row === null) {
-      !el.classList.contains('hidden') && el.classList.add('hidden');
+    if (row === null && !el.classList.contains('hidden')) {
+      el.classList.add('hidden');
       return;
     }
 
     el.classList.remove('hidden');
 
-    const _count = el.querySelectorAll(`[ssl-count]`)
+    const _count = el.querySelectorAll(`[ssl-count]`);
     Array.prototype.map.call(_count, dom => {
       dom.innerHTML = total;
     });
@@ -115,10 +124,10 @@ class View {
     const _if = el.querySelectorAll(`[ssl-if]`);
     Array.prototype.map.call(_if, dom => {
       const visible = function(str) {
-        return eval(str)
-      }.call({ row }, dom.getAttribute('ssl-if'))
-      if (visible) {
-        !dom.classList.contains('hidden') && dom.classList.add('hidden');
+        return eval(str);
+      }.call({row}, dom.getAttribute('ssl-if'));
+      if (visible && !dom.classList.contains('hidden')) {
+        dom.classList.add('hidden');
       } else {
         dom.classList.remove('hidden');
       }
@@ -126,33 +135,34 @@ class View {
 
     // Fill in templates
     for (const k in row) {
-      const key = `ssl-${k}`
-      const dom = el.querySelector(`[${key}]`);
-      if (!dom) {
-        continue;
-      }
-
-      let value = row[k];
-      const attr = dom.getAttribute(key);
-
-      if (attr !== '') {
-        switch (attr) {
-          case "backgroundImage":
-            dom.style.backgroundImage = `url(${value})`;
-            continue;
-          case "currency":
-            value = `$${this.numberWithCommas(value)}`;
-            break;
-          case "number":
-            value = this.numberWithCommas(value);
-            break;
-          default:
-            const template = "`" + dom.getAttribute(key) + "`";
-            value = eval(template);
-            break;
+      if (row[k]) {
+        const key = `ssl-${k}`;
+        const dom = el.querySelector(`[${key}]`);
+        if (!dom) {
+          continue;
         }
+
+        let value = row[k];
+        const attr = dom.getAttribute(key);
+
+        if (attr !== '') {
+          switch (attr) {
+            case "backgroundImage":
+              dom.style.backgroundImage = `url(${value})`;
+              continue;
+            case "currency":
+              value = `$${this.numberWithCommas(value)}`;
+              break;
+            case "number":
+              value = this.numberWithCommas(value);
+              break;
+            default:
+              value = eval("`" + dom.getAttribute(key) + "`");
+              break;
+          }
+        }
+        dom.innerHTML = value;
       }
-      dom.innerHTML = value;
     }
 
     // _bedroom =  {{item.bedrooms}} bed{{item.bedrooms != 1 ? \'s\' : \'\'}}
