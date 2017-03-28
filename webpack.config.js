@@ -5,6 +5,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var srcDir = path.resolve(__dirname, 'src');
 var assetsDir = path.resolve(__dirname, 'assets');
+var fontDir = path.resolve(__dirname, 'font');
 var htmlDir = path.resolve(__dirname, 'html');
 var outDir = path.resolve(__dirname, 'build');
 
@@ -17,7 +18,8 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       { from: htmlDir },
-      { from: assetsDir, to: 'assets' }
+      { from: assetsDir, to: 'assets' },
+      { from: fontDir, to: 'font' }
     ]),
     new webpack.DefinePlugin({
       'APP_NAME': JSON.stringify(require("./package.json").name)
@@ -30,10 +32,19 @@ module.exports = {
         loader: 'babel-loader',
         test: srcDir,
       },
-      { 
+      {
+        loader: 'url-loader?limit=100000',
+        test: /\.otf$/,
+      },
+      {
         loader: "style-loader!css-loader",
         test: /\.css$/,
+      },
+      {
+        loader: 'file?hash=sha512&digest=hex&name=[hash].[ext]',
+        test: /\.(png|jpe?g|gif)$/,
       }
+
     ]
   },
   stats: {

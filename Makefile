@@ -6,11 +6,14 @@ lint:
 clean:
 	rm -rf ./build
 
-dev: clean lint 
+dev: clean lint
 	npm run dev
 
 build: clean lint
 	npm run prod
+
+watch: clean lint
+	npm run watch
 
 pack:
 	mkdir -p ./dist

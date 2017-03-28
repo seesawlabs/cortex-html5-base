@@ -2,20 +2,75 @@
 
 const TEST_DATA = [
   {
-      "_device_id": "d-30c1a338-085b-4df9-791d-1c03f1c8d2a3",
-      "_index": "QU-02-125016-L",
-      "is_test_data": true
+    "_index": "MN-03-123814",
+    "id": 1931017,
+    "addr_street": "67 East 11th Street",
+    "price": 4995,
+    "bathrooms": 1,
+    "bedrooms": 1,
+    "size_sqft": 800,
+    "large_image_uri": "http://cdn-img2.streeteasy.com/nyc/image/50/235082650.jpg",
+    "distance": 0.4,
+    "nearby": 162,
+    "Neighborhood": "Greenwich Village",
+    "listing_type": "Rentals"
   },
   {
-      "_device_id": "d-9ac3c8b2-838b-4223-79a1-8c6aa96f3531",
-      "_index": "QU-02-125016-L",
-      "is_test_data": true
+    "_index": "MN-03-123814",
+    "id": 1262706,
+    "addr_street": "67 East 11th Street",
+    "price": 650000,
+    "bathrooms": 1,
+    "bedrooms": 1,
+    "size_sqft": 800,
+    "large_image_uri": "https://st.hzcdn.com/simgs/d381ac570db38de5_8-4275/craftsman-exterior.jpg",
+    "distance": 0.4,
+    "nearby": 140,
+    "Neighborhood": "Greenwich Village",
+    "listing_type": "Sales"
   },
   {
-      "_device_id": "d-525e7aee-8534-4f93-7497-a6eb7327d540",
-      "_index": "QU-02-125016-L",
-      "is_test_data": true
+    "_index": "MN-03-123814",
+    "id": 1262706,
+    "addr_street": "67 East 11th Street",
+    "price": 650000,
+    "bathrooms": 1,
+    "bedrooms": 1,
+    "size_sqft": "NULL",
+    "large_image_uri": "https://static1.squarespace.com/static/51eed906e4b0953024980af9/530e222ae4b0beb5b8ffabe7/543825d1e4b06d545d26f30c/1412965856568/Pretty-Beach-House-Australia-Travel-KNSTRCT-4.jpg?format=1500w",
+    "distance": 0.4,
+    "nearby": 139,
+    "Neighborhood": "Greenwich Village",
+    "listing_type": "Sales"
+  },
+  {
+    "_index": "MN-03-123814",
+    "id": 1262706,
+    "addr_street": "67 East 11th Street",
+    "price": 650000,
+    "bathrooms": 1,
+    "bedrooms": 1,
+    "size_sqft": "",
+    "large_image_uri": "http://dancenet.s3.amazonaws.com/images/i786/496068.061cute_house_orig.jpg",
+    "distance": 0.4,
+    "nearby": 138,
+    "Neighborhood": "Greenwich Village",
+    "listing_type": "Sales"
+  },
+  {
+    "_index": "MN-03-123814",
+    "id": 1262706,
+    "addr_street": "67 East 11th Street",
+    "price": 1500000,
+    "bathrooms": 2,
+    "bedrooms": 3,
+    "size_sqft": "NA",
+    "large_image_uri": "http://static.panoramio.com/photos/large/6366102.jpg",
+    "distance": 0.4,
+    "nearby": 137,
+    "Neighborhood": "Greenwich Village",
+    "listing_type": "Sales"
   }
-];
+]
 
 module.exports = TEST_DATA;

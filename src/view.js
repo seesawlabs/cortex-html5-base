@@ -2,25 +2,13 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-// import Tracker from './tracker.js';
-
-// const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
 
 class View {
   constructor() {
     this.placeholder = new Placeholder();
-    this.placeholder.render();
-
-    this.rows = null;
-    this.deviceId = '';
-
-    this.container = window.document.getElementById('container');
-
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    this.rows = [];
+    this.current = 0;
+    this.createInitialDom();
   }
 
   /**
@@ -55,16 +43,17 @@ class View {
    *   img.className = 'visible';
    * }
    *
-   * TODO: Implement this method according to your needs.
-   *
    * @param {array} data The data rows.
    */
   setData(data) {
+    if (!data || data.length === 0)
+      return;
     this.rows = data;
 
-    if (data && data.length > 0) {
-      this.deviceId = data[0]._device_id;
-    }
+    this.rows && this.rows.map( row => {
+      const img = new Image();
+      img.src = row.large_image_uri;
+    });
   }
 
   /**
@@ -73,15 +62,102 @@ class View {
    * Every time the app receives a 'hidden' event this method will get called.
    */
   render() {
-    Logger.log('Rendering a new view.');
-    if (this.rows === null) {
-      // Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
+    Logger.log('Rendering a new view.', this.rows);
+    if (this.rows === null || this.rows.length === 0) {
+      this.placeholder.render();
       return;
+    }
+    if (this.rows.length < 3) {
+      this.renderCard('itemPrevious', null);
+    } else {
+      this.renderCard('itemPrevious', this.rows[this.current - 1 < 0 ? this.rows.length - 1 : this.current - 1]);
+    }
+
+    this.renderCard('itemCurrent', this.rows[this.current]);
+    this.renderCard('labels', this.rows[this.current], this.rows.length);
+
+    if (this.rows.length < 2) {
+      this.renderCard('itemNext', null);;
+    } else {
+      this.renderCard('itemNext', this.rows[this.current + 1 >= this.rows.length ? 0 : this.current + 1]);
+    }
+
+    this.current++;
+
+    if (this.current >= this.rows.length) {
+      this.current = 0;
     }
 
     this.placeholder.hide();
-    // Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
+  }
+
+  numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  renderCard(id, row, total) {
+    const el = document.getElementById(id);
+
+    if (row === null) {
+      !el.classList.contains('hidden') && el.classList.add('hidden');
+      return;
+    }
+
+    el.classList.remove('hidden');
+
+    const _count = el.querySelectorAll(`[ssl-count]`)
+    Array.prototype.map.call(_count, dom => {
+      dom.innerHTML = total;
+    });
+
+    // Handle conditionals
+    const _if = el.querySelectorAll(`[ssl-if]`);
+    Array.prototype.map.call(_if, dom => {
+      const visible = function(str) {
+        return eval(str)
+      }.call({ row }, dom.getAttribute('ssl-if'))
+      if (visible) {
+        !dom.classList.contains('hidden') && dom.classList.add('hidden');
+      } else {
+        dom.classList.remove('hidden');
+      }
+    });
+
+    // Fill in templates
+    for (const k in row) {
+      const key = `ssl-${k}`
+      const dom = el.querySelector(`[${key}]`);
+      if (!dom) {
+        continue;
+      }
+
+      let value = row[k];
+      const attr = dom.getAttribute(key);
+
+      if (attr !== '') {
+        switch (attr) {
+          case "backgroundImage":
+            dom.style.backgroundImage = `url(${value})`;
+            continue;
+          case "currency":
+            value = `$${this.numberWithCommas(value)}`;
+            break;
+          case "number":
+            value = this.numberWithCommas(value);
+            break;
+          default:
+            const template = "`" + dom.getAttribute(key) + "`";
+            value = eval(template);
+            break;
+        }
+      }
+      dom.innerHTML = value;
+    }
+
+    // _bedroom =  {{item.bedrooms}} bed{{item.bedrooms != 1 ? \'s\' : \'\'}}
+    // _bathrooms = {{item.bathrooms}} bath{{item.bathrooms != 1 ? \'s\' : \'\'}}
+    // _sqft =  {{item.size_sqft|number}}
   }
 
   /**
@@ -101,6 +177,7 @@ class View {
    */
   updateView() {
     // For this app, we don't need to do anything.
+
   }
 
   /**
@@ -110,6 +187,9 @@ class View {
    * and we have data stored in this.rows. This is the place where you actually
    * render some content on the screen based on the incoming dynamic data.
    *
+   * Current implementation simply iterates over rows and displays a single row
+   * every time the app is visible on the screen.
+   *
    * It is important to be as efficient as possible in this method. Try to
    * make as few DOM manipulations as possible. Reusing DOM elements is better
    * than recreating them every time this method is called.
@@ -117,8 +197,17 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    Logger.log(`The view has ${this.rows.length} data rows. `);
-    this.pre.innerText = JSON.stringify(this.rows, null, 2);
+  }
+
+  create(tag, className) {
+    const el = window.document.createElement(tag);
+    el.className = className;
+    el.id = className;
+    return el;
+  }
+
+  createInitialDom() {
+    this.container = window.document.getElementById('container');
   }
 }
 

@@ -24,7 +24,7 @@
   src: url("../assets/fonts/source-sans-pro/SourceSansPro-ExtraLight.otf") format("opentype"); }
 
 body {
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   background: #191F2C;
   font-family: 'SourceSansPro-Regular';
@@ -33,14 +33,14 @@ body {
 .container {
   width: 1080px;
   height: 1920px;
-  margin: 0 auto;
+  margin: 0;
   position: relative;
   overflow: hidden;
   background: url("../assets/images/background_glow.png") top center no-repeat #191F2C; }
 
 .labels {
   position: relative;
-  top: 148px;
+  top: calc(150px + 158px);
   width: 100%;
   text-align: center; }
 
@@ -72,7 +72,7 @@ h3 {
 
 .carousel {
   position: absolute;
-  top: 446px;
+  top: calc(474px + 158px);
   height: 1163px;
   width: 100%;
   overflow: hidden; }
@@ -80,7 +80,9 @@ h3 {
     position: absolute;
     -webkit-transition: all 1000ms ease-in-out;
     -webkit-transform: translateZ(0);
-    right: 110px; }
+    width: 2695px;
+    height: 1163px;
+    left: -820px; }
   .carousel .carousel-item {
     display: inline-block;
     width: 860px;
@@ -162,35 +164,35 @@ h3 {
       .carousel .carousel-item .details .sqft:after {
         content: " ft²"; }
 
-.footer {
+.header {
   height: 158px;
   position: absolute;
-  bottom: 0;
+  top: 0;
   width: 1080px;
   margin: 0;
   padding: 0;
   background-color: #0080C6; }
-  .footer .logo {
+  .header .logo {
     position: relative;
     top: 52px;
     left: 73px; }
-  .footer .right {
+  .header .right {
     width: 540px;
     height: 100%;
     float: right;
     text-align: right; }
-  .footer .phone {
+  .header .phone {
     position: relative;
     bottom: 75px;
     right: 20px;
     float: right;
     margin-left: 16px; }
-  .footer h3 {
+  .header h3 {
     float: right;
     position: relative;
     top: 44px;
-    margin-right: 16px; }
-    .footer h3 span {
+    margin-right: 73px; }
+    .header h3 span {
       margin-left: 13px;
       margin-right: 13px; }
 
@@ -204,3 +206,6 @@ h3 {
   height: 1920px; }
   .placeholder.invisible {
     opacity: 0; }
+
+.hidden {
+  visibility: hidden; }
