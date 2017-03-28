@@ -6,13 +6,13 @@ lint:
 clean:
 	rm -rf ./build
 
-dev: clean lint
+dev: clean
 	npm run dev
 
 build: clean
 	npm run prod
 
-watch: clean lint
+watch: clean
 	npm run watch
 
 pack:
