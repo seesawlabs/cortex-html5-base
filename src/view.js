@@ -2,10 +2,9 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
 
 // TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+// const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
 
 class View {
   constructor() {
@@ -74,16 +73,17 @@ class View {
    * Every time the app receives a 'hidden' event this method will get called.
    */
   render() {
-    Logger.log('Rendering a new view.');
-    if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
-      this.placeholder.render();
-      return;
-    }
-
-    this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
-    this._render();
+    return;
+    // Logger.log('Rendering a new view.');
+    // if (this.rows === null || this.rows.length === 0) {
+    //   Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
+    //   this.placeholder.render();
+    //   return;
+    // }
+    //
+    // this.placeholder.hide();
+    // Tracker.track(this.deviceId, CAMPAIGN, 'normal');
+    // this._render();
   }
 
   /**
