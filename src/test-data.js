@@ -5,16 +5,28 @@
 
 const TEST_DATA = [
   {
-    "_index": "device1",
-    "neighborhood": "West Village"
+    "_index": "MN-03-123800-R",
+    "city": "New York"
   },
   {
-    "_index": "device2",
-    "neighborhood": "East Village"
+    "_index": "BX-07-119793-L",
+    "city": "Brooklyn"
   },
   {
-    "_index": "device3",
-    "neighborhood": "Chelsea"
+    "_index": "MN-03-133426-R",
+    "city": "Bronx"
+  },
+  {
+    "_index": "MN-04-122078-R",
+    "city": "Ivan"
+  },
+  {
+    "_index": "MN-04-122565-L",
+    "city": "Manhattan"
+  },
+  {
+    "_index": "MN-04-123508-L",
+    "city": "Staten Island"
   }
 ];
 
