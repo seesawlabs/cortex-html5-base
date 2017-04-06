@@ -1,7 +1,7 @@
 /* global window */
 
 import Placeholder from './placeholder.js';
-import Logger from './logger.js';
+// import Logger from './logger.js';
 
 // TODO: Change this.
 // const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
@@ -13,8 +13,9 @@ class View {
 
     this.rows = [];
     this.currentRow = 0;
+    this.currentSlot = null;
     this.deviceId = '';
-    this.adSlots = {}
+    this.adSlots = {};
 
     this.container = window.document.getElementById('container');
   }
@@ -61,40 +62,41 @@ class View {
 
   setUpAdUnit(city, venue) {
     switch (city) {
-      case "New York":
-        city = null
-        break;
       case "Staten Island":
-        city = "StatenIsland"
+        city = "StatenIsland";
+        break;
+      case "Brooklyn":
+      case "Bronx":
+      case "Manhattan":
         break;
       default:
+        city = null;
         break;
     }
 
-    const id = `ad_${city || 'NY'}_${Date.now()}`;
-    this.container.appendChild(this.createElement(id, 'ad'));
+    const id = 'ad';
 
     window.googletag.cmd.push(() => {
       const unit = `/148446784/Link.NYC${city ? '-' + city : ''}`;
       window.googletag
         .defineSlot(unit, [1080, 1920], id)
-        // .setTargeting('Venue', [venue])
-        .addService(window.googletag.pubads())
+        .setTargeting('Venue', [venue])
+        .addService(window.googletag.pubads());
     });
 
     window.googletag.cmd.push(() => {
       window.googletag.pubads().enableSingleRequest();
       window.googletag.enableServices();
       window.googletag.display(id);
-    })
+    });
   }
 
   createElement(id, className, tag = 'div') {
-    const element = document.createElement(tag)
-    element.classList.add(className)
-    element.id = id
+    const element = window.document.createElement(tag);
+    element.classList.add(className);
+    element.id = id;
 
-    return element
+    return element;
   }
 
   /**
@@ -106,6 +108,10 @@ class View {
     if (!this.rows || !this.rows.length) {
       return;
     }
+
+    window.googletag.cmd.push(() => {
+      window.googletag.pubads().refresh();
+    });
 
     this._render();
     return;
@@ -141,7 +147,7 @@ class View {
 
     const {
       city,
-      _index,
+      _index
     } = this.rows[this.currentRow];
 
     this.currentRow++;
@@ -169,6 +175,11 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
+    // try {
+    //   this.container.removeChild(this.currentSlot);
+    // } catch (err) {
+    //   Logger.log('REMOVING SLOT', err);
+    // }
     // while(this.container.firstChild) {
     //   this.container.removeChild(this.container.firstChild)
     // }
