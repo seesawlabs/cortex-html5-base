@@ -14,7 +14,7 @@ class View {
     this.rows = [];
     this.currentRow = 0;
     this.currentSlot = null;
-    this.deviceId = '';
+    this.created = false;
     this.adSlots = {};
 
     this.container = window.document.getElementById('container');
@@ -89,6 +89,8 @@ class View {
       window.googletag.enableServices();
       window.googletag.display(id);
     });
+
+    return true;
   }
 
   createElement(id, className, tag = 'div') {
@@ -155,7 +157,9 @@ class View {
       this.currentRow = 0;
     }
 
-    this.setUpAdUnit(city, _index);
+    if (!this.created) {
+      this.created = this.setUpAdUnit(city, _index);
+    }
   }
 
   /**
