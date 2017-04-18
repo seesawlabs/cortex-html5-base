@@ -7,7 +7,6 @@
     "prod": "./node_modules/.bin/webpack --define process.env.NODE_ENV='\"production\"' --progress --colors",
     "dev": "./node_modules/.bin/webpack --define process.env.NODE_ENV='\"development\"' --progress --colors",
     "watch": "./node_modules/.bin/webpack --define process.env.NODE_ENV='\"development\"' --watch --progress --colors"
-
   },
   "repository": {
     "type": "git",
@@ -29,7 +28,9 @@
     "css-loader": "^0.23.1",
     "eslint": "^2.13.1",
     "eslint-config-google": "^0.6.0",
+    "file-loader": "^0.11.1",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.8",
     "webpack": "^1.13.1"
   },
   "dependencies": {
