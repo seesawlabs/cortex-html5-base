@@ -8,7 +8,7 @@ import Simulator from './simulator.js';
 import Logger from './logger.js';
 import {READY_EVENT} from './events.js';
 
-const DATASET_ID = 'com.intersection.streeteasyv2';
+const DATASET_ID = 'com.intersection.ssl.test.streeteasy';
 
 /**
  * Starts the app in simulation mode.
