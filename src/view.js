@@ -50,6 +50,8 @@ class View {
     if (!data || data.length === 0)
       return;
 
+    this.current = (this.current + 1) % this.rows.length;
+
     this.rows.map(row => {
       const img = new window.Image();
       img.src = row.large_image_uri;
@@ -64,7 +66,7 @@ class View {
    */
   render() {
     Logger.log('Rendering a new view.', this.rows);
-    if (this.rows === null || this.rows.length === 0) {
+    if (!this.rows || this.rows.length === 0) {
       this.placeholder.render();
       return;
     }
@@ -125,8 +127,6 @@ class View {
     } else {
       this.renderCard('itemNext', this.rows[next]);
     }
-
-    this.current = (this.current + 1) % this.rows.length;
   }
 
   numberWithCommas(x) {
@@ -136,7 +136,7 @@ class View {
   renderCard(id, row, total) {
     const el = window.document.getElementById(id);
 
-    if (row === null) {
+    if (!row) {
       el.classList.add('hidden');
       return;
     }
