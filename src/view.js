@@ -46,9 +46,9 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
+    this.rows = data;
     if (!data || data.length === 0)
       return;
-    this.rows = data;
 
     this.rows.map(row => {
       const img = new window.Image();
@@ -69,6 +69,44 @@ class View {
       return;
     }
 
+    this.placeholder.hide();
+    this._render();
+  }
+
+  /**
+   * Update the view before displaying it on the screen.
+   *
+   * Every time the app receives a 'visible' event this method will get called.
+   * This is the place to make changes to the view before it becomes visible
+   * on the screen. For instance, if you want to display the current time
+   * accurately, you should update the time data on this method.
+   *
+   * Prefer rendering the view in this._render() as much as possible as that
+   * method will get called when the app is in the background. Only implement
+   * this method when you need to perform some actions right before the view
+   * becomes visible on the screen.
+   */
+  updateView() {
+    // For this app, we don't need to do anything.
+
+  }
+
+  /**
+   * Handles rendering of the main view.
+   *
+   * This method will get called every time the app receives a 'hidden' event
+   * and we have data stored in this.rows. This is the place where you actually
+   * render some content on the screen based on the incoming dynamic data.
+   *
+   * Current implementation simply iterates over rows and displays a single row
+   * every time the app is visible on the screen.
+   *
+   * It is important to be as efficient as possible in this method. Try to
+   * make as few DOM manipulations as possible. Reusing DOM elements is better
+   * than recreating them every time this method is called.
+   *
+   */
+  _render() {
     const current = this.current;
     const previous = (current - 1) < 0 ? this.rows.length - 1 : current - 1;
     const next = (current + 1) % this.rows.length;
@@ -91,9 +129,6 @@ class View {
     }
 
     this.current = (this.current + 1) % this.rows.length;
-
-    this.placeholder.hide();
-    this._render();
   }
 
   numberWithCommas(x) {
@@ -165,44 +200,6 @@ class View {
     // _sqft =  {{item.size_sqft|number}}
   }
 
-  /**
-   * Update the view before displaying it on the screen.
-   *
-   * Every time the app receives a 'visible' event this method will get called.
-   * This is the place to make changes to the view before it becomes visible
-   * on the screen. For instance, if you want to display the current time
-   * accurately, you should update the time data on this method.
-   *
-   * Prefer rendering the view in this._render() as much as possible as that
-   * method will get called when the app is in the background. Only implement
-   * this method when you need to perform some actions right before the view
-   * becomes visible on the screen.
-   *
-   * TODO: Implement this method according to your needs.
-   */
-  updateView() {
-    // For this app, we don't need to do anything.
-
-  }
-
-  /**
-   * Handles rendering of the main view.
-   *
-   * This method will get called every time the app receives a 'hidden' event
-   * and we have data stored in this.rows. This is the place where you actually
-   * render some content on the screen based on the incoming dynamic data.
-   *
-   * Current implementation simply iterates over rows and displays a single row
-   * every time the app is visible on the screen.
-   *
-   * It is important to be as efficient as possible in this method. Try to
-   * make as few DOM manipulations as possible. Reusing DOM elements is better
-   * than recreating them every time this method is called.
-   *
-   * TODO: Implement this method according to your needs.
-   */
-  _render() {
-  }
 
   create(tag, className) {
     const el = window.document.createElement(tag);
