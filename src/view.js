@@ -68,34 +68,29 @@ class View {
       this.placeholder.render();
       return;
     }
-    const current = this.current;
 
-    if (this.rows.length < 3) {
+    const current = this.current;
+    const previous = (current - 1) < 0 ? this.rows.length - 1 : current - 1;
+    const next = (current + 1) % this.rows.length;
+
+    console.log('Curr ' + current + ' prev ' + previous + ' next ' + next);
+
+    if (previous === current) {
       this.renderCard('itemPrevious', null);
     } else {
-      this.renderCard(
-        'itemPrevious',
-        this.rows[current - 1 < 0 ? this.rows.length - 1 : current - 1]
-      );
+      this.renderCard('itemPrevious', this.rows[previous]);
     }
 
     this.renderCard('itemCurrent', this.rows[current]);
     this.renderCard('labels', this.rows[current], this.rows.length);
 
-    if (this.rows.length < 2) {
+    if (next === current) {
       this.renderCard('itemNext', null);
     } else {
-      this.renderCard(
-        'itemNext',
-        this.rows[current + 1 >= this.rows.length ? 0 : current + 1]
-      );
+      this.renderCard('itemNext', this.rows[next]);
     }
 
-    this.current++;
-
-    if (this.current >= this.rows.length) {
-      this.current = 0;
-    }
+    this.current = (this.current + 1) % this.rows.length;
 
     this.placeholder.hide();
     this._render();
@@ -108,7 +103,7 @@ class View {
   renderCard(id, row, total) {
     const el = window.document.getElementById(id);
 
-    if (row === null && !el.classList.contains('hidden')) {
+    if (row === null) {
       el.classList.add('hidden');
       return;
     }
