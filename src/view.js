@@ -6,6 +6,7 @@ import Logger from './logger.js';
 class View {
   constructor() {
     this.placeholder = new Placeholder();
+    this.placeholder.render();
     this.rows = [];
     this.current = 0;
     this.createInitialDom();
@@ -67,7 +68,7 @@ class View {
   render() {
     Logger.log('Rendering a new view.', this.rows);
     if (!this.rows || this.rows.length === 0) {
-      this.placeholder.render();
+      this.placeholder.show();
       return;
     }
 
