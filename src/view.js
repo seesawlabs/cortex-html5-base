@@ -111,8 +111,6 @@ class View {
     const previous = (current - 1) < 0 ? this.rows.length - 1 : current - 1;
     const next = (current + 1) % this.rows.length;
 
-    console.log('Curr ' + current + ' prev ' + previous + ' next ' + next);
-
     if (previous === current) {
       this.renderCard('itemPrevious', null);
     } else {
