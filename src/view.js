@@ -51,8 +51,18 @@ class View {
     if (!data || data.length === 0)
       return;
 
-    this.current = (this.current + 1) % this.rows.length;
+    // Filter out any listings that have invalid columns
+    this.rows = this.rows.filter(r => {
+      for (var col in r) {
+        if (!r[col]) {
+          Logger.log(`Skipping listing ${r["id"]}, invalid column value for ${col}.`);
+          return false;
+        }
+      }
+      return true;
+    });
 
+    // Preload all images
     this.rows.map(row => {
       const img = new window.Image();
       img.src = row.large_image_uri;
@@ -90,8 +100,8 @@ class View {
    * becomes visible on the screen.
    */
   updateView() {
-    // For this app, we don't need to do anything.
-
+    // Cycle the carousel
+    this.current = (this.current + 1) % this.rows.length;
   }
 
   /**
