@@ -152,7 +152,8 @@ class View {
    *
    */
   _render() {
-    const current = (this.current + 1) % this.rows.length;
+    this.current = (this.current + 1) % this.rows.length;
+    const current = this.current;
     const previous = (current - 1) < 0 ? this.rows.length - 1 : current - 1;
     const next = (current + 1) % this.rows.length;
 
