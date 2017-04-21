@@ -12,6 +12,48 @@ class View {
     this.createInitialDom();
   }
 
+  /*
+   * Returns true if the given property listing row is valid, false otherwise.
+   * A valid property listing will contain all of the proper, non-null keys
+   * including:
+   *   _index
+   *   distance
+   *   bathrooms
+   *   size_sqft
+   *   addr_street
+   *   nearby
+   *   bedrooms
+   *   listing_type
+   *   large_image_uri
+   *   neighborhood
+   *   line_venue_id
+   *   price
+   */
+  _rowIsValid(row) {
+    var requiredKeys = [
+      '_index',
+      'distance',
+      'bathrooms',
+      'size_sqft',
+      'addr_street',
+      'nearby',
+      'bedrooms',
+      'listing_type',
+      'large_image_uri',
+      'neighborhood',
+      'link_venue_id',
+      'price'
+    ];
+
+    if (!row) {
+      return false;
+    }
+
+    return requiredKeys.every(k => {
+      return (k in row) && row[k];
+    });
+  }
+
   /**
    * Set the incoming data from Silo.
    *
@@ -52,15 +94,7 @@ class View {
       return;
 
     // Filter out any listings that have invalid columns
-    this.rows = this.rows.filter(r => {
-      for (var col in r) {
-        if (!r[col]) {
-          Logger.log(`Skipping listing ${r["id"]}, invalid column value for ${col}.`);
-          return false;
-        }
-      }
-      return true;
-    });
+    this.rows = this.rows.filter(this._rowIsValid);
 
     // Preload all images
     this.rows.map(row => {
@@ -100,8 +134,6 @@ class View {
    * becomes visible on the screen.
    */
   updateView() {
-    // Cycle the carousel
-    this.current = (this.current + 1) % this.rows.length;
   }
 
   /**
@@ -120,7 +152,7 @@ class View {
    *
    */
   _render() {
-    const current = this.current;
+    const current = (this.current + 1) % this.rows.length;
     const previous = (current - 1) < 0 ? this.rows.length - 1 : current - 1;
     const next = (current + 1) % this.rows.length;
 

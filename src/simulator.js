@@ -13,25 +13,6 @@ const DISPATCH_VISTAR_HIDDEN_INTERVAL = 5000;
 // Send data updates every 4 seconds.
 const DISPATCH_DATA_UPDATES_INTERVAL = 4000;
 
-var test_data = TEST_DATA;
-
-function getRandomSubarray(arr, size) {
-  var shuffled = arr.slice(0), i = arr.length, temp, index;
-  while (i--) {
-    index = Math.floor((i + 1) * Math.random());
-    temp = shuffled[index];
-    shuffled[index] = shuffled[i];
-    shuffled[i] = temp;
-  }
-  return shuffled.slice(0, size);
-}
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
 class Simulator {
   run() {
     Logger.log('Running the app in simulation mode.');
@@ -39,8 +20,7 @@ class Simulator {
     window.Cortex = {
       onData: (dsId, fun) => {
         setInterval(() => {
-          var d = getRandomSubarray(test_data, getRandomInt(0, test_data.length));
-          fun(d, false);
+          fun(TEST_DATA, false);
         }, DISPATCH_DATA_UPDATES_INTERVAL);
       }
     };
