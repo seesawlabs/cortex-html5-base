@@ -2,26 +2,58 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
 
-// TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+// const CAMPAIGN = 'com.cortexpowered.campaigns.open-loop';
+const IFRAME = 'https://dp.openloop.media/ise/US/YouTube-e/StreetPortrait/LNKNYC/sync/';
 
 class View {
   constructor() {
     this.placeholder = new Placeholder();
-
-    this.rows = [];
-    this.currentRow = 0;
-    this.deviceId = '';
+    // Hold off on rendering the placeholder just yet. We need to check
+    // and see if the iFrame source is available (below).
 
     this.container = window.document.getElementById('container');
 
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    // Create the iFrame (but don't append yet)
+    this.frame = window.document.createElement('iframe');
+    this.frame.className = 'content';
+    this.frame.id = 'content';
+    this.frame.width = '100%';
+    this.frame.height = '100%';
+
+    // Create the dyanamic script tag. We need this to test whether the iFrame
+    // endpoint is even available to display. Checking for iFrame load errors
+    // by setting iframe.src directly is next to impossible, and using XMLHttpRequest
+    // objects results in cross origin request issues. This is a workaround for
+    // making sure that the iFrame source URL is actually live before trying to render it.
+    // This way we can react appropriately by potentially displaying the placeholder
+    // instead of a nasty 404 page.
+    this.script = window.document.createElement('script');
+
+    this.loaded = false;
+    this.timedOut = false;
+
+    this.script.onload = function() {
+      // The iframe is confirmed to be loadable. Let's append it now.
+      this.loaded = true;
+      Logger.log('iFrame source confirmed operational.');
+      this.container.appendChild(this.frame);
+    }.bind(this);
+
+    // Attach and begin load
+    this.script.src = IFRAME;
+    this.container.appendChild(this.script);
+
+    // Wait a bit for a response.
+    window.setTimeout(function() {
+      if (!this.loaded) {
+        // We waited, and the iframe failed to load. Assume that the endpoint
+        // is down and display the placeholder.
+        Logger.log('The iFrame source is unavailable!');
+        this.timedOut = true;
+        this.placeholder.render();
+      }
+    }.bind(this), 1000);
   }
 
   /**
@@ -61,11 +93,7 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
-    this.rows = data;
-
-    if (data && data.length > 0) {
-      this.deviceId = data[0]._device_id;
-    }
+    // This creative doesn't use any data
   }
 
   /**
@@ -74,15 +102,16 @@ class View {
    * Every time the app receives a 'hidden' event this method will get called.
    */
   render() {
-    Logger.log('Rendering a new view.');
-    if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
-      this.placeholder.render();
+    if (this.timedOut) {
+      Logger.log('iFrame source timed out. Skipping render.');
       return;
     }
 
-    this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
+    Logger.log('Rendering new view with iFrame src: ' + IFRAME);
+
+    if (this.frame && this.frame.src === "") {
+      this.frame.src = IFRAME;
+    }
     this._render();
   }
 
@@ -122,14 +151,6 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    if (this.currentRow >= this.rows.length) {
-      this.currentRow = 0;
-    }
-    Logger.log(`The view has ${this.rows.length} data rows. ` +
-               `Displaying row #${this.currentRow}.`);
-    const row = this.rows[this.currentRow];
-    this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
   }
 }
 
