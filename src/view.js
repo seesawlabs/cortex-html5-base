@@ -66,6 +66,7 @@ class View {
         city = "StatenIsland";
         break;
       case "Brooklyn":
+      case "Queens":
       case "Bronx":
       case "Manhattan":
         break;
