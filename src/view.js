@@ -4,7 +4,9 @@ import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 
 // const CAMPAIGN = 'com.cortexpowered.campaigns.open-loop';
-const IFRAME = 'https://dp.openloop.media/ise/US/YouTube-e/StreetPortrait/LNKNYC/sync/';
+const IFRAME = 'https://dp.openloop.media/ise/US/YouTube-e/StreetNewYork/LNKNYC/sync/';
+
+const IFRAME_TIMEOUT = 5000;
 
 class View {
   constructor() {
@@ -53,7 +55,7 @@ class View {
         this.timedOut = true;
         this.placeholder.render();
       }
-    }.bind(this), 1000);
+    }.bind(this), IFRAME_TIMEOUT);
   }
 
   /**
