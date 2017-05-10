@@ -19,9 +19,10 @@ class View {
     // Create the iFrame (but don't append yet)
     this.frame = window.document.createElement('iframe');
     this.frame.className = 'content';
+    this.frame.scrolling = 'no';
     this.frame.id = 'content';
-    this.frame.width = '100%';
-    this.frame.height = '100%';
+    this.frame.width = '1080';
+    this.frame.height = '1920';
 
     // Create the dyanamic script tag. We need this to test whether the iFrame
     // endpoint is even available to display. Checking for iFrame load errors
