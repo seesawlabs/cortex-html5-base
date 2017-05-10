@@ -4,15 +4,15 @@ import Logger from './logger.js';
 
 // const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
 
+var moment = require('moment');
+
 class View {
   constructor() {
     this.container = window.document.getElementById('container');
 
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    this.hourElement = window.document.getElementById('hour');
+    this.minuteTensElement = window.document.getElementById('minute-tens');
+    this.minuteOnesElement = window.document.getElementById('minute-ones');
   }
 
   /**
@@ -78,7 +78,26 @@ class View {
    * becomes visible on the screen.
    */
   updateView() {
-    // Update the countdown timer
+    var now = moment();
+    var fivePM = moment().startOf('day').add(17, 'hours');
+    var hours = 0;
+    var minutes = 0;
+    var minutesOnes = 0;
+    var minutesTens = 0;
+
+    if (now.isBefore(fivePM)) {
+      // Calculate time left
+      var diff = fivePM.valueOf() - now.valueOf();
+      var duration = moment.duration(diff);
+      hours = Math.min(duration.hours(), 9); // Cap hours at 9
+      minutes = duration.minutes() + 1; // add one so that the timer hits zero at EXACTLY 5pm
+      minutesTens = (minutes < 10) ? '0' : String(minutes)[0];
+      minutesOnes = (minutes < 10) ? String(minutes) : String(minutes)[1];
+    }
+
+    this.hourElement.innerHTML = hours;
+    this.minuteTensElement.innerHTML = minutesTens;
+    this.minuteOnesElement.innerHTML = minutesOnes;
   }
 
   /**
