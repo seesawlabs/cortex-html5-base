@@ -1,6 +1,11 @@
+@font-face {
+  font-family: "Helvetica";
+  src: url('assets/fonts/helvetica75bold.ttf');
+}
+
 html, body {
-  width: 100%;
-  height: 100%;
+  width: 1080px;
+  height: 1920px;
   padding: 0;
   margin: 0;
   overflow: hidden;
@@ -12,7 +17,9 @@ html, body {
   height: 100%;
   margin: 0;
   overflow: hidden;
-  color: #fff;
+  background-image: url('assets/images/happyhour.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .placeholder {
@@ -25,4 +32,35 @@ html, body {
 
 .placeholder.invisible {
   opacity: 0;
+}
+
+.digit-box {
+  position: absolute;
+  background-color: #0a4f9a;
+  width: 250px;
+  height: 342px;
+  top: 666px;
+  text-align: center;
+}
+
+span.digit {
+  display: inline-block;
+  width: inherit;
+  height: inherit;
+  color: #27a0d9;
+  font-size: 330px;
+  font-family: "Helvetica", sans-serif;
+  padding-top: 35px;
+}
+
+#hour-box {
+  left: 72px;
+}
+
+#minute-tens-box {
+  left: 468px;
+}
+
+#minute-ones-box {
+  left: 751px;
 }
