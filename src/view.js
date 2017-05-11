@@ -4,7 +4,7 @@ import _first from 'lodash/first';
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 
-const GAME = 'celticswizards';
+const GAME = 'spursrockets';
 
 class View {
   constructor() {
@@ -152,17 +152,17 @@ class View {
 
     let status = `<span>${this.game.clock}</span> ${this.ndth(this.game.period)} QTR`;
 
-    switch (this.game.status) {
+    switch (this.game.status.toLowerCase()) {
       // Handle end of periods and halftime
-      case "END OF PERIOD":
+      case "end of period":
         if (this.game.period === 2) {
           status = 'Halftime';
         } else {
           status = `End of ${this.ndth(this.game.period)}`;
         }
         break;
-      case "FINAL":
-      case "FULL TIME":
+      case "final":
+      case "full time":
         status = 'Final';
         break;
       default:
