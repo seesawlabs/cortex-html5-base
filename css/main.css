@@ -26,3 +26,34 @@ html, body {
 .placeholder.invisible {
   opacity: 0;
 }
+.output {
+    margin-top: 580px;
+    width: 1080px;
+}
+
+body, #container {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+}
+
+.team {
+    display: flex;
+    text-transform: uppercase;
+    padding: 0 20px;
+    font-size: 120pt;
+    line-height: 1.1em;
+}
+
+.status {
+    width: 100%;
+    font-size: 80pt;
+    text-align: center;
+}
+
+.team-name {
+    flex: 2 1 100%;
+}
+.team-score {
+    flex: 1 1 0;
+}

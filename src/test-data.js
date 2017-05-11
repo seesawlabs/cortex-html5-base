@@ -5,17 +5,27 @@
 
 const TEST_DATA = [
   {
-    "_index": "device1",
-    "neighborhood": "West Village"
+    away_city: 'Washington',
+    away_name: 'Wizards',
+    away_score: 52,
+    clock: '12:31',
+    home_city: 'Boston',
+    home_name: 'Celtics',
+    home_score: 67,
+    period: 2,
+    status: 'END OF PERIOD'
   },
-  {
-    "_index": "device2",
-    "neighborhood": "East Village"
-  },
-  {
-    "_index": "device3",
-    "neighborhood": "Chelsea"
-  }
+  // {
+  //   away_city: 'San Antonio',
+  //   away_name: 'Spurs',
+  //   away_score: 120,
+  //   clock: '12:31',
+  //   home_city: 'Golden State',
+  //   home_name: 'Warriors',
+  //   home_score: 120,
+  //   period: 3,
+  //   status: 'IN PROGRESS'
+  // },
 ];
 
 module.exports = TEST_DATA;

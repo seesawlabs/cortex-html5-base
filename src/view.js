@@ -1,11 +1,10 @@
 /* global window */
+import _first from 'lodash/first';
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
 
-// TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+const GAME = 'celticswizards';
 
 class View {
   constructor() {
@@ -15,13 +14,19 @@ class View {
     this.currentRow = 0;
     this.deviceId = '';
 
-    this.container = window.document.getElementById('container');
+    // Current Game
+    this.game = null;
 
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    this.container = window.document.getElementById('container');
+  }
+
+  isMyGame(row) {
+    return (row.away_name + row.home_name).toLowerCase() === GAME ||
+      (row.home_name + row.away_name).toLowerCase() === GAME;
+  }
+
+  gameInProgress(row) {
+    return row.status !== 'SCHEDULED';
   }
 
   /**
@@ -66,6 +71,14 @@ class View {
     if (data && data.length > 0) {
       this.deviceId = data[0]._device_id;
     }
+
+    if (!this.rows.length) {
+      return;
+    }
+
+    this.game = _first(this.rows
+      .filter(this.isMyGame)
+      .filter(this.gameInProgress));
   }
 
   /**
@@ -76,13 +89,11 @@ class View {
   render() {
     Logger.log('Rendering a new view.');
     if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
       this.placeholder.render();
       return;
     }
 
     this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
@@ -105,6 +116,15 @@ class View {
     // For this app, we don't need to do anything.
   }
 
+  ndth(number) {
+    switch (number) {
+      case 1: return '1st';
+      case 2: return '2nd';
+      case 3: return '3rd';
+      case 4: return '4th';
+      default: return '';
+    }
+  }
   /**
    * Handles rendering of the main view.
    *
@@ -122,14 +142,49 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    if (this.currentRow >= this.rows.length) {
-      this.currentRow = 0;
-    }
     Logger.log(`The view has ${this.rows.length} data rows. ` +
                `Displaying row #${this.currentRow}.`);
-    const row = this.rows[this.currentRow];
-    this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+
+    if (!this.game) {
+      this.container.innerHTML = '';
+      return;
+    }
+
+    let status = `<span>${this.game.clock}</span> ${this.ndth(this.game.period)} QTR`;
+
+    switch (this.game.status) {
+      // Handle end of periods and halftime
+      case "END OF PERIOD":
+        if (this.game.period === 2) {
+          status = 'Halftime';
+        } else {
+          status = `End of ${this.ndth(this.game.period)}`;
+        }
+        break;
+      case "FINAL":
+      case "FULL TIME":
+        status = 'Final';
+        break;
+      default:
+        break;
+    }
+
+    const html = `
+      <div class="output">
+        <div class="team team1">
+          <div class="team-name">${this.game.away_name}</div>
+          <div class="team-score">${this.game.away_score}</div>
+        </div>
+
+        <div class="team team2">
+          <div class="team-name">${this.game.home_name}</div>
+          <div class="team-score">${this.game.home_score}</div>
+        </div>
+        <div class="status">${status}</div>
+      </div>
+    `;
+
+    this.container.innerHTML = html;
   }
 }
 

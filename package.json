@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prod": "./node_modules/.bin/webpack --define process.env.NODE_ENV='\"production\"' --progress --colors",
-    "dev": "./node_modules/.bin/webpack --define process.env.NODE_ENV='\"development\"' --progress --colors"
+    "dev": "./node_modules/.bin/webpack --define process.env.NODE_ENV='\"development\"' --progress --colors",
+    "watch": "./node_modules/.bin/webpack --define process.env.NODE_ENV='\"development\"' --watch --progress --colors"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "promise": "^7.1.1"
   }
 }
