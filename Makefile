@@ -6,7 +6,7 @@ lint:
 clean:
 	rm -rf ./build
 
-dev: clean lint
+dev: clean
 	npm run dev
 
 build: clean lint

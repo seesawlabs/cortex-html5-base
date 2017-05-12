@@ -1,20 +1,32 @@
 /* eslint-disable */
 
-// TODO: Update this file with the test data. The format should be exactly what
-// you get from Silo.
-
 const TEST_DATA = [
   {
-    "_index": "device1",
-    "neighborhood": "West Village"
+    "_index": "MN-05-121626-R",
+    "longitude": "73.985963",
+    "latitude": "40.743381",
+    "city": "Brooklyn",
+    "_device_id": "d-52b82a14-a3e0-4455-77d0-249412320c7e"
   },
   {
-    "_index": "device2",
-    "neighborhood": "East Village"
+    "_index": "MN-05-121626-R",
+    "longitude": "73.985963",
+    "latitude": "40.743381",
+    "_device_id": "d-52b82a14-a3e0-4455-77d0-249412320c7e"
   },
   {
-    "_index": "device3",
-    "neighborhood": "Chelsea"
+    "_index": "MN-05-121626-R",
+    "longitude": "73.985963",
+    "latitude": "40.743381",
+    "city": "Staten Island",
+    "_device_id": "d-52b82a14-a3e0-4455-77d0-249412320c7e"
+  },
+  {
+    "_index": "MN-05-121626-R",
+    "longitude": "73.985963",
+    "latitude": "40.743381",
+    "city": "Manhattan",
+    "_device_id": "d-52b82a14-a3e0-4455-77d0-249412320c7e"
   }
 ];
 

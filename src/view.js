@@ -2,10 +2,9 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
+// import Tracker from './tracker.js';
 
-// TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+// const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
 
 class View {
   constructor() {
@@ -17,11 +16,8 @@ class View {
 
     this.container = window.document.getElementById('container');
 
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    var gladeScript = this.createGladeScript();
+    this.container.appendChild(gladeScript);
   }
 
   /**
@@ -56,8 +52,6 @@ class View {
    *   img.className = 'visible';
    * }
    *
-   * TODO: Implement this method according to your needs.
-   *
    * @param {array} data The data rows.
    */
   setData(data) {
@@ -76,13 +70,13 @@ class View {
   render() {
     Logger.log('Rendering a new view.');
     if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
+      // Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
       this.placeholder.render();
       return;
     }
 
     this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
+    // Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
@@ -99,10 +93,50 @@ class View {
    * this method when you need to perform some actions right before the view
    * becomes visible on the screen.
    *
-   * TODO: Implement this method according to your needs.
    */
   updateView() {
-    // For this app, we don't need to do anything.
+    // Refresh ad slots
+    window.glade && glade.run && glade.run();
+  }
+
+  createAdUnit(city) {
+    Logger.log("Creating new ad unit");
+
+    // Sanitize city
+    if (city) {
+      city = city.replace(/ /g, '');
+    }
+
+    var adUnit = window.document.createElement("div");
+    adUnit.id = "ad";
+    adUnit.setAttribute("data-glade", "");
+    adUnit.setAttribute("data-ad-unit-path", `/148446784/Link.NYC${city ? '-' + city : ''}`);
+    adUnit.setAttribute("height", "1920");
+    adUnit.setAttribute("width", "1080");
+    return adUnit;
+  }
+
+  createGladeScript() {
+    Logger.log("Creating glade script");
+    var gladeScript = window.document.createElement("script");
+    gladeScript.setAttribute("async", "");
+    gladeScript.src = "https://securepubads.g.doubleclick.net/static/glade.js";
+
+    var gladeContainer = window.document.createElement("div");
+    gladeContainer.id = "glade-container";
+    gladeContainer.appendChild(gladeScript);
+
+    return gladeContainer;
+  }
+
+  destroyElement(id) {
+    Logger.log("Destroying element " + id);
+    var elem = window.document.getElementById(id);
+    if (elem && elem.parentNode) {
+      elem.parentNode.removeChild(elem);
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -122,14 +156,20 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
+    this.currentRow += 1;
     if (this.currentRow >= this.rows.length) {
       this.currentRow = 0;
     }
     Logger.log(`The view has ${this.rows.length} data rows. ` +
                `Displaying row #${this.currentRow}.`);
     const row = this.rows[this.currentRow];
-    this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+
+    // Remove old ad elements
+    this.destroyElement("ad");
+
+    // Create new ad elements
+    var adUnit = this.createAdUnit(row.city);
+    this.container.appendChild(adUnit);
   }
 }
 
