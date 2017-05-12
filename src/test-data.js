@@ -20,8 +20,8 @@ const TEST_DATA = [
     away_name: 'Spurs',
     away_score: 120,
     clock: '12:31',
-    home_city: 'Houston',
-    home_name: 'Rockets',
+    home_city: 'Golden State',
+    home_name: 'Warriors',
     home_score: 120,
     period: 3,
     status: 'IN PROGRESS'

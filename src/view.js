@@ -4,14 +4,14 @@ import _first from 'lodash/first';
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 
-const GAME = 'spursrockets';
+const GAME = 'spurswarriors';
 
 class View {
   constructor() {
     this.placeholder = new Placeholder();
 
     this.rows = [];
-    this.currentRow = 0;
+    this.current = 1;
     this.deviceId = '';
 
     // Current Game
@@ -79,6 +79,10 @@ class View {
     this.game = _first(this.rows
       .filter(this.isMyGame)
       .filter(this.gameInProgress));
+
+    if (this.game && this.game.status !== 'SCHEDULED') {
+      this.placeholder.hide();
+    }
   }
 
   /**
@@ -93,7 +97,6 @@ class View {
       return;
     }
 
-    this.placeholder.hide();
     this._render();
   }
 
@@ -113,38 +116,10 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   updateView() {
+    this.container.className = `bg${this.current}`;
+    this.current = this.current === 1 ? 2 : 1;
+
     // For this app, we don't need to do anything.
-  }
-
-  ndth(number) {
-    switch (number) {
-      case 1: return '1st';
-      case 2: return '2nd';
-      case 3: return '3rd';
-      case 4: return '4th';
-      default: return '';
-    }
-  }
-  /**
-   * Handles rendering of the main view.
-   *
-   * This method will get called every time the app receives a 'hidden' event
-   * and we have data stored in this.rows. This is the place where you actually
-   * render some content on the screen based on the incoming dynamic data.
-   *
-   * Current implementation simply iterates over rows and displays a single row
-   * every time the app is visible on the screen.
-   *
-   * It is important to be as efficient as possible in this method. Try to
-   * make as few DOM manipulations as possible. Reusing DOM elements is better
-   * than recreating them every time this method is called.
-   *
-   * TODO: Implement this method according to your needs.
-   */
-  _render() {
-    Logger.log(`The view has ${this.rows.length} data rows. ` +
-               `Displaying row #${this.currentRow}.`);
-
     if (!this.game) {
       this.container.innerHTML = '';
       return;
@@ -185,6 +160,35 @@ class View {
     `;
 
     this.container.innerHTML = html;
+  }
+
+  ndth(number) {
+    switch (number) {
+      case 1: return '1st';
+      case 2: return '2nd';
+      case 3: return '3rd';
+      case 4: return '4th';
+      default: return '';
+    }
+  }
+  /**
+   * Handles rendering of the main view.
+   *
+   * This method will get called every time the app receives a 'hidden' event
+   * and we have data stored in this.rows. This is the place where you actually
+   * render some content on the screen based on the incoming dynamic data.
+   *
+   * Current implementation simply iterates over rows and displays a single row
+   * every time the app is visible on the screen.
+   *
+   * It is important to be as efficient as possible in this method. Try to
+   * make as few DOM manipulations as possible. Reusing DOM elements is better
+   * than recreating them every time this method is called.
+   *
+   * TODO: Implement this method according to your needs.
+   */
+  _render() {
+
   }
 }
 
