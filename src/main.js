@@ -8,7 +8,7 @@ import Simulator from './simulator.js';
 import Logger from './logger.js';
 import {READY_EVENT} from './events.js';
 
-const DATASET_ID = null;
+const DATASET_ID = 'com.intersection.linknyc.locationdata';
 
 /**
  * Starts the app in simulation mode.
