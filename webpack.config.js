@@ -33,6 +33,10 @@ module.exports = {
       { 
         loader: "style-loader!css-loader?url=false",
         test: /\.css$/,
+      },
+      {
+        loader: "json-loader",
+        test: /\.json$/
       }
     ]
   },

@@ -9,13 +9,13 @@ var moment = require('moment-timezone');
 class View {
   constructor() {
     this.container = window.document.getElementById('container');
-    this.rows = [];
-
     this.updateInterval = null;
 
     this.hourElement = window.document.getElementById('hour');
     this.minuteTensElement = window.document.getElementById('minute-tens');
     this.minuteOnesElement = window.document.getElementById('minute-ones');
+
+    moment.tz.setDefault("America/New_York");
   }
 
   /**
@@ -53,7 +53,6 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
-    this.rows = data;
   }
 
   /**
@@ -81,34 +80,32 @@ class View {
    * becomes visible on the screen.
    */
   updateView() {
+    Logger.log("Setting update interval");
     this.updateInterval = window.setInterval(() => {
-      // SBC devices are configured in the GMT timezone, but are in NYC.
-      // For that reason we have to count down to 9pm GMT, which is
-      // 5pm EDT (at least for the duration of this creative's lifetime).
-      var now = Date.now();
-      var fivePM = new Date().setHours(21, 0, 0, 0);
+      var now = moment();
+      // Target time is actually 5:01pm. This is so the timer reaches zero
+      // at exactly 5:00pm because we're only displaying hours and minutes.
+      // Without showing seconds, minutes would reach 00 too early.
+      var fivePM = moment().startOf('day').add(17, 'hours').add(1, 'minutes');
 
       var hours = 0;
       var minutes = 0;
-      var seconds = 0;
       var minutesTens = '0';
       var minutesOnes = '0';
 
       Logger.log(`Now (ms): ${now}, Target (ms): ${fivePM}`);
 
-      if (now < fivePM) {
+      if (now.isBefore(fivePM)) {
         // Calculate time left
-        var diff = fivePM - now;
-        seconds = Math.floor((diff / 1000) % 60);
-        minutes = Math.floor((diff / (1000 * 60)) % 60);
-        hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        var diff = fivePM.valueOf() - now.valueOf();
+        var duration = moment.duration(diff);
 
-        hours = Math.min(hours, 9); // Cap hours at 9
-        minutes += 1; // add one so that the timer hits zero at EXACTLY 5pm
+        hours = Math.min(duration.hours(), 9); // Cap hours at 9
+        minutes = duration.minutes();
         minutesTens = (minutes < 10) ? '0' : String(minutes)[0];
         minutesOnes = (minutes < 10) ? String(minutes) : String(minutes)[1];
 
-        Logger.log(`Difference is ${hours}:${minutes}:${seconds}`);
+        Logger.log(`Difference is ${hours}:${minutes}`);
       }
 
       this.hourElement.innerHTML = String(hours);
@@ -132,6 +129,7 @@ class View {
    * than recreating them every time this method is called.
    */
   _render() {
+    Logger.log("Clearing update interval");
     window.clearInterval(this.updateInterval);
   }
 }
