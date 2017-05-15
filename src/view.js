@@ -99,8 +99,8 @@ class View {
     window.glade && glade.run && glade.run();
   }
 
-  createAdUnit(city) {
-    Logger.log("Creating new ad unit");
+  createAdUnit(city, venue) {
+    Logger.log("Creating new ad unit. City: " + city + ", Venue: " + venue);
 
     // Sanitize city
     if (city) {
@@ -111,6 +111,9 @@ class View {
     adUnit.id = "ad";
     adUnit.setAttribute("data-glade", "");
     adUnit.setAttribute("data-ad-unit-path", `/148446784/Link.NYC${city ? '-' + city : ''}`);
+    if (venue) {
+      adUnit.setAttribute("data-json", `{"targeting": {"Venue": "${venue}"}}`);
+    }
     adUnit.setAttribute("height", "1920");
     adUnit.setAttribute("width", "1080");
     return adUnit;
@@ -168,7 +171,8 @@ class View {
     this.destroyElement("ad");
 
     // Create new ad elements
-    var adUnit = this.createAdUnit(row.city);
+    var venue = row._index;
+    var adUnit = this.createAdUnit(row.city, venue);
     this.container.appendChild(adUnit);
   }
 }

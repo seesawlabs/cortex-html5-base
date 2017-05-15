@@ -8,10 +8,10 @@ import {VISIBLE_EVENT, HIDDEN_EVENT, READY_EVENT} from './events.js';
 const DISPATCH_CORTEX_READY_TIME = 2000;
 
 // Dispatch vistar-hidden event every 5secs.
-const DISPATCH_VISTAR_HIDDEN_INTERVAL = 5000;
+const DISPATCH_VISTAR_HIDDEN_INTERVAL = 10000;
 
 // Send data updates every 4 seconds.
-const DISPATCH_DATA_UPDATES_INTERVAL = 4000;
+const DISPATCH_DATA_UPDATES_INTERVAL = 6000;
 
 class Simulator {
   run() {
