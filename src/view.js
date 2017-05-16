@@ -15,9 +15,6 @@ class View {
     this.deviceId = '';
 
     this.container = window.document.getElementById('container');
-
-    var gladeScript = this.createGladeScript();
-    this.container.appendChild(gladeScript);
   }
 
   /**
@@ -95,51 +92,13 @@ class View {
    *
    */
   updateView() {
-    // Refresh ad slots
-    window.glade && glade.run && glade.run();
   }
 
-  createAdUnit(city, venue) {
-    Logger.log("Creating new ad unit. City: " + city + ", Venue: " + venue);
-
-    // Sanitize city
-    if (city) {
-      city = city.replace(/ /g, '');
+  refreshAdContent() {
+    if (window.googletag && window.googletag.pubads) {
+      Logger.log("Refreshing ad content");
+      window.googletag.pubads().refresh();
     }
-
-    var adUnit = window.document.createElement("div");
-    adUnit.id = "ad";
-    adUnit.setAttribute("data-glade", "");
-    adUnit.setAttribute("data-ad-unit-path", `/148446784/Link.NYC${city ? '-' + city : ''}`);
-    if (venue) {
-      adUnit.setAttribute("data-json", `{"targeting": {"Venue": "${venue}"}}`);
-    }
-    adUnit.setAttribute("height", "1920");
-    adUnit.setAttribute("width", "1080");
-    return adUnit;
-  }
-
-  createGladeScript() {
-    Logger.log("Creating glade script");
-    var gladeScript = window.document.createElement("script");
-    gladeScript.setAttribute("async", "");
-    gladeScript.src = "https://securepubads.g.doubleclick.net/static/glade.js";
-
-    var gladeContainer = window.document.createElement("div");
-    gladeContainer.id = "glade-container";
-    gladeContainer.appendChild(gladeScript);
-
-    return gladeContainer;
-  }
-
-  destroyElement(id) {
-    Logger.log("Destroying element " + id);
-    var elem = window.document.getElementById(id);
-    if (elem && elem.parentNode) {
-      elem.parentNode.removeChild(elem);
-      return true;
-    }
-    return false;
   }
 
   /**
@@ -165,15 +124,6 @@ class View {
     }
     Logger.log(`The view has ${this.rows.length} data rows. ` +
                `Displaying row #${this.currentRow}.`);
-    const row = this.rows[this.currentRow];
-
-    // Remove old ad elements
-    this.destroyElement("ad");
-
-    // Create new ad elements
-    var venue = row._index;
-    var adUnit = this.createAdUnit(row.city, venue);
-    this.container.appendChild(adUnit);
   }
 }
 
