@@ -15,6 +15,7 @@ class View {
     this.deviceId = '';
 
     this.container = window.document.getElementById('container');
+    this.adId = "ad";
   }
 
   /**
@@ -92,12 +93,41 @@ class View {
    *
    */
   updateView() {
+    if (window.googletag) {
+      Logger.log("Enabling GPT services and displaying ad");
+
+      window.googletag.cmd.push(function () {
+        window.googletag.enableServices();
+        window.googletag.display(this.adId);
+      }.bind(this));
+    }
   }
 
-  refreshAdContent() {
-    if (window.googletag && window.googletag.pubads) {
-      Logger.log("Refreshing ad content");
-      window.googletag.pubads().refresh();
+  createAdUnit() {
+    Logger.log("Creating new ad unit");
+    var div = window.document.createElement("div");
+    div.style = "width:1080px;height:1920px;";
+    div.id = this.adId;
+    this.container.appendChild(div);
+
+    window.googletag.cmd.push(function() {
+      window.googletag.defineSlot('/6075/kiran-dooh', [1080, 1920], this.adId)
+        .addService(window.googletag.pubads());
+      window.googletag.pubads().set("page_url", "https://www.google.com");
+      window.googletag.pubads().enableSingleRequest();
+    }.bind(this));
+  }
+
+  destroyAdUnit() {
+    if (window.googletag) {
+      Logger.log("Destroying old ad slots");
+      window.googletag.destroySlots();
+    }
+
+    var unit = window.document.getElementById(this.adId);
+    if (unit && unit.parentNode) {
+      Logger.log("Destroying old ad unit");
+      unit.parentNode.removeChild(unit);
     }
   }
 
@@ -124,6 +154,9 @@ class View {
     }
     Logger.log(`The view has ${this.rows.length} data rows. ` +
                `Displaying row #${this.currentRow}.`);
+
+    this.destroyAdUnit();
+    this.createAdUnit();
   }
 }
 

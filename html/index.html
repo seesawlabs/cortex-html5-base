@@ -6,27 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-	<script src='https://www.googletagservices.com/tag/js/gpt.js'></script>
-	<script>
-	  var googletag = googletag || {};
-	  googletag.cmd = googletag.cmd || [];
-	</script>
+	<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+    <script>
+      var googletag = window.googletag || {};
+      googletag.cmd = window.googletag.cmd || [];
+    </script>
 
-	<script>
-	  googletag.cmd.push(function() {
-		googletag.defineSlot('/6075/kiran-dooh', [1080, 1920], 'div-gpt-ad-1494529999009-0').addService(googletag.pubads());
-		googletag.pubads().set("page_url", "https://www.google.com");
-		googletag.pubads().enableSingleRequest();
-		googletag.enableServices();
-	  });
-	</script>
-
-	<!-- /6075/kiran-dooh -->
-	<div id='div-gpt-ad-1494529999009-0'>
-	  <script>
-	googletag.cmd.push(function() { googletag.display('div-gpt-ad-1494529999009-0'); });
-	  </script>
-	</div>
+    <div id="container"></div>
     <script src="bundle.js"></script>
   </body>
 </html>
