@@ -80,7 +80,7 @@ class View {
       .filter(this.isMyGame)
       .filter(this.gameInProgress));
 
-    if (this.game && this.game.status !== 'SCHEDULED') {
+    if (this.game && this.game.status.toLowerCase() !== 'scheduled') {
       this.placeholder.hide();
     }
   }
@@ -127,6 +127,11 @@ class View {
 
     let status = `<span>${this.game.clock}</span> ${this.ndth(this.game.period)} QTR`;
 
+    // if (this.game && this.game.status.toLowerCase() === 'final') {
+    //   this.container.innerHTML = `<img src="assets/images/post-game.jpg" />`;
+    //   return;
+    // }
+
     switch (this.game.status.toLowerCase()) {
       // Handle end of periods and halftime
       case "end of period":
@@ -138,7 +143,7 @@ class View {
         break;
       case "final":
       case "full time":
-        status = 'Final';
+        status = 'FINAL SCORES';
         break;
       default:
         break;

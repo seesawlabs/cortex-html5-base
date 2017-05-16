@@ -18,13 +18,13 @@ const TEST_DATA = [
   {
     away_city: 'San Antonio',
     away_name: 'Spurs',
-    away_score: 98,
+    away_score: 120,
     clock: '12:31',
     home_city: 'Golden State',
     home_name: 'Warriors',
-    home_score: 87,
+    home_score: 120,
     period: 3,
-    status: 'IN PROGRESS'
+    status: 'Final'
   },
 ];
 

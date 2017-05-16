@@ -1,6 +1,7 @@
 /* global window */
 
 import TEST_DATA from './test-data.js';
+import TEST_DATA2 from './test-data2.js';
 import Logger from './logger.js';
 import {VISIBLE_EVENT, HIDDEN_EVENT, READY_EVENT} from './events.js';
 
@@ -19,8 +20,14 @@ class Simulator {
 
     window.Cortex = {
       onData: (dsId, fun) => {
+        let key = TEST_DATA;
         setInterval(() => {
-          fun(TEST_DATA, false);
+          fun(key, false);
+          if (key === TEST_DATA) {
+            key = TEST_DATA2;
+          } else {
+            key = TEST_DATA;
+          }
         }, DISPATCH_DATA_UPDATES_INTERVAL);
       }
     };

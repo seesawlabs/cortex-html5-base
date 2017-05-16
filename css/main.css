@@ -26,6 +26,17 @@ html, body {
 .placeholder.invisible {
   opacity: 0;
 }
+.placeholder:after {
+  color: #FFF;
+  content: "STARTING SOON";
+  font-size: 9em;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 700px;
+  width: 100%;
+  z-index: 1000;
+}
 .output {
     margin-top: 580px;
     width: 1080px;
