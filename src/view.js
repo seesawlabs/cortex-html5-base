@@ -99,23 +99,23 @@ class View {
     window.glade && glade.run && glade.run();
   }
 
-  createAdUnit(city, venue) {
-    Logger.log("Creating new ad unit. City: " + city + ", Venue: " + venue);
-
-    // Sanitize city
-    if (city) {
-      city = city.replace(/ /g, '');
-    }
+  createAdUnit({path, url, data, height, width}) {
+    Logger.log("Creating new ad unit");
 
     var adUnit = window.document.createElement("div");
     adUnit.id = "ad";
     adUnit.setAttribute("data-glade", "");
-    adUnit.setAttribute("data-ad-unit-path", `/148446784/Link.NYC${city ? '-' + city : ''}`);
-    if (venue) {
-      adUnit.setAttribute("data-json", `{"targeting": {"Venue": "${venue}"}}`);
+    adUnit.setAttribute("data-ad-unit-path", path);
+    adUnit.setAttribute("height", height);
+    adUnit.setAttribute("width", width);
+
+    if (url) {
+      adUnit.setAttribute("data-page-url", url);
     }
-    adUnit.setAttribute("height", "1920");
-    adUnit.setAttribute("width", "1080");
+    if (data) {
+      adUnit.setAttribute("data-json", data);
+    }
+
     return adUnit;
   }
 
@@ -140,6 +140,15 @@ class View {
       return true;
     }
     return false;
+  }
+
+  determineAdPath(row) {
+    // var city = row.city;
+    // if (city) {
+    //   city = city.replace(/ /g, '');
+    // }
+    // return `/148446784/Link.NYC${city ? '-' + city : ''}`;
+    return '/6075/kiran-dooh';
   }
 
   /**
@@ -172,7 +181,13 @@ class View {
 
     // Create new ad elements
     var venue = row._index;
-    var adUnit = this.createAdUnit(row.city, venue);
+    var adUnit = this.createAdUnit({
+      path: this.determineAdPath(row),
+      url: 'https://www.google.com',
+      width: "1080",
+      height: "1920",
+      data: `{"targeting": {"Venue": "${venue}"}}`
+    });
     this.container.appendChild(adUnit);
   }
 }
