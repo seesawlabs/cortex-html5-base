@@ -38,7 +38,7 @@ html, body {
   background-color: white;
   width: 385px;
   height: 215px;
-  left: 369px;
+  left: 363px;
   text-align: center;
 }
 
@@ -46,8 +46,9 @@ span.jackpot {
   display: inline-block;
   width: inherit;
   color: red;
-  font-size: 130px;
+  font-size: 180px;
   font-family: "Graphik", serif;
+  margin-top: -25px;
 }
 
 span.quantifier {
@@ -56,6 +57,7 @@ span.quantifier {
   color: red;
   font-size: 60px;
   font-family: "Graphik", serif;
+  margin-top: -20px;
 }
 
 #megamillions-container {
