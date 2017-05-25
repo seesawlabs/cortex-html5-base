@@ -20,7 +20,6 @@ class Placeholder {
    * The view generated will get hidden once the data arrives using the
    * Placeholder.hide() method.
    *
-   * TODO: Implement this method according to your needs.
    */
   render() {
     Logger.log('Rendering the placeholder image.');
@@ -45,7 +44,6 @@ class Placeholder {
    * This method gets called when the app receives data and the placeholder
    * is no longer needed.
    *
-   * TODO: Implement this method according to your needs.
    */
   hide() {
     if (this.hidden) {

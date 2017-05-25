@@ -2,10 +2,9 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
+// import Tracker from './tracker.js';
 
-// TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+// const CAMPAIGN = 'com.cortexpowered.campaigns.ny-lotto';
 
 class View {
   constructor() {
@@ -16,12 +15,10 @@ class View {
     this.deviceId = '';
 
     this.container = window.document.getElementById('container');
-
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    this.megamillionsJackpotSpan = window.document.getElementById('megamillions-jackpot');
+    this.powerballJackpotSpan = window.document.getElementById('powerball-jackpot');
+    this.megamillionsQuantifierSpan = window.document.getElementById('megamillions-quantifier');
+    this.powerballQuantifierSpan = window.document.getElementById('powerball-quantifier');
   }
 
   /**
@@ -56,8 +53,6 @@ class View {
    *   img.className = 'visible';
    * }
    *
-   * TODO: Implement this method according to your needs.
-   *
    * @param {array} data The data rows.
    */
   setData(data) {
@@ -76,13 +71,11 @@ class View {
   render() {
     Logger.log('Rendering a new view.');
     if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
       this.placeholder.render();
       return;
     }
 
     this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
@@ -98,11 +91,55 @@ class View {
    * method will get called when the app is in the background. Only implement
    * this method when you need to perform some actions right before the view
    * becomes visible on the screen.
-   *
-   * TODO: Implement this method according to your needs.
    */
   updateView() {
     // For this app, we don't need to do anything.
+  }
+
+  /**
+   * Given a jackpot amount string (e.g. "250.0"),
+   * returns an object containing the properly rounded amount
+   * and the accompanying unit:
+   * {
+   *   amount: "250"
+   *   unit: "MILLION"
+   * }
+   *
+   * or
+   *
+   * {
+   *   amount: "1.2"
+   *   unit: "BILLION"
+   * }
+   *
+   * Unit is all caps because that's how it's displayed in the UI.
+   *
+   * @param {string} jackpot The jackpot amount as a string
+   * @return {Object} The jackpot object
+   */
+  parseJackpot(jackpot) {
+    var floatJackpot = parseFloat(jackpot);
+    var amount;
+    var unit;
+
+    // Check if we're in the billions
+    if (floatJackpot >= 1000) {
+      var jackpotBillions = floatJackpot / 1000;
+      amount = String(jackpotBillions.toFixed(1));
+      unit = "BILLION";
+    } else if (floatJackpot < 1) {
+      var jackpotThousands = floatJackpot * 1000;
+      amount = String(jackpotThousands.toFixed(0));
+      unit = "THOUSAND";
+    } else {
+      amount = String(parseInt(jackpot, 10));
+      unit = "MILLION";
+    }
+
+    return {
+      amount,
+      unit
+    };
   }
 
   /**
@@ -118,8 +155,6 @@ class View {
    * It is important to be as efficient as possible in this method. Try to
    * make as few DOM manipulations as possible. Reusing DOM elements is better
    * than recreating them every time this method is called.
-   *
-   * TODO: Implement this method according to your needs.
    */
   _render() {
     if (this.currentRow >= this.rows.length) {
@@ -129,7 +164,14 @@ class View {
                `Displaying row #${this.currentRow}.`);
     const row = this.rows[this.currentRow];
     this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+
+    var megamillions = this.parseJackpot(row.megamillions_nextjackpot);
+    var powerball = this.parseJackpot(row.powerball_nextjackpot);
+
+    this.megamillionsJackpotSpan.innerText = megamillions.amount;
+    this.megamillionsQuantifierSpan.innerText = megamillions.unit;
+    this.powerballJackpotSpan.innerText = powerball.amount;
+    this.powerballQuantifierSpan.innerText = powerball.unit;
   }
 }
 

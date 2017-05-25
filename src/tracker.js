@@ -1,6 +1,5 @@
 import Ajax from './ajax.js';
 
-// TODO: Change this with a production token.
 const TOKEN = 'token';
 const API_URL = 'https://fleet.cortexpowered.com/api/track';
 

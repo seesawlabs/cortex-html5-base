@@ -31,7 +31,7 @@ module.exports = {
         test: srcDir,
       },
       { 
-        loader: "style-loader!css-loader",
+        loader: "style-loader!css-loader?url=false",
         test: /\.css$/,
       }
     ]
