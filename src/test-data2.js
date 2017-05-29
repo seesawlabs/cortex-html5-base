@@ -16,15 +16,15 @@ const TEST_DATA = [
   //   status: 'FINAL'
   // },
   {
-    away_city: 'San Antonio',
-    away_name: 'Spurs',
+    away_city: 'Clevaland Cavaliers',
+    away_name: 'Cavaliers',
     away_score: 120,
     clock: '12:31',
     home_city: 'Golden State',
     home_name: 'Warriors',
     home_score: 122,
-    period: 3,
-    status: 'Final'
+    period: 4,
+    status: 'END OF PERIOD'
   },
 ];
 

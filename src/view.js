@@ -4,7 +4,7 @@ import _first from 'lodash/first';
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 
-const GAME = 'spurswarriors';
+const GAME = 'cavalierswarriors';
 
 class View {
   constructor() {
