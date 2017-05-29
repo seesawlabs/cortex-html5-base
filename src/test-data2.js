@@ -22,7 +22,7 @@ const TEST_DATA = [
     clock: '12:31',
     home_city: 'Golden State',
     home_name: 'Warriors',
-    home_score: 120,
+    home_score: 122,
     period: 3,
     status: 'Final'
   },
