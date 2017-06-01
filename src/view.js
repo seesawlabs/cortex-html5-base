@@ -5,7 +5,7 @@ import Logger from './logger.js';
 import Tracker from './tracker.js';
 
 // TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+const CAMPAIGN = 'com.intersection.link.data.weather.underground';
 
 class View {
   constructor() {

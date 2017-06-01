@@ -18,5 +18,8 @@ pack:
 	zip -r app_`date -u +"%Y-%m-%dT%H:%M:%SZ"`.zip * && \
 	cp app_*.zip ../dist && \
 	popd
+	
+watch: clean lint
+	npm run watch
 
 dist: clean build pack
