@@ -172,14 +172,14 @@ class View {
     this.megamillionsJackpotSpan.innerHTML = megamillions.amount
       .split('')
       .map(number => {
-        return `<div class="numbers-single">${number}</div>`
+        return `<div class="numbers">${number}</div>`
       })
       .join('');
     this.megamillionsQuantifierSpan.innerText = megamillions.unit;
     this.powerballJackpotSpan.innerHTML = powerball.amount
     .split('')
     .map(number => {
-      return `<div class="numbers-powerball">${number}</div>`
+      return `<div class="numbers">${number}</div>`
     })
     .join('');
     this.powerballQuantifierSpan.innerText = powerball.unit;
