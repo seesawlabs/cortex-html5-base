@@ -95,9 +95,25 @@
       color: white;
       font-size: 60px;
       font-family: "Graphik", serif;
-      margin-top: 9px;
+      margin-top: 21px;
     }
     /* Power Ball */
+
+    .powerball-container {
+      position: absolute;
+      width: 460px;
+      height: 185px;
+      left: 308px;
+      text-align: center;
+      margin-top: -81px;
+    }
+
+    span.powerball::before {
+      content: url(../assets/images/mask-bottom.png);
+      position: absolute;
+      margin-left: 9.5px;
+      margin-top: 92px;
+    }
 
     .numbers-powerball {
       border-radius: 10px;
@@ -112,6 +128,15 @@
       width: 25%;
       height: 150px;
       display: inline-block;
+    }
+
+    .numbers-powerball:nth-child(1):before {
+      content: '$';
+      position: absolute;
+      color: red;
+      font-size: 30px;
+      top: 35px;
+      left: 30px
     }
 
     .numbers-powerball:nth-child(3) {
