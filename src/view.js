@@ -2,14 +2,11 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
 
 import moment from 'moment';
 import 'moment-timezone';
 
 const pathToAssets = require.context('../assets/images', true);
-// TODO: Change this.
-const CAMPAIGN = 'com.intersection.link.data.weather.underground';
 
 class View {
   constructor() {
@@ -85,13 +82,11 @@ class View {
   render() {
     Logger.log('Rendering a new view.');
     if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
       this.placeholder.render();
       return;
     }
 
     this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
@@ -103,18 +98,10 @@ class View {
         weather.hour]).tz('Europe/London');
       return weather;
     });
-    return sorted;
-  }
-
-  getClosestDates(sorted) {
-    const currentTime = moment().tz('Europe/London');
-    const closest = sorted.filter(weather => {
-      return weather.fullDate.isSameOrAfter(currentTime);
-    });
-    closest.sort((a, b) => {
+    sorted.sort((a, b) => {
       return a.fullDate - b.fullDate;
     });
-    return closest.slice(0, 3);
+    return sorted.slice(0, 3);
   }
 
   formatHours(time) {
@@ -177,8 +164,7 @@ class View {
     const row = this.rows;
     this.currentRow += 1;
     const _sorted = this.sortDates(row);
-    const _closest = this.getClosestDates(_sorted);
-    this.addValues(_closest);
+    this.addValues(_sorted);
   }
 }
 
