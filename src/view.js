@@ -4,7 +4,9 @@ import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 import Tracker from './tracker.js';
 
-const pathToAssets = require.context('../assets/images', true);
+import moment from 'moment';
+import 'moment-timezone';
+
 // TODO: Change this.
 const CAMPAIGN = 'com.intersection.link.data.weather.underground';
 
@@ -16,16 +18,18 @@ class View {
     this.currentRow = 0;
     this.deviceId = '';
 
-    var domElements = {};
-    domElements.degrees1 = window.document.getElementById('degrees1');
-    domElements.degrees2 = window.document.getElementById('degrees2');
-    domElements.degrees3 = window.document.getElementById('degrees3');
-    domElements.time1 = window.document.getElementById('time1');
-    domElements.time2 = window.document.getElementById('time2');
-    domElements.time3 = window.document.getElementById('time3');
-    domElements.icon1 = window.document.getElementById('icon1');
-    domElements.icon2 = window.document.getElementById('icon2');
-    domElements.icon3 = window.document.getElementById('icon3');
+    this.domElements = {};
+    this.domElements.degrees1 = window.document.getElementById('degrees1');
+    this.domElements.degrees2 = window.document.getElementById('degrees2');
+    this.domElements.degrees3 = window.document.getElementById('degrees3');
+    this.domElements.time1 = window.document.getElementById('time1');
+    this.domElements.time2 = window.document.getElementById('time2');
+    this.domElements.time3 = window.document.getElementById('time3');
+    this.domElements.icon1 = window.document.getElementById('icon1');
+    this.domElements.icon2 = window.document.getElementById('icon2');
+    this.domElements.icon3 = window.document.getElementById('icon3');
+    this.creativeContainer = window.document.getElementById(
+    'creativeContainer');
   }
 
   /**
@@ -90,8 +94,39 @@ class View {
     this._render();
   }
 
-  sortDates(rows, row) {
-    console.log('SUP', rows, row);
+  sortDates(rows) {
+    const sorted = rows.map(weather => {
+      weather.fullDate = moment([weather.year,
+        weather.mon - 1,
+        weather.mday,
+        weather.hour]).tz('Europe/London');
+      return weather;
+    });
+    return sorted;
+  }
+
+  getClosestDates(sorted) {
+    const currentTime = moment().tz('Europe/London');
+    const closest = sorted.filter(weather => {
+      return weather.fullDate.isSameOrAfter(currentTime);
+    });
+    closest.sort((a, b) => {
+      return a.fullDate - b.fullDate;
+    });
+    return closest.slice(0, 3);
+  }
+
+  formatHours(time) {
+    return moment(time, ["HH"]).tz('Europe/London').format("h A");
+  }
+
+  addValues(closest) {
+    closest.forEach((weather, index) => {
+      const _i = index + 1;
+      this.domElements[`icon${_i}`].src = weather.icon_url;
+      this.domElements[`degrees${_i}`].innerHTML = weather.temp_english;
+      this.domElements[`time${_i}`].innerHTML = this.formatHours(weather.hour);
+    });
   }
 
   /**
@@ -130,6 +165,7 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
+    this.creativeContainer.style.display = 'block';
     if (this.currentRow >= this.rows.length) {
       this.currentRow = 0;
     }
@@ -137,11 +173,9 @@ class View {
                `Displaying row #${this.currentRow}.`);
     const row = this.rows;
     this.currentRow += 1;
-    const imgSrc = pathToAssets(`./cloudy.svg`, true);
-
-    console.log(imgSrc);
-
-    this.sortDates(this.rows, row);
+    const _sorted = this.sortDates(row);
+    const _closest = this.getClosestDates(_sorted);
+    this.addValues(_closest);
   }
 }
 

@@ -33,6 +33,9 @@
   },
   "dependencies": {
     "file-loader": "^0.11.1",
+    "json-loader": "^0.5.4",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "promise": "^7.1.1"
   }
 }

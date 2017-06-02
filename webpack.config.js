@@ -39,6 +39,10 @@ module.exports = {
         loader: 'file-loader', exclude: /node_modules/,
         query: {name: './[path][hash].[ext]'}
       },
+      { 
+        test: /\.json$/, 
+        loader: "json-loader" 
+      }
     ]
   },
   stats: {
