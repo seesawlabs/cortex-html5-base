@@ -1,0 +1,82 @@
+.creativeContainer {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  background-color: #00a8dd;
+  font-family: "HelveticaNeue-Bold";
+  color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  display:none;
+  background-repeat: none;
+}
+
+.creativeContainer-header {
+  height: 730px;
+  font-size: 130px;
+  line-height: 122px;
+  font-weight: bold;
+  letter-spacing: -4px;
+  padding: 75px 75px 0;
+  box-sizing: border-box;
+}
+
+.creativeContainer-header-stroke {
+  width: 234px;
+  height: 20px;
+  font-size: 0;
+  background-color: #fff;
+  margin-bottom: 32px;
+}
+
+.weatherContainer {
+    width: 930px;
+    margin: 0;
+    list-style: none;
+    padding: 0 75px;
+    box-sizing: border-box;
+}
+
+.weatherContainer-list {
+    width: 930px;
+    height: 314px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    clear: both;
+}
+
+
+.weatherContainer-list .li {
+    height: 314px;
+    border-top: 2px solid #fff;
+    float: left;
+    font-size: 140px;
+    font-weight: lighter;
+    letter-spacing: -5px;
+}
+
+.weatherContainer-list .weatherContainer-list-time {
+    width: 456px;
+    height: 230px;
+    padding-top: 84px;
+    text-align: left;
+}
+
+
+.weatherContainer-list .weatherContainer-list-icon {
+    width: 196px;
+    height: 232px;
+    padding-top: 52px;
+    text-align: center;
+    font-size: 85px;
+}
+
+.weatherContainer-list .weatherContainer-list-degrees {
+    width: 278px;
+    height: 229px;
+    padding-top: 85px;
+    text-align: right;
+    letter-spacing: 0px;
+}

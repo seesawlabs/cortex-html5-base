@@ -4,6 +4,7 @@ import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 import Tracker from './tracker.js';
 
+const pathToAssets = require.context('../assets/images', true);
 // TODO: Change this.
 const CAMPAIGN = 'com.intersection.link.data.weather.underground';
 
@@ -15,13 +16,16 @@ class View {
     this.currentRow = 0;
     this.deviceId = '';
 
-    this.container = window.document.getElementById('container');
-
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    var domElements = {};
+    domElements.degrees1 = window.document.getElementById('degrees1');
+    domElements.degrees2 = window.document.getElementById('degrees2');
+    domElements.degrees3 = window.document.getElementById('degrees3');
+    domElements.time1 = window.document.getElementById('time1');
+    domElements.time2 = window.document.getElementById('time2');
+    domElements.time3 = window.document.getElementById('time3');
+    domElements.icon1 = window.document.getElementById('icon1');
+    domElements.icon2 = window.document.getElementById('icon2');
+    domElements.icon3 = window.document.getElementById('icon3');
   }
 
   /**
@@ -86,6 +90,10 @@ class View {
     this._render();
   }
 
+  sortDates(rows, row) {
+    console.log('SUP', rows, row);
+  }
+
   /**
    * Update the view before displaying it on the screen.
    *
@@ -127,9 +135,13 @@ class View {
     }
     Logger.log(`The view has ${this.rows.length} data rows. ` +
                `Displaying row #${this.currentRow}.`);
-    const row = this.rows[this.currentRow];
+    const row = this.rows;
     this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+    const imgSrc = pathToAssets(`./cloudy.svg`, true);
+
+    console.log(imgSrc);
+
+    this.sortDates(this.rows, row);
   }
 }
 
