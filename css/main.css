@@ -1,69 +1,127 @@
-@font-face {
-  font-family: "Graphik";
-  src: url('assets/fonts/Graphik-Black.otf');
-}
+    @font-face {
+      font-family: "Graphik";
+      src: url('assets/fonts/Graphik-Black.otf');
+    }
 
-html, body {
-  width: 1080px;
-  height: 1920px;
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  background-color: #000;
-}
+    html, body {
+      width: 1080px;
+      height: 1920px;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      background-color: #000;
+    }
 
-#container {
-  width: 1080px;
-  height: 1920px;
-  margin: 0;
-  overflow: hidden;
-  color: #fff;
-  background-image: url('assets/images/lotto-bg.jpg');
-}
+    #container {
+      width: 1080px;
+      height: 1920px;
+      margin: 0;
+      overflow: hidden;
+      color: #fff;
+      background-image: url('assets/images/lotto-bg.jpg');
+    }
 
-.placeholder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1080px;
-  height: 1920px;
-}
+    .placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1080px;
+      height: 1920px;
+    }
 
-.placeholder.invisible {
-  opacity: 0;
-}
+    .placeholder.invisible {
+      opacity: 0;
+    }
 
-.lotto-container {
-  position: absolute;
-  background-color: white;
-  width: 385px;
-  height: 215px;
-  left: 363px;
-  text-align: center;
-}
+    .lotto-container {
+      position: absolute;
+      width: 460px;
+      height: 185px;
+      left: 315px;
+      text-align: center;
+      margin-top: -25px;
+    }
 
-span.jackpot {
-  display: inline-block;
-  width: inherit;
-  color: red;
-  font-size: 180px;
-  font-family: "Graphik", serif;
-  margin-top: -25px;
-}
+    span.jackpot {
+      display: inline-block;
+      width: inherit;
+      margin-top: -25px;
+    }
+    /* Jackpot Mask */
 
-span.quantifier {
-  display: inline-block;
-  width: inherit;
-  color: red;
-  font-size: 60px;
-  font-family: "Graphik", serif;
-  margin-top: -20px;
-}
+    span.jackpot::before {
+      content: url(../assets/images/mask-top.png);
+      position: absolute;
+      margin-left: 11px;
+      margin-top: 108px;
+    }
+    /* Single Numbers */
 
-#megamillions-container {
-  top: 460px;
-}
+    .numbers-single {
+      border-radius: 10px;
+      color: red;
+      background-color: white;
+      font-size: 180px;
+      font-family: "Graphik", serif;
+      margin-top: 10px;
+      margin-top: 25px;
+      text-align: center;
+      margin-left: 11px;
+      width: 30%;
+      height: 185px;
+      display: inline-block;
+    }
+    /* Jackpot '$' Symbol */
 
-#powerball-container {
-  top: 1580px;
-}
+    .numbers-single:nth-child(1):before {
+      content: '$';
+      position: absolute;
+      color: red;
+      font-size: 30px;
+      top: 10px;
+    }
+
+    .jackpot:first-child {
+      margin-left: -24px;
+    }
+
+    .jackpot:last-child {
+      margin-right: -10px;
+    }
+
+    span.quantifier {
+      display: inline-block;
+      width: inherit;
+      color: white;
+      font-size: 60px;
+      font-family: "Graphik", serif;
+      margin-top: 9px;
+    }
+    /* Power Ball */
+
+    .numbers-powerball {
+      border-radius: 10px;
+      color: red;
+      background-color: white;
+      font-size: 150px;
+      font-family: "Graphik", serif;
+      margin-top: 10px;
+      margin-top: 25px;
+      text-align: center;
+      margin-left: 11px;
+      width: 25%;
+      height: 150px;
+      display: inline-block;
+    }
+
+    .numbers-powerball:nth-child(3) {
+      width: 10%
+    }
+
+    #megamillions-container {
+      top: 460px;
+    }
+
+    #powerball-container {
+      top: 1580px;
+    }
