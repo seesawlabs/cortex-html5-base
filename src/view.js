@@ -7,6 +7,7 @@ import Tracker from './tracker.js';
 import moment from 'moment';
 import 'moment-timezone';
 
+const pathToAssets = require.context('../assets/images', true);
 // TODO: Change this.
 const CAMPAIGN = 'com.intersection.link.data.weather.underground';
 
@@ -123,7 +124,9 @@ class View {
   addValues(closest) {
     closest.forEach((weather, index) => {
       const _i = index + 1;
-      this.domElements[`icon${_i}`].src = weather.icon_url;
+      const _icon = weather.icon.replace(/chance|mostly|partly/gi, '');
+      const _prefix = (weather.icon_url.indexOf('nt_') > -1) ? 'nt_' : '';
+      this.domElements[`icon${_i}`].src = pathToAssets(`./${_prefix}${_icon}.svg`, '');
       this.domElements[`degrees${_i}`].innerHTML = weather.temp_english;
       this.domElements[`time${_i}`].innerHTML = this.formatHours(weather.hour);
     });
