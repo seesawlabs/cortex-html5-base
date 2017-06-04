@@ -95,17 +95,18 @@ class View {
       weather.fullDate = moment([weather.year,
         weather.mon - 1,
         weather.mday,
-        weather.hour]).tz('Europe/London');
+        weather.hour]);
       return weather;
     });
     sorted.sort((a, b) => {
       return a.fullDate - b.fullDate;
     });
+    console.log(sorted.slice(0, 3));
     return sorted.slice(0, 3);
   }
 
   formatHours(time) {
-    return moment(time, ["HH"]).tz('Europe/London').format("h A");
+    return moment(time, ["HH"]).format("h A");
   }
 
   addValues(closest) {
