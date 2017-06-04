@@ -16,7 +16,7 @@ pack:
 	mkdir -p ./dist
 	pushd ./build && \
 	zip -r transit-weather-`date -u +"%Y-%m-%dT%H:%M:%SZ"`.zip * && \
-	cp app_*.zip ../dist && \
+	cp transit-weather-*.zip ../dist && \
 	popd
 
 watch: clean lint
