@@ -7,7 +7,7 @@ const TEST_DATA =
     "asof": "2017-06-05T17:48:08Z",
     "line_id": "jubilee",
     "name": "Jubilee",
-    "status": "Good Service"
+    "status": "Part Closure"
   },
   {
     "_index": 1,
@@ -28,7 +28,7 @@ const TEST_DATA =
     "asof": "2017-06-05T17:48:08Z",
     "line_id": "central",
     "name": "Central",
-    "status": "Good Service"
+    "status": "Part Closure"
   },
   {
     "_index": 1,
@@ -49,7 +49,7 @@ const TEST_DATA =
     "asof": "2017-06-05T17:48:08Z",
     "line_id": "circle",
     "name": "Circle",
-    "status": "Good Service"
+    "status": "Part Closure"
   },
   {
     "_index": 1,
@@ -63,7 +63,7 @@ const TEST_DATA =
     "asof": "2017-06-05T17:48:08Z",
     "line_id": "tfl-rail",
     "name": "TfL Rail",
-    "status": "Good Service"
+    "status": "Full Closure"
   },
   {
     "_index": 1,
