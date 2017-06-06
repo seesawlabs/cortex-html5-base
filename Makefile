@@ -15,8 +15,8 @@ build: clean lint
 pack:
 	mkdir -p ./dist
 	pushd ./build && \
-	zip -r app_`date -u +"%Y-%m-%dT%H:%M:%SZ"`.zip * && \
-	cp app_*.zip ../dist && \
+	zip -r transit-uk-`date -u +"%Y-%m-%dT%H:%M:%SZ"`.zip * && \
+	cp transit-uk-*.zip ../dist && \
 	popd
 
 dist: clean build pack
