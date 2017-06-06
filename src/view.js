@@ -168,9 +168,20 @@ class View {
     var megamillions = this.parseJackpot(row.megamillions_nextjackpot);
     var powerball = this.parseJackpot(row.powerball_nextjackpot);
 
-    this.megamillionsJackpotSpan.innerText = megamillions.amount;
+    // this.megamillionsJackpotSpan.innerText = megamillions.amount;
+    this.megamillionsJackpotSpan.innerHTML = megamillions.amount
+      .split('')
+      .map(number => {
+        return `<div class="numbers">${number}</div>`
+      })
+      .join('');
     this.megamillionsQuantifierSpan.innerText = megamillions.unit;
-    this.powerballJackpotSpan.innerText = powerball.amount;
+    this.powerballJackpotSpan.innerHTML = powerball.amount
+    .split('')
+    .map(number => {
+      return `<div class="numbers">${number}</div>`
+    })
+    .join('');
     this.powerballQuantifierSpan.innerText = powerball.unit;
   }
 }
