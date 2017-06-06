@@ -164,6 +164,7 @@ class View {
                `Displaying row #${this.currentRow}.`);
     const row = this.rows[this.currentRow];
     this.currentRow += 1;
+    this.blah = 'blah';
 
     var megamillions = this.parseJackpot(row.megamillions_nextjackpot);
     var powerball = this.parseJackpot(row.powerball_nextjackpot);
@@ -171,18 +172,24 @@ class View {
     // this.megamillionsJackpotSpan.innerText = megamillions.amount;
     this.megamillionsJackpotSpan.innerHTML = megamillions.amount
       .split('')
-      .map(number => {
-        return `<div class="numbers">${number}</div>`
-      })
+      .map(number => `<div class="numbers">${number}</div>`)
       .join('');
+
+    this.megamillionsJackpotSpan.className = 'jackpot no-decimal';
+    if (megamillions.amount.split('').indexOf('.') > -1) {
+      this.megamillionsJackpotSpan.className += 'jackpot decimal';
+    }
     this.megamillionsQuantifierSpan.innerText = megamillions.unit;
     this.powerballJackpotSpan.innerHTML = powerball.amount
-    .split('')
-    .map(number => {
-      return `<div class="numbers">${number}</div>`
-    })
-    .join('');
+      .split('')
+      .map(number => `<div class="numbers">${number}</div>`)
+      .join('');
     this.powerballQuantifierSpan.innerText = powerball.unit;
+
+    this.powerballJackpotSpan.className = 'powerball no-decimal';
+    if (powerball.amount.split('').indexOf('.') > -1) {
+      this.powerballJackpotSpan.className = 'powerball decimal';
+    }
   }
 }
 
