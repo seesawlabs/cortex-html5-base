@@ -106,7 +106,7 @@ class View {
   }
 
   formatHours(time) {
-    return moment(time, ["HH"]).format("h A");
+    return moment(time, ["HH"]).format("hh A");
   }
 
   addValues(closest) {
