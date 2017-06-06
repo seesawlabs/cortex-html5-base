@@ -15,8 +15,8 @@ build: clean lint
 pack:
 	mkdir -p ./dist
 	pushd ./build && \
-	zip -r transit-weather-`date -u +"%Y-%m-%dT%H:%M:%SZ"`.zip * && \
-	cp transit-weather-*.zip ../dist && \
+	zip -r linkuk-weather-`date -u +"%Y-%m-%dT%H:%M:%SZ"`.zip * && \
+	cp linkuk-weather-*.zip ../dist && \
 	popd
 
 watch: clean lint
