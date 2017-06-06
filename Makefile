@@ -15,8 +15,8 @@ build: clean lint
 pack:
 	mkdir -p ./dist
 	pushd ./build && \
-	zip -r linkuk-tfl-`date -u +"%Y-%m-%dT%H:%M:%SZ"`.zip * && \
-	cp linkuk-tfl-*.zip ../dist && \
+	zip -r linkuk-tfl-status-`date -u +"%Y-%m-%dT%H:%M:%SZ"`.zip * && \
+	cp linkuk-tfl-status*.zip ../dist && \
 	popd
 
 dist: clean build pack
