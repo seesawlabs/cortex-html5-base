@@ -102,7 +102,7 @@ class View {
   addList(rows) {
     const normal = 'Good Service';
     const asofLondon = moment.tz(rows[0].asof, 'Europe/London');
-    const asOf = moment(asofLondon, ["HH mm"]).format("HH:mm A");
+    const asOf = moment(asofLondon, ["HH mm"]).format("hh:mm A");
     this.creativeHeaderAsOf.innerHTML = `as of ${asOf}`;
     rows.forEach(line => {
       this.domElements[line.line_id] = window.document.getElementById(line.line_id);

@@ -102,47 +102,51 @@ div[id^="status"] {
   float: right;
 }
 #jubilee {
-  background-color: #8C4E17 ;
+  background-color: #8C4E17;
 }
 #bakerloo {
-  background-color: #8C4E17 ;
+  background-color: #8C4E17;
 }
 #piccadilly {
-  background-color: #0800AE ;
+  background-color: #0800AE;
 }
 #central {
-  background-color: #E11C00 ;
+  background-color: #E11C00;
 }
 #northern {
-  background-color: #000000 ;
+  background-color: #000000;
 }
 #metropolitan {
-  background-color: #770258 ;
+  background-color: #770258;
 }
 #circle {
-  background-color: #FFD100 ;
+  background-color: #FFD100;
+  color: #031E2B;
 }
 #tfl-rail {
-  background-color: #0800AE ;
+  background-color: #0800AE;
 }
 #dlr {
-  background-color: #00AFAE ;
+  background-color: #00AFAE;
+  color: #031E2B;
 }
 #district {
-  background-color: #007420 ;
+  background-color: #007420;
 }
 #london-overground {
-  background-color: #EC6A00 ;
+  background-color: #EC6A00;
 }
 #waterloo-city {
-  background-color: #6ED1BD ;
+  background-color: #6ED1BD;
+  color: #031E2B;
 }
 #tram {
   background-color:  #5ED000;
 }
 #hammersmith-city {
-  background-color: #D998AF ;
+  background-color: #D998AF;
 }
 #victoria {
-  background-color: #009EE8 ;
+  color: #031E2B;
+  background-color: #009EE8;
 }
