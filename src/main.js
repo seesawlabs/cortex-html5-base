@@ -9,7 +9,7 @@ import Logger from './logger.js';
 import {READY_EVENT} from './events.js';
 
 // TODO: Update this with your production dataset id.
-const DATASET_ID = 'com.cortexpowered.test-dataset';
+const DATASET_ID = 'uk.co.primesight.linkuk.weather.underground.london';
 
 /**
  * Starts the app in simulation mode.
