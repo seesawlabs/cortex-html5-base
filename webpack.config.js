@@ -30,9 +30,18 @@ module.exports = {
         loader: 'babel-loader',
         test: srcDir,
       },
-      { 
+      {
         loader: "style-loader!css-loader",
         test: /\.css$/,
+      },
+      {
+        test: /\.(png|jpg|gif|jpeg|otf|svg)$/,
+        loader: 'file-loader', exclude: /node_modules/,
+        query: {name: './[path][hash].[ext]'}
+      },
+      {
+        test: /\.json$/,
+        loader: "json-loader"
       }
     ]
   },

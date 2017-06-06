@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "HelveticaNeue-Bold";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../assets/fonts/HelveticaNeueLTStd-Roman.otf") format("opentype"); }
+
 html, body {
   width: 100%;
   height: 100%;
@@ -5,14 +11,6 @@ html, body {
   margin: 0;
   overflow: hidden;
   background-color: #000;
-}
-
-#container {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  color: #fff;
 }
 
 .placeholder {
@@ -25,4 +23,126 @@ html, body {
 
 .placeholder.invisible {
   opacity: 0;
+}
+
+.creativeContainer {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  background-color: #2b4ea1;
+  color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  display:none;
+  font-family: "HelveticaNeue-Bold";
+}
+
+.creativeHeaderContainer {
+  width: 1080px;
+  height: 206px;
+  background-color: #FFF;
+}
+
+.creativeHeader {
+  font-size: 72px;
+  color: #2B4EA1;
+  width: 920px;
+  height: 154px;
+  padding-top: 47px;
+  padding-left: 42px;
+}
+
+.creativeHeaderAsOf {
+  font-size: 36px;
+  display: block;
+}
+
+.footer {
+  color: white;
+  padding-left: 20px;
+  padding-top: 10px;
+  font-size: 60px;
+}
+
+#creativeContent {
+  background-color: #fff;
+  overflow: hidden;
+}
+/*#F3C97D*/
+.square {
+  width: 506px;
+  height: 73px;
+  margin-top: 3px;
+  background-color: #E9E9E9;
+  font-size: 48px;
+  padding-top: 30px;
+  padding-left: 30px;
+}
+
+.square.not-good {
+  background-color: #F3C97D;
+}
+
+div[id^="status"] {
+  color: #555555;
+}
+
+.footer {
+  color: white;
+  padding-left: 70px;
+  padding-top: 30px;
+  font-size: 60px;
+}
+
+
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+#jubilee {
+  background-color: #8C4E17 ;
+}
+#bakerloo {
+  background-color: #8C4E17 ;
+}
+#piccadilly {
+  background-color: #0800AE ;
+}
+#central {
+  background-color: #E11C00 ;
+}
+#northern {
+  background-color: #000000 ;
+}
+#metropolitan {
+  background-color: #770258 ;
+}
+#circle {
+  background-color: #FFD100 ;
+}
+#tfl-rail {
+  background-color: #0800AE ;
+}
+#dlr {
+  background-color: #00AFAE ;
+}
+#district {
+  background-color: #007420 ;
+}
+#london-overground {
+  background-color: #EC6A00 ;
+}
+#waterloo-city {
+  background-color: #6ED1BD ;
+}
+#tram {
+  background-color:  #5ED000;
+}
+#hammersmith-city {
+  background-color: #D998AF ;
+}
+#victoria {
+  background-color: #009EE8 ;
 }

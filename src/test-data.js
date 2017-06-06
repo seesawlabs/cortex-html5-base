@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-const TEST_DATA = 
+const TEST_DATA =
 [
   {
     "_index": 1,

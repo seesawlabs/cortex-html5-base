@@ -2,10 +2,8 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
-
-// TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+import moment from 'moment';
+import 'moment-timezone';
 
 class View {
   constructor() {
@@ -15,13 +13,12 @@ class View {
     this.currentRow = 0;
     this.deviceId = '';
 
-    this.container = window.document.getElementById('container');
+    this.creativeContainer = window.document.getElementById(
+    'creativeContainer');
+    this.creativeHeaderAsOf = window.document.getElementById(
+    'creativeHeaderAsOf');
 
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    this.domElements = {};
   }
 
   /**
@@ -76,13 +73,10 @@ class View {
   render() {
     Logger.log('Rendering a new view.');
     if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
       this.placeholder.render();
       return;
     }
-
     this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
@@ -105,6 +99,20 @@ class View {
     // For this app, we don't need to do anything.
   }
 
+  addList(rows) {
+    const normal = 'Good Service';
+    const asOf = moment(rows[0].asof, ["HH mm"]).format("HH:mm A");
+    this.creativeHeaderAsOf.innerHTML = `as of ${asOf}`;
+    rows.forEach(line => {
+      this.domElements[line.line_id] = window.document.getElementById(line.line_id);
+      this.domElements[`status-${line.line_id}`] = window.document.getElementById(`status-${line.line_id}`);
+      this.domElements[line.line_id].innerHTML = line.name;
+      this.domElements[`status-${line.line_id}`].innerHTML = line.status;
+      if (line.status !== normal) {
+        this.domElements[`status-${line.line_id}`].classList.add('not-good');
+      }
+    });
+  }
   /**
    * Handles rendering of the main view.
    *
@@ -122,14 +130,8 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    if (this.currentRow >= this.rows.length) {
-      this.currentRow = 0;
-    }
-    Logger.log(`The view has ${this.rows.length} data rows. ` +
-               `Displaying row #${this.currentRow}.`);
-    const row = this.rows[this.currentRow];
-    this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+    this.creativeContainer.style.display = 'block';
+    this.addList(this.rows);
   }
 }
 
