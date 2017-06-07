@@ -164,7 +164,6 @@ class View {
                `Displaying row #${this.currentRow}.`);
     const row = this.rows[this.currentRow];
     this.currentRow += 1;
-    this.blah = 'blah';
 
     var megamillions = this.parseJackpot(row.megamillions_nextjackpot);
     var powerball = this.parseJackpot(row.powerball_nextjackpot);

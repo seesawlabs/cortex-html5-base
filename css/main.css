@@ -37,21 +37,33 @@ html, body {
   position: absolute;
   width: 460px;
   height: 185px;
-  left: 315px;
+  left: 310px;
   text-align: center;
   margin-top: -25px;
 }
 
 /* Numbers with no-decimal */
 
-span.no-decimal {
-  display: inline-block;
-  width: inherit;
-  text-align: right;
-  background-image: url('../assets/images/background-no-decimal.png');
-  background-repeat: no-repeat;
-  background-position: top right;
-  padding-right: 5px;
+.jackpot, .powerball {
+  position: absolute;
+  top: 0;
+  right: 0;
+  line-height: 186px;
+  white-space: nowrap;
+}
+
+.lotto-container:after {
+  content: ' ';
+  width: 100%;
+  background: #011a49;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  height: 10px;
+}
+
+#powerball-container:after {
+  background: #020002;
 }
 
 .numbers {
@@ -59,8 +71,10 @@ span.no-decimal {
   font-size: 180px;
   font-family: "Graphik", serif;
   text-align: center;
-  padding:5px;
-  mix-blend-mode: multiply;
+  margin-top: 0;
+  padding: 0;
+  width: 146px;
+  margin-left: 11px;
   display: inline-block;
 }
 
@@ -68,18 +82,9 @@ span.no-decimal {
   content: '$';
   color: red;
   font-size: 30px;
-  float:left;
-  position: relative;
-  margin-bottom: -40px;
-  top: 10px;
-  left:10px;
-}
-
-span.no-decimal .numbers {
-  margin-top: 0;
-  width: 30%;
-  height: 185px;
-
+  top: -70px;
+  left: 15px;
+  position: absolute;
 }
 
 span.quantifier {
@@ -88,42 +93,7 @@ span.quantifier {
   color: white;
   font-size: 60px;
   font-family: "Graphik", serif;
-  margin-top: 5px;
-}
-
-span#megamillions-quantifier {
-  margin-top: 12px;
-}
-
-
-
-/* Numbers with decimal */
-
-span.decimal {
-  display: inline-block;
-  width: inherit;
-  text-align: right;
-  background-image: url('../assets/images/background-decimal.png');
-  background-repeat: no-repeat;
-  background-position: top right;
-}
-
-span.decimal .numbers {
-  font-size: 160px;
-  margin-top: 0;
-  padding: 5px;
-  width: 25%;
-  height: 150px;
-}
-
-span.decimal .numbers:last-child {
-padding-left:20px;
-}
-
-span.decimal .numbers:nth-last-child(2) {
-  width: 10%;
-  padding-right: 0;
-  margin-left: 6px
+  margin-top: 10px;
 }
 
 #megamillions-container lotto-container {
@@ -132,9 +102,28 @@ span.decimal .numbers:nth-last-child(2) {
 }
 
 #megamillions-container {
-  top: 460px;
+  top: 475px;
 }
 
 #powerball-container {
   top: 1535px;
+}
+
+.white-block-row {
+  overflow: hidden;
+  width: 460px;
+  height: 80px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.white-block {
+  position: relative;
+  width: 146px;
+  background: #FFFFFF;
+  height: 100%;
+  margin-right: 11px;
+  display: inline-block;
+  border-radius: 8px;
 }
