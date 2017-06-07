@@ -30,7 +30,11 @@ module.exports = {
         loader: 'babel-loader',
         test: srcDir,
       },
-      { 
+      {
+        loader: 'url-loader?limit=100000',
+        test: /\.otf$/,
+      },
+      {
         loader: "style-loader!css-loader",
         test: /\.css$/,
       }
