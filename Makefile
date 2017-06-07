@@ -20,3 +20,6 @@ pack:
 	popd
 
 dist: clean build pack
+
+watch: clean lint
+	npm run watch

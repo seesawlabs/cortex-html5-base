@@ -109,6 +109,7 @@ class View {
       this.domElements[`status-${line.line_id}`] = window.document.getElementById(`status-${line.line_id}`);
       this.domElements[line.line_id].innerHTML = line.name;
       this.domElements[`status-${line.line_id}`].innerHTML = line.status;
+      this.domElements[`status-${line.line_id}`].classList.remove('not-good');
       if (line.status !== normal) {
         this.domElements[`status-${line.line_id}`].classList.add('not-good');
       }
