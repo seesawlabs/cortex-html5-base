@@ -15,9 +15,6 @@ class View {
     this.deviceId = '';
 
     this.container = window.document.getElementById('container');
-
-    var gladeScript = this.createGladeScript();
-    this.container.appendChild(gladeScript);
   }
 
   /**
@@ -95,60 +92,30 @@ class View {
    *
    */
   updateView() {
-    // Refresh ad slots
-    window.glade && glade.run && glade.run();
-  }
-
-  createAdUnit({path, url, data, height, width}) {
-    Logger.log("Creating new ad unit");
-
-    var adUnit = window.document.createElement("div");
-    adUnit.id = "ad";
-    adUnit.setAttribute("data-glade", "");
-    adUnit.setAttribute("data-ad-unit-path", path);
-    adUnit.setAttribute("height", height);
-    adUnit.setAttribute("width", width);
-
-    if (url) {
-      adUnit.setAttribute("data-page-url", url);
-    }
-    if (data) {
-      adUnit.setAttribute("data-json", data);
-    }
-
-    return adUnit;
-  }
-
-  createGladeScript() {
-    Logger.log("Creating glade script");
-    var gladeScript = window.document.createElement("script");
-    gladeScript.setAttribute("async", "");
-    gladeScript.src = "https://securepubads.g.doubleclick.net/static/glade.js";
-
-    var gladeContainer = window.document.createElement("div");
-    gladeContainer.id = "glade-container";
-    gladeContainer.appendChild(gladeScript);
-
-    return gladeContainer;
   }
 
   destroyElement(id) {
-    Logger.log("Destroying element " + id);
-    var elem = window.document.getElementById(id);
-    if (elem && elem.parentNode) {
-      elem.parentNode.removeChild(elem);
+    var el = window.document.getElementById(id);
+    if (el && el.parentNode) {
+      el.parentNode.removeChild(el);
       return true;
     }
+
     return false;
   }
 
-  determineAdPath(row) {
-    // var city = row.city;
-    // if (city) {
-    //   city = city.replace(/ /g, '');
-    // }
-    // return `/148446784/Link.NYC${city ? '-' + city : ''}`;
-    return '/6075/kiran-dooh';
+  createIframe(id) {
+    var frame = window.document.createElement("iframe");
+    frame.id = id;
+    frame.src = "https://s3.amazonaws.com/dfp.iframe.seesawlabs/index.html";
+    frame.width = "1080";
+    frame.height = "1920";
+    frame.scrolling = "no";
+    frame.frameBorder = "0";
+    frame.seamless = "seamless";
+    frame.marginWidth = "0";
+    frame.marginHeight = "0";
+    return frame;
   }
 
   /**
@@ -165,7 +132,6 @@ class View {
    * make as few DOM manipulations as possible. Reusing DOM elements is better
    * than recreating them every time this method is called.
    *
-   * TODO: Implement this method according to your needs.
    */
   _render() {
     this.currentRow += 1;
@@ -176,19 +142,10 @@ class View {
                `Displaying row #${this.currentRow}.`);
     const row = this.rows[this.currentRow];
 
-    // Remove old ad elements
-    this.destroyElement("ad");
-
-    // Create new ad elements
-    var venue = row._index;
-    var adUnit = this.createAdUnit({
-      path: this.determineAdPath(row),
-      url: 'https://www.google.com',
-      width: "1080",
-      height: "1920",
-      data: `{"targeting": {"Venue": "${venue}"}}`
-    });
-    this.container.appendChild(adUnit);
+    const id = "frame";
+    this.destroyElement(id);
+    const frame = this.createIframe(id);
+    this.container.appendChild(frame);
   }
 }
 

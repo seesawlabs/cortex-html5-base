@@ -13,6 +13,7 @@ html, body {
   margin: 0;
   overflow: hidden;
   color: #fff;
+  padding: 0;
 }
 
 .placeholder {
@@ -25,4 +26,14 @@ html, body {
 
 .placeholder.invisible {
   opacity: 0;
+}
+
+#frame {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 1080px;
+  height: 1920px;
+  border: none;
+  overflow: hidden;
 }
