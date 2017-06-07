@@ -135,6 +135,7 @@ div[id^="status"] {
 }
 #london-overground {
   background-color: #EC6A00;
+  color: #031E2B;
 }
 #waterloo-city {
   background-color: #6ED1BD;
@@ -145,6 +146,7 @@ div[id^="status"] {
 }
 #hammersmith-city {
   background-color: #D998AF;
+  color: #031E2B;
 }
 #victoria {
   color: #031E2B;
