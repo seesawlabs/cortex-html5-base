@@ -123,8 +123,8 @@ class View {
     const row = this.rows[this.currentRow];
     this.currentRow += 1;
 
-    const updatedLondon = moment.tz(row.updated, 'Europe/London');
-    const updated = moment(updatedLondon, ["HH mm"]).format("HH:mm");
+    const updatedLondon = moment.tz(row.updated, 'America/New_York');
+    const updated = moment(updatedLondon, ["HH mm"]).format("hh:mm A");
     this.headline.innerText = row.headline;
     this.updated.innerText = `Updated ${updated}`;
   }
