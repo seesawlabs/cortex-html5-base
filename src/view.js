@@ -2,10 +2,8 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
-
-// TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+import moment from 'moment';
+import 'moment-timezone';
 
 class View {
   constructor() {
@@ -16,12 +14,8 @@ class View {
     this.deviceId = '';
 
     this.container = window.document.getElementById('container');
-
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    this.updated = window.document.getElementById('ap-updated');
+    this.headline = window.document.getElementById('ap-headline');
   }
 
   /**
@@ -76,13 +70,11 @@ class View {
   render() {
     Logger.log('Rendering a new view.');
     if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
       this.placeholder.render();
       return;
     }
 
     this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
@@ -122,6 +114,7 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
+    this.container.style.display = 'block';
     if (this.currentRow >= this.rows.length) {
       this.currentRow = 0;
     }
@@ -129,7 +122,11 @@ class View {
                `Displaying row #${this.currentRow}.`);
     const row = this.rows[this.currentRow];
     this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+
+    const updatedLondon = moment.tz(row.updated, 'Europe/London');
+    const updated = moment(updatedLondon, ["HH mm"]).format("HH:mm");
+    this.headline.innerText = row.headline;
+    this.updated.innerText = `Updated ${updated}`;
   }
 }
 
