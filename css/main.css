@@ -61,6 +61,11 @@ html, body {
 #ap-headline {
   font-size: 130px;
   text-align: left;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #ap-updated {
