@@ -2,8 +2,13 @@
 
 const TEST_DATA = [
   {
+  "_index": 1,
+  "headline": "The Latest",
+  "updated": "2017-06-13T15:58:57Z"
+  },
+  {
 	"_index": 1,
-	"headline": "Agent: Tiger Woods in a clinic for handling pain medications",
+	"headline": "Agent: Tiger Woods in a clinic for handling pain medications test test test test test test teeeeeest",
 	"updated": "2017-06-13T15:58:57Z"
   },
   {
@@ -45,7 +50,17 @@ const TEST_DATA = [
 	"_index": 1,
 	"headline": "Public funeral planned for US student freed from North Korea",
 	"updated": "2017-06-13T15:58:57Z"
-  }
+  },
+  {
+  "_index": 1,
+  "headline": "The Latest",
+  "updated": "2017-06-13T15:58:57Z"
+  },
+  {
+  "_index": 1,
+  "headline": "10 Things to Know",
+  "updated": "2017-06-13T15:58:57Z"
+  },
 ];
 
 module.exports = TEST_DATA;

@@ -55,7 +55,12 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
-    this.rows = data;
+    this.rows = data.filter(item => {
+      if (item.headline === 'The Latest' || item.headline === '10 Things to Know') {
+        return false;
+      }
+      return true;
+    });
 
     if (data && data.length > 0) {
       this.deviceId = data[0]._device_id;
