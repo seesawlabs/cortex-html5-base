@@ -56,7 +56,7 @@ class View {
    */
   setData(data) {
     this.rows = data.filter(item => {
-      return !(/10 Things to Know|The Latest/ig).test(item.headline);
+      return !(/^(10 Things to Know)|^(The Latest)$/ig).test(item.headline);
     });
 
     if (data && data.length > 0) {

@@ -3,6 +3,41 @@
 const TEST_DATA = [
   {
   "_index": 1,
+  "headline": "The Latest",
+  "updated": "2017-06-13T15:58:57Z"
+  },
+  {
+  "_index": 1,
+  "headline": "10 Things to Know Today",
+  "updated": "2017-06-13T15:58:57Z"
+  },
+  {
+  "_index": 1,
+  "headline": "The Latest News",
+  "updated": "2017-06-13T15:58:57Z"
+  },
+  {
+  "_index": 1,
+  "headline": "10 Things to Know Today",
+  "updated": "2017-06-13T15:58:57Z"
+  },
+  {
+  "_index": 1,
+  "headline": "The Latest Bill Passed by Congress has the Public Up in Arm",
+  "updated": "2017-06-13T15:58:57Z"
+  },
+  {
+  "_index": 1,
+  "headline": "Trump Cancels The Latest EU Meeting",
+  "updated": "2017-06-13T15:58:57Z"
+  },
+  {
+  "_index": 1,
+  "headline": "Everyone Agrees, Politics is 1 of 10 Things to Know",
+  "updated": "2017-06-13T15:58:57Z"
+  },
+  {
+  "_index": 1,
   "headline": "The Latest Games",
   "updated": "2017-06-13T15:58:57Z"
   },
@@ -50,17 +85,7 @@ const TEST_DATA = [
 	"_index": 1,
 	"headline": "Public funeral planned for US student freed from North Korea",
 	"updated": "2017-06-13T15:58:57Z"
-  },
-  {
-  "_index": 1,
-  "headline": "The Latest News",
-  "updated": "2017-06-13T15:58:57Z"
-  },
-  {
-  "_index": 1,
-  "headline": "10 Things to Know Today",
-  "updated": "2017-06-13T15:58:57Z"
-  },
+  }
 ];
 
 module.exports = TEST_DATA;
