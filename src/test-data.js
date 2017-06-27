@@ -3,7 +3,7 @@
 const TEST_DATA = [
   {
   "_index": 1,
-  "headline": "The Latest",
+  "headline": "The Latest Games",
   "updated": "2017-06-13T15:58:57Z"
   },
   {
@@ -53,12 +53,12 @@ const TEST_DATA = [
   },
   {
   "_index": 1,
-  "headline": "The Latest",
+  "headline": "The Latest News",
   "updated": "2017-06-13T15:58:57Z"
   },
   {
   "_index": 1,
-  "headline": "10 Things to Know",
+  "headline": "10 Things to Know Today",
   "updated": "2017-06-13T15:58:57Z"
   },
 ];
