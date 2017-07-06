@@ -114,7 +114,12 @@ class View {
       const _i = index + 1;
       const _icon = weather.icon.replace(/chance|mostly|partly/gi, '');
       const _prefix = (weather.icon_url.indexOf('nt_') > -1) ? 'nt_' : '';
-      this.domElements[`icon${_i}`].src = pathToAssets(`./${_prefix}${_icon}.svg`, '');
+      try {
+        this.domElements[`icon${_i}`].src = pathToAssets(`./${_prefix}${_icon}.svg`, '');
+      } catch (error) {
+        this.domElements[`icon${_i}`].src = pathToAssets(`./fog.svg`, '');
+      }
+
       this.domElements[`degrees${_i}`].innerHTML = weather.temp_metric;
       this.domElements[`time${_i}`].innerHTML = this.formatHours(weather.hour);
     });
