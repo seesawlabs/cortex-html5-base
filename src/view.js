@@ -117,7 +117,7 @@ class View {
       try {
         this.domElements[`icon${_i}`].src = pathToAssets(`./${_prefix}${_icon}.svg`, '');
       } catch (error) {
-        this.domElements[`icon${_i}`].src = pathToAssets(`./fog.svg`, '');
+        this.domElements[`icon${_i}`].src = pathToAssets(`./.svg`, '');
       }
 
       this.domElements[`degrees${_i}`].innerHTML = weather.temp_metric;
