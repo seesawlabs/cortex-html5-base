@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 const TEST_DATA = [
+  // ALERT 1
   {
     "_index": "1",
     "cap_id": "CAP_81096187_d0fded54-538d-411a-a13d-8d8078f20604_NotifyNYCCAP_NotifyNYCCAP_636359856890569863",
@@ -17,6 +18,7 @@ const TEST_DATA = [
       }
     }
   },
+  // ALERT 2
   {
     "_index": "1",
     "cap_id": "CAP_81153316_87675498-204d-4169-acc7-8e549ee83fd1_NotifyNYCCAP_NotifyNYCCAP_636359856890413475",
@@ -25,7 +27,6 @@ const TEST_DATA = [
     "expires": "2017-07-25T18:15:30-04:00",
     "severity": "Severe",
     "sent": "2017-07-20T17:11:49-04:00",
-    // The example device provided in this test data IS within this polygon, we should see it on screen.
     "area": [
       {
         "areaDesc":"Affected ZIP Code(s)"
@@ -43,6 +44,7 @@ const TEST_DATA = [
         }
       }]
   },
+  // ALERT 3
   {
     "_index": "1",
     "cap_id": "CAP_81154753_c1d20a74-50ca-40f8-afd2-3386b655b237_NotifyNYCCAP_NotifyNYCCAP_636359856890413475",
@@ -51,7 +53,6 @@ const TEST_DATA = [
     "expires": "2017-07-18T16:41:29-04:00",
     "severity": "Extreme",
     "sent": "2017-07-20T17:11:49-04:00",
-    // The example device provided in this test data is NOT within this alert's polygon and should NOT be shown.
     "area": [
       {
         "areaDesc": "Citywide"
@@ -73,8 +74,22 @@ const TEST_DATA = [
   {
     "_index": "QU-02-145792-L",
     "_device_id": "d-a7448178-313b-4a86-6219-656e7a8d2b58",
-    "latitude": 40.6198487,
-    "longitude": -73.8257217
+
+    // This set of coordinates should show ALERTS 1 and 2
+    // "latitude": 40.6198487,
+    // "longitude": -73.8257217
+
+    // This set of coordinates should show ALERTS 1 and 3
+    // "latitude": 40.6887575,
+    // "longitude": -74.0196776
+
+    // This set of coordinates should show ALERTS 1, 2 and 3
+    "latitude": 40.5824099,
+    "longitude": -74.1467285
+
+    // This set of coordinates should only show ALERT 1
+    // "latitude": 40.9373775,
+    // "longitude": -74.2057800
   }
 ];
 

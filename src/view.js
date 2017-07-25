@@ -2,6 +2,7 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
+import Geofencing from './geofencing.js';
 // import Tracker from './tracker.js';
 
 // const CAMPAIGN = 'com.linknyc.campaigns.oem';
@@ -82,11 +83,29 @@ class View {
         Logger.log(`Device ${this.deviceId} has coordinates ` +
                    `(${this.latitude}, ${this.longitude})`);
 
-        /*
-         * Here is where we need to do some polygonal math to further filter `rows`
-         * by checking if the device's lat/long coordinates are within an alert's
-         * designated area.
-         */
+        // Filter alerts to only include those that are relevant to this device
+        // based on its lat/long coordinate.
+        this.rows = this.rows.filter(alert => {
+          const area = alert.area;
+
+          // Alerts that don't have an array of polygons are relevant to ALL devices.
+          if (!Array.isArray(area)) {
+            return true;
+          }
+
+          const polygons = area.map(o => {
+            return o.polygon;
+          }).filter(poly => {
+            return poly !== undefined;
+          }).map(poly => {
+            return Geofencing.stringToPolygon(poly);
+          });
+
+          // The device needs to be within SOME polygon in the given area; there may be many.
+          return polygons.some((poly, index, arr) => {
+            return Geofencing.latLongWithinPolygon(this.latitude, this.longitude, poly);
+          });
+        });
       }
     }
   }
