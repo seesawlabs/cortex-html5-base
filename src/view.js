@@ -2,10 +2,9 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
+// import Tracker from './tracker.js';
 
-// TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+// const CAMPAIGN = 'com.linknyc.campaigns.oem';
 
 class View {
   constructor() {
@@ -14,7 +13,8 @@ class View {
     this.rows = [];
     this.currentRow = 0;
     this.deviceId = '';
-
+    this.latitude = 0;
+    this.longitude = 0;
     this.container = window.document.getElementById('container');
 
     // Create a <pre> element under the div#container to display the JSON
@@ -56,15 +56,38 @@ class View {
    *   img.className = 'visible';
    * }
    *
-   * TODO: Implement this method according to your needs.
-   *
    * @param {array} data The data rows.
    */
   setData(data) {
-    this.rows = data;
+    // The "rows" of this data set include all of those marked with `_index`
+    // equal to "1". These are the actual emergency alerts that are sent to ALL
+    // devices.
+    this.rows = data.filter(el => {
+      return el._index === "1";
+    });
 
+    // Here we find the single row unique to this device. It will be the only row that
+    // doesn't have `_index` equal to "1". It will instead be equal to the device's venue id
+    // (e.g. QU-123456-L). This row also contains the device's geographic coordinates.
     if (data && data.length > 0) {
-      this.deviceId = data[0]._device_id;
+      const deviceRow = data.find(el => {
+        return el._index !== "1";
+      });
+
+      if (deviceRow) {
+        this.deviceId = deviceRow._device_id;
+        this.latitude = deviceRow.latitude;
+        this.longitude = deviceRow.longitude;
+
+        Logger.log(`Device ${this.deviceId} has coordinates ` +
+                   `(${this.latitude}, ${this.longitude})`);
+
+        /*
+         * Here is where we need to do some polygonal math to further filter `rows`
+         * by checking if the device's lat/long coordinates are within an alert's
+         * designated area.
+         */
+      }
     }
   }
 
@@ -76,13 +99,13 @@ class View {
   render() {
     Logger.log('Rendering a new view.');
     if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
+      // Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
       this.placeholder.render();
       return;
     }
 
     this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
+    // Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
