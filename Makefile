@@ -16,7 +16,7 @@ pack:
 	mkdir -p ./dist
 	pushd ./build && \
 	zip -r linkny-oem-`date -u +"%Y-%m-%dT%H:%M:%SZ"`.zip * && \
-	cp app_*.zip ../dist && \
+	cp linkny-oem-*.zip ../dist && \
 	popd
 
 dist: clean build pack

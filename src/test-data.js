@@ -49,7 +49,7 @@ const TEST_DATA = [
     "_index": "1",
     "cap_id": "CAP_81154753_c1d20a74-50ca-40f8-afd2-3386b655b237_NotifyNYCCAP_NotifyNYCCAP_636359856890413475",
     "category": "Geo",
-    "event": "Thunderstorm Watch",
+    "event": "Extreme Thunderstorm Watch",
     "expires": "2017-07-18T16:41:29-04:00",
     "severity": "Extreme",
     "sent": "2017-07-20T17:11:49-04:00",

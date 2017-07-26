@@ -173,7 +173,7 @@ class View {
 
     const updatedNY = moment.tz(row.sent, 'America/New_York');
     const updated = moment(updatedNY, ["HH mm"]).format("MM/DD/YYYY [at] hh:mm A");
-    this.header.innerText = `${row.severity} ${row.event}`;
+    this.header.innerText = [row.severity, row.event].join(' ').replace(/(\b\S+\b)\s+\b\1\b/ig, '$1');
     this.updated.innerText = `Issued: ${updated}`;
     this.container.className = '';
     this.container.classList.add(row.severity.toLowerCase());
