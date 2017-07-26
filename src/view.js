@@ -171,9 +171,9 @@ class View {
     const row = this.rows[this.currentRow];
     this.currentRow += 1;
 
-    const updatedNY = moment.tz(row.updated, 'America/New_York');
+    const updatedNY = moment.tz(row.sent, 'America/New_York');
     const updated = moment(updatedNY, ["HH mm"]).format("MM/DD/YYYY [at] hh:mm A");
-    this.header.innerText = row.event;
+    this.header.innerText = `${row.severity} ${row.event}`;
     this.updated.innerText = `Issued: ${updated}`;
     this.container.className = '';
     this.container.classList.add(row.severity.toLowerCase());
