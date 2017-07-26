@@ -3,6 +3,8 @@
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
 import Geofencing from './geofencing.js';
+import moment from 'moment';
+import 'moment-timezone';
 // import Tracker from './tracker.js';
 
 // const CAMPAIGN = 'com.linknyc.campaigns.oem';
@@ -17,12 +19,8 @@ class View {
     this.latitude = 0;
     this.longitude = 0;
     this.container = window.document.getElementById('container');
-
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    this.updated = window.document.getElementById('oem-updated');
+    this.header = window.document.getElementById('oem-header');
   }
 
   /**
@@ -164,6 +162,7 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
+    this.container.style.display = 'block';
     if (this.currentRow >= this.rows.length) {
       this.currentRow = 0;
     }
@@ -171,7 +170,13 @@ class View {
                `Displaying row #${this.currentRow}.`);
     const row = this.rows[this.currentRow];
     this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+
+    const updatedNY = moment.tz(row.updated, 'America/New_York');
+    const updated = moment(updatedNY, ["HH mm"]).format("MM/DD/YYYY [at] hh:mm A");
+    this.header.innerText = row.event;
+    this.updated.innerText = `Issued: ${updated}`;
+    this.container.className = '';
+    this.container.classList.add(row.severity.toLowerCase());
   }
 }
 
