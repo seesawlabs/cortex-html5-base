@@ -80,10 +80,11 @@ class View {
         // Filter alerts to only include those that are relevant to this device
         // based on its lat/long coordinate.
         this.rows = this.rows.filter(alert => {
-          const area = alert.area;
+          const area = JSON.parse(areaStr);
 
           // Alerts that don't have an array of polygons are relevant to ALL devices.
           if (!Array.isArray(area)) {
+            Logger.log(`Alert ${alert.cap_id} is relevant to all devices. area is not an array.`);
             return true;
           }
 
@@ -101,7 +102,7 @@ class View {
           });
         });
 
-        Logger.log(`${this.rows.length} rows survived alert pruning`);
+        Logger.log(`${this.rows.length} rows survived alert pruning with device coordinates (${this.latitude},${this.longitude})`);
       }
     }
   }
