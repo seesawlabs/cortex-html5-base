@@ -1,6 +1,6 @@
 /* global window */
 
-import {TEST_DATA, LOC_DATA} from './test-data.js';
+import {TEST_DATA, LOC_DATA, EMPTY_DATA} from './test-data.js';
 import Logger from './logger.js';
 import {VISIBLE_EVENT, HIDDEN_EVENT, READY_EVENT} from './events.js';
 
@@ -13,6 +13,8 @@ const DISPATCH_VISTAR_HIDDEN_INTERVAL = 5000;
 // Send data updates every 4 seconds.
 const DISPATCH_DATA_UPDATES_INTERVAL = 4000;
 
+var useEmptyData = false;
+
 class Simulator {
   run() {
     Logger.log('Running the app in simulation mode.');
@@ -23,7 +25,12 @@ class Simulator {
           fun(LOC_DATA, false);
         } else {
           setInterval(() => {
-            fun(TEST_DATA, false);
+            if (useEmptyData) {
+              fun(EMPTY_DATA, false);
+            } else {
+              fun(TEST_DATA, false);
+            }
+            useEmptyData = !useEmptyData;
           }, DISPATCH_DATA_UPDATES_INTERVAL);
         }
       }

@@ -36,13 +36,12 @@ module.exports.TEST_DATA = [
   }
 ];
 
-// This is for testing the empty result set.
-// module.exports.TEST_DATA = [
-//   {
-//     "_index": 2,
-//     "message": "No alerts"
-//   }
-// ];
+module.exports.EMPTY_DATA = [
+  {
+    "_index": 2,
+    "message": "No alerts"
+  }
+];
 
 module.exports.LOC_DATA = [{
   "_index": "QU-02-145792-L",
