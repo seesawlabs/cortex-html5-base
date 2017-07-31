@@ -80,7 +80,7 @@ class View {
         // Filter alerts to only include those that are relevant to this device
         // based on its lat/long coordinate.
         this.rows = this.rows.filter(alert => {
-          const area = JSON.parse(areaStr);
+          const area = JSON.parse(alert.area);
 
           // Alerts that don't have an array of polygons are relevant to ALL devices.
           if (!Array.isArray(area)) {
