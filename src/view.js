@@ -80,26 +80,31 @@ class View {
         // Filter alerts to only include those that are relevant to this device
         // based on its lat/long coordinate.
         this.rows = this.rows.filter(alert => {
-          const area = JSON.parse(alert.area);
+          if (alert.area !== undefined) {
+            const area = JSON.parse(alert.area);
 
-          // Alerts that don't have an array of polygons are relevant to ALL devices.
-          if (!Array.isArray(area)) {
-            Logger.log(`Alert ${alert.cap_id} is relevant to all devices. area is not an array.`);
-            return true;
+            // Alerts that don't have an array of polygons are relevant to ALL devices.
+            if (!Array.isArray(area)) {
+              Logger.log(`Alert ${alert.cap_id} is relevant to all devices. area is not an array.`);
+              return true;
+            }
+
+            const polygons = area.map(o => {
+              return o.polygon;
+            }).filter(poly => {
+              return poly !== undefined;
+            }).map(poly => {
+              return Geofencing.stringToPolygon(poly);
+            });
+
+            // The device needs to be within SOME polygon in the given area; there may be many.
+            return polygons.some((poly, index, arr) => {
+              return Geofencing.latLongWithinPolygon(this.latitude, this.longitude, poly);
+            });
           }
 
-          const polygons = area.map(o => {
-            return o.polygon;
-          }).filter(poly => {
-            return poly !== undefined;
-          }).map(poly => {
-            return Geofencing.stringToPolygon(poly);
-          });
-
-          // The device needs to be within SOME polygon in the given area; there may be many.
-          return polygons.some((poly, index, arr) => {
-            return Geofencing.latLongWithinPolygon(this.latitude, this.longitude, poly);
-          });
+          // This row doesn't look like an alert, ignore it.
+          return false;
         });
 
         Logger.log(`${this.rows.length} rows survived alert pruning with device coordinates (${this.latitude},${this.longitude})`);
