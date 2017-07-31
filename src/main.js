@@ -8,7 +8,8 @@ import Simulator from './simulator.js';
 import Logger from './logger.js';
 import {READY_EVENT} from './events.js';
 
-const DATASET_ID = 'com.intersection.data.oemnyc';
+const OEM_DATASET_ID = 'com.intersection.data.oemnyc';
+const LOCATION_DATASET_ID = 'com.intersection.linknyc.locationdata';
 
 /**
  * Starts the app in simulation mode.
@@ -39,8 +40,10 @@ function main() {
   window.addEventListener(READY_EVENT, () => {
     Logger.log('Received the cortex-ready event.');
 
-    const data = new Data(DATASET_ID, view);
-    data.init();
+    const locData = new Data(LOCATION_DATASET_ID, view, false);
+    locData.init('loc');
+    const oemData = new Data(OEM_DATASET_ID, view);
+    oemData.init('oem');
   });
 
   if (process.env.NODE_ENV === 'development') {

@@ -56,31 +56,27 @@ class View {
    * }
    *
    * @param {array} data The data rows.
+   * @param {string} tag The tag denoting which dataset this data is coming from
    */
-  setData(data) {
-    // The "rows" of this data set include all of those marked with `_index`
-    // equal to "1". These are the actual emergency alerts that are sent to ALL
-    // devices.
-    this.rows = data.filter(el => {
-      return el._index === "1";
-    });
-
-    // Here we find the single row unique to this device. It will be the only row that
-    // doesn't have `_index` equal to "1". It will instead be equal to the device's venue id
-    // (e.g. QU-123456-L). This row also contains the device's geographic coordinates.
-    if (data && data.length > 0) {
-      const deviceRow = data.find(el => {
-        return el._index !== "1";
-      });
-
-      if (deviceRow) {
-        this.deviceId = deviceRow._device_id;
-        this.latitude = deviceRow.latitude;
-        this.longitude = deviceRow.longitude;
-
+  setData(data, tag) {
+    if (tag === 'loc') {
+      // This is location data. Just need to extract lat/long.
+      if (data && data.length > 0) {
+        const locData = data[0];
+        this.deviceId = locData._device_id;
+        this.latitude = locData.latitude;
+        this.longitude = locData.longitude;
         Logger.log(`Device ${this.deviceId} has coordinates ` +
                    `(${this.latitude}, ${this.longitude})`);
+      }
+    } else if (tag === 'oem') {
+      // This is emergency alert data
+      // Note: It may be possible for this data to get set prior to the location data coming in.
+      // In that case, lat/long will be the coordinate (0,0) which is technically valid, but not in NY.
+      // Any alert tied to an explicit lat/long will then just be filtered out as usual.
+      this.rows = data;
 
+      if (data && data.length > 0) {
         // Filter alerts to only include those that are relevant to this device
         // based on its lat/long coordinate.
         this.rows = this.rows.filter(alert => {
@@ -104,6 +100,8 @@ class View {
             return Geofencing.latLongWithinPolygon(this.latitude, this.longitude, poly);
           });
         });
+
+        Logger.log(`${this.rows.length} rows survived alert pruning`);
       }
     }
   }
@@ -138,8 +136,6 @@ class View {
    * method will get called when the app is in the background. Only implement
    * this method when you need to perform some actions right before the view
    * becomes visible on the screen.
-   *
-   * TODO: Implement this method according to your needs.
    */
   updateView() {
     // For this app, we don't need to do anything.

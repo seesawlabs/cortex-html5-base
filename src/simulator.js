@@ -1,6 +1,6 @@
 /* global window */
 
-import TEST_DATA from './test-data.js';
+import {TEST_DATA, LOC_DATA} from './test-data.js';
 import Logger from './logger.js';
 import {VISIBLE_EVENT, HIDDEN_EVENT, READY_EVENT} from './events.js';
 
@@ -19,9 +19,13 @@ class Simulator {
 
     window.Cortex = {
       onData: (dsId, fun) => {
-        setInterval(() => {
-          fun(TEST_DATA, false);
-        }, DISPATCH_DATA_UPDATES_INTERVAL);
+        if (dsId === 'com.intersection.linknyc.locationdata') {
+          fun(LOC_DATA, false);
+        } else {
+          setInterval(() => {
+            fun(TEST_DATA, false);
+          }, DISPATCH_DATA_UPDATES_INTERVAL);
+        }
       }
     };
 

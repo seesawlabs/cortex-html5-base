@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-const TEST_DATA = [
+module.exports.TEST_DATA = [
   // ALERT 1
   {
     "_index": "1",
@@ -70,27 +70,26 @@ const TEST_DATA = [
         }
       }
     ]
-  },
-  {
-    "_index": "QU-02-145792-L",
-    "_device_id": "d-a7448178-313b-4a86-6219-656e7a8d2b58",
-
-    // This set of coordinates should show ALERTS 1 and 2
-    // "latitude": 40.6198487,
-    // "longitude": -73.8257217
-
-    // This set of coordinates should show ALERTS 1 and 3
-    // "latitude": 40.6887575,
-    // "longitude": -74.0196776
-
-    // This set of coordinates should show ALERTS 1, 2 and 3
-    "latitude": 40.5824099,
-    "longitude": -74.1467285
-
-    // This set of coordinates should only show ALERT 1
-    // "latitude": 40.9373775,
-    // "longitude": -74.2057800
   }
 ];
 
-module.exports = TEST_DATA;
+module.exports.LOC_DATA = [{
+  "_index": "QU-02-145792-L",
+  "_device_id": "d-a7448178-313b-4a86-6219-656e7a8d2b58",
+
+  // This set of coordinates should show ALERTS 1 and 2
+  // "latitude": 40.6198487,
+  // "longitude": -73.8257217
+
+  // This set of coordinates should show ALERTS 1 and 3
+  // "latitude": 40.6887575,
+  // "longitude": -74.0196776
+
+  // This set of coordinates should show ALERTS 1, 2 and 3
+  "latitude": 40.5824099,
+  "longitude": -74.1467285
+
+  // This set of coordinates should only show ALERT 1
+  // "latitude": 40.9373775,
+  // "longitude": -74.2057800
+}];
