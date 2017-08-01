@@ -5,9 +5,6 @@ import Logger from './logger.js';
 const PLACEHOLDER_ID = 'placeholder';
 
 class Placeholder {
-  constructor() {
-    this.hidden = false;
-  }
 
   /**
    * Display a placeholder view.
@@ -20,23 +17,26 @@ class Placeholder {
    * The view generated will get hidden once the data arrives using the
    * Placeholder.hide() method.
    *
-   * TODO: Implement this method according to your needs.
    */
   render() {
     Logger.log('Rendering the placeholder image.');
 
-    const img = new window.Image();
-    img.src = "assets/images/placeholder.jpg";
-    img.onerror = e => {
-      console.error("Failed to load the placeholder image: ", e);
-    };
+    const div = window.document.getElementById(PLACEHOLDER_ID);
 
-    const div = window.document.createElement('div');
-    div.id = PLACEHOLDER_ID;
-    div.className = 'placeholder';
-    div.appendChild(img);
+    if (div === null) {
+      const img = new window.Image();
+      img.src = "assets/images/default.jpg";
+      img.onerror = e => {
+        console.error("Failed to load the placeholder image: ", e);
+      };
 
-    window.document.body.appendChild(div);
+      const div = window.document.createElement('div');
+      div.id = PLACEHOLDER_ID;
+      div.className = 'placeholder';
+      div.appendChild(img);
+
+      window.document.body.appendChild(div);
+    }
   }
 
   /**
@@ -45,20 +45,14 @@ class Placeholder {
    * This method gets called when the app receives data and the placeholder
    * is no longer needed.
    *
-   * TODO: Implement this method according to your needs.
    */
   hide() {
-    if (this.hidden) {
-      // View is already hidden, no need to update the DOM again.
-      return;
-    }
-
-    Logger.log('Hiding the placeholder image.');
-
     const div = window.document.getElementById(PLACEHOLDER_ID);
-    div.className = 'placeholder invisible';
 
-    this.hidden = true;
+    if (div !== null) {
+      Logger.log('Destroying the placeholder image.');
+      div.parentNode.removeChild(div);
+    }
   }
 }
 

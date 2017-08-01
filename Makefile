@@ -15,8 +15,8 @@ build: clean lint
 pack:
 	mkdir -p ./dist
 	pushd ./build && \
-	zip -r app_`date -u +"%Y-%m-%dT%H:%M:%SZ"`.zip * && \
-	cp app_*.zip ../dist && \
+	zip -r groundhog_day_`date -u +"%Y-%m-%dT%H:%M:%SZ"`.zip * && \
+	cp groundhog_day_*.zip ../dist && \
 	popd
 
 dist: clean build pack

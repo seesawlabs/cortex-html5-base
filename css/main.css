@@ -15,7 +15,7 @@ html, body {
   color: #fff;
 }
 
-.placeholder {
+.placeholder, #ad {
   position: absolute;
   top: 0;
   left: 0;
@@ -23,6 +23,10 @@ html, body {
   height: 1920px;
 }
 
-.placeholder.invisible {
+.invisible {
   opacity: 0;
+}
+
+#ad img {
+    position: absolute;
 }

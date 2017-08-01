@@ -2,10 +2,13 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
+// import Tracker from './tracker.js';
 
-// TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+// const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+
+const DIV_ID = 'ad';
+const DEFAULT_IMG_SRC = "assets/images/default.jpg";
+const HOT_IMG_SRC = "assets/images/hot.jpg";
 
 class View {
   constructor() {
@@ -17,11 +20,30 @@ class View {
 
     this.container = window.document.getElementById('container');
 
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    // Load up the ad images
+    this.defaultImg = new window.Image();
+    this.hotImg = new window.Image();
+    this.defaultImg.src = DEFAULT_IMG_SRC;
+    this.hotImg.src = HOT_IMG_SRC;
+
+    // Make them initially invisible
+    this.defaultImg.classList.add("invisible");
+    this.hotImg.classList.add("invisible");
+
+    // Handle load errors
+    const errFn = e => {
+      console.error("Failed to load ad image: ", e);
+    };
+    this.defaultImg.onerror = errFn;
+    this.hotImg.onerror = errFn;
+
+    // Attach them to the DOM
+    this.div = window.document.createElement("div");
+    this.div.id = DIV_ID;
+    this.div.appendChild(this.defaultImg);
+    this.div.appendChild(this.hotImg);
+
+    window.document.body.appendChild(this.div);
   }
 
   /**
@@ -76,13 +98,13 @@ class View {
   render() {
     Logger.log('Rendering a new view.');
     if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
+      // Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
       this.placeholder.render();
       return;
     }
 
     this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
+    // Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
@@ -129,7 +151,17 @@ class View {
                `Displaying row #${this.currentRow}.`);
     const row = this.rows[this.currentRow];
     this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+
+    const temp = row.temp;
+
+    Logger.log(`_render: Current temperature is ${temp}`);
+    if (temp >= 85) {
+      this.hotImg.classList.remove("invisible");
+      this.defaultImg.classList.add("invisible");
+    } else {
+      this.hotImg.classList.add("invisible");
+      this.defaultImg.classList.remove("invisible");
+    }
   }
 }
 
