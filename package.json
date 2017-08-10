@@ -1,7 +1,7 @@
 {
-  "name": "cortex-html5-base",
+  "name": "cortex-interactive",
   "version": "1.0.0",
-  "description": "Base HTML5 application to be run on Cortex player",
+  "description": "WebSocket tests for interactive creatives running on Cortex devices",
   "main": "index.js",
   "scripts": {
     "prod": "./node_modules/.bin/webpack --define process.env.NODE_ENV='\"production\"' --progress --colors",
@@ -31,6 +31,8 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "promise": "^7.1.1"
+    "express": "^4.15.3",
+    "promise": "^7.1.1",
+    "ws": "^3.1.0"
   }
 }

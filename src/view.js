@@ -2,10 +2,9 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
+// import Tracker from './tracker.js';
 
-// TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+// const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
 
 class View {
   constructor() {
@@ -22,6 +21,16 @@ class View {
     // index.html directly to have a pre-defined DOM structure.
     this.pre = window.document.createElement('pre');
     this.container.appendChild(this.pre);
+
+    this.ws = new window.WebSocket('ws://a363e8e6.ngrok.io/');
+
+    this.ws.addEventListener('open', function open(event) {
+      this.ws.send('hello from device');
+    }.bind(this));
+
+    this.ws.addEventListener('message', function incoming(event) {
+      this.pre.innerText += (event.data + "\n");
+    }.bind(this));
   }
 
   /**
@@ -75,14 +84,14 @@ class View {
    */
   render() {
     Logger.log('Rendering a new view.');
-    if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
-      this.placeholder.render();
-      return;
-    }
+    // if (this.rows === null || this.rows.length === 0) {
+    //   // Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
+    //   this.placeholder.render();
+    //   return;
+    // }
 
-    this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
+    // this.placeholder.hide();
+    // Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
@@ -122,14 +131,6 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   _render() {
-    if (this.currentRow >= this.rows.length) {
-      this.currentRow = 0;
-    }
-    Logger.log(`The view has ${this.rows.length} data rows. ` +
-               `Displaying row #${this.currentRow}.`);
-    const row = this.rows[this.currentRow];
-    this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
   }
 }
 

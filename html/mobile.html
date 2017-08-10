@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Cortex Interactive Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+     var ws = null;
+     window.onload = function() {
+         var loc = window.location.href;
+         ws = new WebSocket(loc.replace("http","ws"));
+         ws.addEventListener('open', function open(event) {
+             ws.send('hello from mobile page');
+         });
+     };
+
+     function touch() {
+         ws.send("TOUCHED!");
+     }
+    </script>
+  </head>
+  <body>
+      <div id="container">
+          <input type="button" name="touch" value="touch" onclick="touch()" />
+      </div>
+  </body>
+</html>
