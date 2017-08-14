@@ -26,3 +26,7 @@ html, body {
 .placeholder.invisible {
   opacity: 0;
 }
+
+iframe {
+    display: block;
+}

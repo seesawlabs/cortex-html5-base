@@ -1,11 +1,10 @@
-/* global window */
+// /* global window */
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
+// import Tracker from './tracker.js';
 
-// TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+// const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
 
 class View {
   constructor() {
@@ -14,14 +13,6 @@ class View {
     this.rows = [];
     this.currentRow = 0;
     this.deviceId = '';
-
-    this.container = window.document.getElementById('container');
-
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
   }
 
   /**
@@ -56,8 +47,6 @@ class View {
    *   img.className = 'visible';
    * }
    *
-   * TODO: Implement this method according to your needs.
-   *
    * @param {array} data The data rows.
    */
   setData(data) {
@@ -75,14 +64,14 @@ class View {
    */
   render() {
     Logger.log('Rendering a new view.');
-    if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
-      this.placeholder.render();
-      return;
-    }
+    // if (this.rows === null || this.rows.length === 0) {
+    //   Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
+    //   this.placeholder.render();
+    //   return;
+    // }
 
-    this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
+    // this.placeholder.hide();
+    // Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
@@ -98,8 +87,6 @@ class View {
    * method will get called when the app is in the background. Only implement
    * this method when you need to perform some actions right before the view
    * becomes visible on the screen.
-   *
-   * TODO: Implement this method according to your needs.
    */
   updateView() {
     // For this app, we don't need to do anything.
@@ -118,18 +105,16 @@ class View {
    * It is important to be as efficient as possible in this method. Try to
    * make as few DOM manipulations as possible. Reusing DOM elements is better
    * than recreating them every time this method is called.
-   *
-   * TODO: Implement this method according to your needs.
    */
   _render() {
-    if (this.currentRow >= this.rows.length) {
-      this.currentRow = 0;
-    }
+    // if (this.currentRow >= this.rows.length) {
+    //   this.currentRow = 0;
+    // }
     Logger.log(`The view has ${this.rows.length} data rows. ` +
                `Displaying row #${this.currentRow}.`);
-    const row = this.rows[this.currentRow];
-    this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+    // const row = this.rows[this.currentRow];
+    // this.currentRow += 1;
+    // this.pre.innerText = JSON.stringify(row, null, 2);
   }
 }
 

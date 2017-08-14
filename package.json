@@ -1,7 +1,7 @@
 {
-  "name": "cortex-html5-base",
+  "name": "interactive-sports-demo",
   "version": "1.0.0",
-  "description": "Base HTML5 application to be run on Cortex player",
+  "description": "Interactive demo featuring WebGL and WebSockets",
   "main": "index.js",
   "scripts": {
     "prod": "./node_modules/.bin/webpack --define process.env.NODE_ENV='\"production\"' --progress --colors",
