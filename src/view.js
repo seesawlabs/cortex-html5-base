@@ -11,6 +11,7 @@ import 'moment-timezone';
 
 class View {
   constructor() {
+    Logger.log('OEM view under construction');
     this.placeholder = new Placeholder();
 
     this.rows = [];
@@ -59,6 +60,7 @@ class View {
    * @param {string} tag The tag denoting which dataset this data is coming from
    */
   setData(data, tag) {
+    Logger.log("OEM setData function called");
     if (tag === 'loc') {
       // This is location data. Just need to extract lat/long.
       if (data && data.length > 0) {
@@ -76,12 +78,15 @@ class View {
       // Any alert tied to an explicit lat/long will then just be filtered out as usual.
       this.rows = data;
 
+      Logger.log("Incoming OEM data...initiating parse sequence...");
+
       if (data && data.length > 0) {
         // Filter alerts to only include those that are relevant to this device
         // based on its lat/long coordinate.
         this.rows = this.rows.filter(alert => {
           if (alert.area !== undefined) {
-            const area = JSON.parse(alert.area);
+            Logger.log(`alert.area contains ${alert.area} with type ${typeof alert.area}`);
+            const area = alert.area;
 
             // Alerts that don't have an array of polygons are relevant to ALL devices.
             if (!Array.isArray(area)) {
@@ -118,7 +123,7 @@ class View {
    * Every time the app receives a 'hidden' event this method will get called.
    */
   render() {
-    Logger.log('Rendering a new view.');
+    Logger.log('Rendering a new OEM view.');
     if (this.rows === null || this.rows.length === 0) {
       // Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
       this.placeholder.render();
@@ -168,7 +173,7 @@ class View {
     if (this.currentRow >= this.rows.length) {
       this.currentRow = 0;
     }
-    Logger.log(`The view has ${this.rows.length} data rows. ` +
+    Logger.log(`OEM view has ${this.rows.length} data rows. ` +
                `Displaying row #${this.currentRow}.`);
     const row = this.rows[this.currentRow];
     this.currentRow += 1;
