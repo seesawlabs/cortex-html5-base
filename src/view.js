@@ -15,13 +15,7 @@ class View {
     this.currentRow = 0;
     this.deviceId = '';
 
-    this.container = window.document.getElementById('container');
-
-    // Create a <pre> element under the div#container to display the JSON
-    // representation of a row. Alternatively, you can update the
-    // index.html directly to have a pre-defined DOM structure.
-    this.pre = window.document.createElement('pre');
-    this.container.appendChild(this.pre);
+    this.container = window.document.getElementById('creativeContainer');
   }
 
   /**

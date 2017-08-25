@@ -31,7 +31,7 @@ body {
 }
 
 .creativeContainer-header {
-  height: 730px;
+  height: 710px;
   font-size: 130px;
   line-height: 122px;
   font-weight: bold;
@@ -84,7 +84,7 @@ body {
   background-color: #1c468c;
   display: flex;
   flex-direction: column;
-  width: 1000px;
+  width: 996px;
   margin: 0 auto;
   font-size: 55px;
 }
@@ -115,14 +115,39 @@ body {
   text-align: center;
 }
 
+.stats-player .points.women-points {
+  width: 150px;
+}
+
 .stats-player .total {
-  width: 100px;
-  padding: 25px 10px;
-  text-align: center;
+  background-color: #2b9fd9;
 }
 
 .container-ball {
   position: absolute;
   right: -60px;
-  bottom: -120px;
+  bottom: -50px;
+}
+
+footer {
+  background-color: #004f99;
+  width: 100%;
+  height: 140px;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.usOpen-footer {
+  width: 165px;
+  height: 92px;
+  margin: 30px;
+}
+
+.ibm-footer {
+  width: 101px;
+  height: 40px;
+  margin: 50px 20px;
 }
