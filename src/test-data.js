@@ -74,6 +74,107 @@ const TEST_DATA = [
       }
     ]
   },
+  {
+    "_index": "MS143",
+    "details": {
+      "CurSpeedKMH": "",
+      "Type": "S",
+      "LineNumber": "43",
+      "ID": "MS143",
+      "CurSpeedMPH": "",
+      "Event": "Men's Singles",
+      "IsMatchPoint": "false",
+      "RoundName": "1st Round",
+      "MaxSets": "5",
+      "IsBreakPoint": "false",
+      "Server": "",
+      "IsSetPoint": "false",
+      "IsTiebreak": "false",
+      "Winner": "2",
+      "CurrentSet": "4",
+      "Status": "C"
+    },
+    "team1_players": [
+      {
+        "Nationality": "CRO",
+        "Position": "A",
+        "ShortName": "I. Dodig",
+        "ID": "ATPD646",
+        "LastName": "Dodig",
+        "FirstName": "Ivan"
+      }
+    ],
+    "team1_scores": [
+      {
+        "Minutes": "41",
+        "Set": "1",
+        "Score": "3",
+        "SetWinner": "2",
+        "TB": "0"
+      },
+      {
+        "Minutes": "46",
+        "Set": "2",
+        "Score": "4",
+        "SetWinner": "2",
+        "TB": "0"
+      },
+      {
+        "Minutes": "77",
+        "Set": "3",
+        "Score": "7",
+        "SetWinner": "1",
+        "TB": "7"
+      },
+      {
+        "Minutes": "66",
+        "Set": "4",
+        "Score": "5",
+        "SetWinner": "2",
+        "TB": "0"
+      }
+    ],
+    "team2_players": [
+      {
+        "Nationality": "UKR",
+        "Position": "A",
+        "ShortName": "I. Marchenko",
+        "ID": "ATPME89",
+        "LastName": "Marchenko",
+        "FirstName": "Illya"
+      }
+    ],
+    "team2_scores": [
+      {
+        "Minutes": "41",
+        "Set": "1",
+        "Score": "6",
+        "SetWinner": "2",
+        "TB": "0"
+      },
+      {
+        "Minutes": "46",
+        "Set": "2",
+        "Score": "6",
+        "SetWinner": "2",
+        "TB": "0"
+      },
+      {
+        "Minutes": "77",
+        "Set": "3",
+        "Score": "6",
+        "SetWinner": "1",
+        "TB": "4"
+      },
+      {
+        "Minutes": "66",
+        "Set": "4",
+        "Score": "7",
+        "SetWinner": "2",
+        "TB": "0"
+      }
+    ]
+  },
 
   // ---- The entry below is a doubles match, so we shouldn't show it
   {
