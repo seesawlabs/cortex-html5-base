@@ -1,6 +1,7 @@
 /* global window */
 
 require('../css/main.css');
+require('../css/global.css');
 
 import View from './view.js';
 import Data from './data.js';

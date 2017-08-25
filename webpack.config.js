@@ -31,8 +31,8 @@ module.exports = {
         test: srcDir,
       },
       {
-        loader: 'url-loader?limit=100000',
-        test: /\.otf$/,
+        loader: "style-loader!css-loader",
+        test: /\.css$/,
       },
       {
         test: /\.(png|jpg|gif|jpeg|otf|svg)$/,
@@ -42,10 +42,6 @@ module.exports = {
       {
         test: /\.json$/,
         loader: "json-loader"
-      },
-      {
-        loader: "style-loader!css-loader",
-        test: /\.css$/,
       }
     ]
   },

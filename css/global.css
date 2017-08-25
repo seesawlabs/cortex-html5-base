@@ -1,0 +1,128 @@
+@font-face {
+  font-family: "HelveticaNeue-Bold";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../assets/fonts/helvetica-neue/HelveticaNeueLTStd-Bd.otf") format("opentype"); }
+
+@font-face {
+  font-family: "HelveticaNeue";
+  font-style: normal;
+  font-weight: 200;
+  src: url("../assets/fonts/helvetica-neue/HelveticaNeueLTStd-Roman.otf") format("opentype"); }
+
+.hide {
+  display: none;
+}
+
+body {
+  margin: 0;
+}
+
+.creativeContainer {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  background-color: #1169AA;
+  font-family: "HelveticaNeue-Bold";
+  color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-repeat: none;
+}
+
+.creativeContainer-header {
+  height: 730px;
+  font-size: 130px;
+  line-height: 122px;
+  font-weight: bold;
+  letter-spacing: -4px;
+  padding: 75px 75px 0;
+  box-sizing: border-box;
+  line-height: 1.2;
+}
+
+.creativeContainer-header-stroke {
+  width: 234px;
+  height: 20px;
+  font-size: 0;
+  background-color: #fff;
+  margin-bottom: 32px;
+}
+
+.box-result {
+  background-color: #2b9fd9;
+  width: 496px;
+  height: 496px;
+}
+
+.circle-result {
+  border-radius: 50%;
+  width: 400px;
+  height: 400px;
+  background-color: #fff;
+  margin: 50px auto;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #004290;
+}
+
+.circle-result .points {
+  font-size: 160px;
+}
+
+.container-result {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  width: 1000px;
+}
+
+.container-stats {
+  background-color: #1c468c;
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  margin: 0 auto;
+  font-size: 55px;
+}
+
+.stats-player {
+  display: flex;
+  flex-direction: row;
+}
+
+.stats-border {
+  border-bottom: 1px solid #2b9fd9;
+}
+
+.results-border {
+  border-right: 1px solid #2b9fd9;
+}
+
+.stats-player .name {
+  width: 496px;
+  padding: 25px 40px;
+  border-right: 1px solid #2b9fd9;
+}
+
+.stats-player .points {
+  width: 100px;
+  padding: 25px 10px;
+  border-right: 1px solid #2b9fd9;
+  text-align: center;
+}
+
+.stats-player .total {
+  width: 100px;
+  padding: 25px 10px;
+  text-align: center;
+}
+
+.container-ball {
+  position: absolute;
+  right: -60px;
+  bottom: -120px;
+}
