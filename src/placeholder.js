@@ -20,23 +20,26 @@ class Placeholder {
    * The view generated will get hidden once the data arrives using the
    * Placeholder.hide() method.
    *
-   * TODO: Implement this method according to your needs.
    */
   render() {
-    Logger.log('Rendering the placeholder image.');
+    const div = window.document.getElementById(PLACEHOLDER_ID);
 
-    const img = new window.Image();
-    img.src = "assets/images/placeholder.jpg";
-    img.onerror = e => {
-      console.error("Failed to load the placeholder image: ", e);
-    };
+    if (div === null) {
+      Logger.log('Rendering the placeholder image.');
 
-    const div = window.document.createElement('div');
-    div.id = PLACEHOLDER_ID;
-    div.className = 'placeholder';
-    div.appendChild(img);
+      const img = new window.Image();
+      img.src = "assets/images/placeholder.jpg";
+      img.onerror = e => {
+        console.error("Failed to load the placeholder image: ", e);
+      };
 
-    window.document.body.appendChild(div);
+      const div = window.document.createElement('div');
+      div.id = PLACEHOLDER_ID;
+      div.className = 'placeholder';
+      div.appendChild(img);
+
+      window.document.body.appendChild(div);
+    }
   }
 
   /**
@@ -48,17 +51,12 @@ class Placeholder {
    * TODO: Implement this method according to your needs.
    */
   hide() {
-    if (this.hidden) {
-      // View is already hidden, no need to update the DOM again.
-      return;
-    }
-
-    Logger.log('Hiding the placeholder image.');
+    Logger.log('Destroying the placeholder image.');
 
     const div = window.document.getElementById(PLACEHOLDER_ID);
-    div.className = 'placeholder invisible';
-
-    this.hidden = true;
+    if (div !== null) {
+      div.parentNode.removeChild(div);
+    }
   }
 }
 
