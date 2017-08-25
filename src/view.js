@@ -2,10 +2,9 @@
 
 import Placeholder from './placeholder.js';
 import Logger from './logger.js';
-import Tracker from './tracker.js';
 
 // TODO: Change this.
-const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
+// const CAMPAIGN = 'com.cortexpowered.campaigns.test-campaign';
 
 class View {
   constructor() {
@@ -15,7 +14,8 @@ class View {
     this.currentRow = 0;
     this.deviceId = '';
 
-    this.container = window.document.getElementById('creativeContainer');
+    this.roundName = window.document.getElementById('round-name');
+    this.eventName = window.document.getElementById('event-name');
   }
 
   /**
@@ -55,7 +55,12 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
-    this.rows = data;
+    this.rows = data.filter((row)=> {
+      if(row.details.Type !== 'S') {
+        return false;
+      }
+      return true;
+    });
 
     if (data && data.length > 0) {
       this.deviceId = data[0]._device_id;
@@ -69,14 +74,11 @@ class View {
    */
   render() {
     Logger.log('Rendering a new view.');
-    if (this.rows === null || this.rows.length === 0) {
-      Tracker.track(this.deviceId, CAMPAIGN, 'placeholder');
+    if (this.rows === null || this.rows.length === 0 || this.rows[0]._index === "empty") {
       this.placeholder.render();
       return;
     }
-
     this.placeholder.hide();
-    Tracker.track(this.deviceId, CAMPAIGN, 'normal');
     this._render();
   }
 
@@ -123,7 +125,8 @@ class View {
                `Displaying row #${this.currentRow}.`);
     const row = this.rows[this.currentRow];
     this.currentRow += 1;
-    this.pre.innerText = JSON.stringify(row, null, 2);
+    this.eventName.innerText = row.details.Event;
+    this.roundName.innerText = row.details.RoundName;
   }
 }
 
