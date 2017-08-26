@@ -16,6 +16,13 @@ class View {
 
     this.roundName = window.document.getElementById('round-name');
     this.eventName = window.document.getElementById('event-name');
+    this.playerOne = window.document.getElementById('player-1');
+    this.playerTwo = window.document.getElementById('player-2');
+    this.playerStatsOne = window.document.getElementById('stats-player1-name');
+    this.playerStatsTwo = window.document.getElementById('stats-player2-name');
+    this.playerOneCountry = window.document.getElementById('player-1-country');
+    this.playerTwoCountry = window.document.getElementById('player-2-country');
+
   }
 
   /**
@@ -55,8 +62,8 @@ class View {
    * @param {array} data The data rows.
    */
   setData(data) {
-    this.rows = data.filter((row)=> {
-      if(row.details.Type !== 'S') {
+    this.rows = data.filter(row => {
+      if (row.details.Type !== 'S') {
         return false;
       }
       return true;
@@ -80,6 +87,13 @@ class View {
     }
     this.placeholder.hide();
     this._render();
+  }
+
+  loadScores(scores, playerNumber){
+    scores.map(row => {
+      const point = window.document.getElementById(`player-${playerNumber}-point-${row.Set}`);
+      point.innerText = row.Score;
+    });
   }
 
   /**
@@ -127,6 +141,15 @@ class View {
     this.currentRow += 1;
     this.eventName.innerText = row.details.Event;
     this.roundName.innerText = row.details.RoundName;
+    this.playerOne.innerText = row.team1_players[0].ShortName;
+    this.playerTwo.innerText = row.team2_players[0].ShortName;
+    this.playerStatsOne.innerText = row.team1_players[0].LastName;
+    this.playerStatsTwo.innerText = row.team2_players[0].LastName;
+    this.playerOneCountry.innerText = `(${row.team1_players[0].Nationality})`;
+    this.playerTwoCountry.innerText = `(${row.team2_players[0].Nationality})`;
+    this.loadScores(row.team1_scores, 1);
+    this.loadScores(row.team2_scores, 2);
+
   }
 }
 

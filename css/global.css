@@ -57,8 +57,8 @@ body {
 
 .circle-result {
   border-radius: 50%;
-  width: 400px;
-  height: 400px;
+  width: 420px;
+  height: 420px;
   background-color: #fff;
   margin: 50px auto;
   color: black;
@@ -72,6 +72,12 @@ body {
 .circle-result .points {
   font-size: 160px;
 }
+
+.circle-result .points .legend {
+  font-size: 32px;
+  text-align: center;
+}
+
 
 .container-result {
   display: flex;
@@ -92,6 +98,10 @@ body {
 .stats-player {
   display: flex;
   flex-direction: row;
+}
+
+.stats-country-player {
+  padding: 10px 5px;
 }
 
 .stats-border {
@@ -150,4 +160,27 @@ footer {
   width: 101px;
   height: 40px;
   margin: 50px 20px;
+}
+
+.gray-tag {
+  color: #cdccca;
+}
+
+.dark-gray-tag {
+  color: #808284;
+}
+
+.player-container {
+  display: flex;
+  flex-direction: row;
+  font-size: 38px;
+  margin-top: 51px;
+}
+
+.player-container .player {
+  padding: 10px;
+}
+
+.stats-player .points.last-point {
+  border-right: none;
 }
