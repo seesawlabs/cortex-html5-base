@@ -62,7 +62,7 @@ class View {
    */
   setData(data) {
     this.rows = data.filter(row => {
-      if (row.details.Type !== 'S' && row.details.Event.indexOf('Men') !== -1) {
+      if (row.details.Type !== 'S') {
         return false;
       }
       return true;
