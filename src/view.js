@@ -22,7 +22,6 @@ class View {
     this.playerStatsTwo = window.document.getElementById('stats-player2-name');
     this.playerOneCountry = window.document.getElementById('player-1-country');
     this.playerTwoCountry = window.document.getElementById('player-2-country');
-
   }
 
   /**
@@ -63,7 +62,7 @@ class View {
    */
   setData(data) {
     this.rows = data.filter(row => {
-      if (row.details.Type !== 'S') {
+      if (row.details.Type !== 'S' && row.details.Event.indexOf('Men') !== -1) {
         return false;
       }
       return true;
@@ -89,8 +88,15 @@ class View {
     this._render();
   }
 
-  loadScores(scores, playerNumber){
-    scores.map(row => {
+  clearScores() {
+    const points = window.document.getElementsByClassName('stats-points');
+    Array.from(points).forEach(point => {
+      point.innerText = "";
+    });
+  }
+
+  loadScores(scores, playerNumber) {
+    scores.forEach(row => {
       const point = window.document.getElementById(`player-${playerNumber}-point-${row.Set}`);
       point.innerText = row.Score;
     });
@@ -147,9 +153,9 @@ class View {
     this.playerStatsTwo.innerText = row.team2_players[0].LastName;
     this.playerOneCountry.innerText = `(${row.team1_players[0].Nationality})`;
     this.playerTwoCountry.innerText = `(${row.team2_players[0].Nationality})`;
+    this.clearScores();
     this.loadScores(row.team1_scores, 1);
     this.loadScores(row.team2_scores, 2);
-
   }
 }
 

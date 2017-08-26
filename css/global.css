@@ -118,15 +118,11 @@ body {
   border-right: 1px solid #2b9fd9;
 }
 
-.stats-player .points {
+.stats-player .stats-points {
   width: 100px;
   padding: 25px 10px;
   border-right: 1px solid #2b9fd9;
   text-align: center;
-}
-
-.stats-player .points.women-points {
-  width: 150px;
 }
 
 .stats-player .total {
