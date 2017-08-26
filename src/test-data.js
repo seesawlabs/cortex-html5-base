@@ -2,269 +2,325 @@
 
 const TEST_DATA = [
   {
-    "_index": "WS408",
-    "details": {
-      "CurSpeedKMH": "140.0",
-      "Type": "S",       // <---- Filter on this value here. "S" means Singles, and "D" means Doubles. We don't want Doubles matches.
-      "LineNumber": "8",
-      "ID": "WS408",
-      "CurSpeedMPH": "87",
-      "Event": "Women's Singles",  // <---- Here is the event name
-      "IsMatchPoint": "false",
-      "RoundName": "4th Round",
-      "MaxSets": "3",
-      "IsBreakPoint": "false",
-      "Server": "",
-      "IsSetPoint": "false",
-      "IsTiebreak": "false",
-      "Winner": "2",
-      "CurrentSet": "2",
-      "Status": "C"
-    },
-    "team1_players": [
-      {
-        "Nationality": "CZE",
-        "Position": "A",
-        "ShortName": "P. Kvitova",
-        "ID": "WTA314206",
-        "LastName": "Kvitova",
-        "FirstName": "Petra"
-      }
-    ],
-    "team1_scores": [      // <--- Score array is sorted in order by set (sets start at 1)
-      {
-        "Minutes": "31",
-        "Set": "1",
-        "Score": "3",
-        "SetWinner": "2",
-        "TB": "0"
-      },
-      {
-        "Minutes": "57",
-        "Set": "2",
-        "Score": "5",
-        "SetWinner": "2",
-        "TB": "0"
-      }
-    ],
-    "team2_players": [
-      {
-        "Nationality": "GER",
-        "Position": "A",
-        "ShortName": "A. Kerber",
-        "ID": "WTA311470",
-        "LastName": "Kerber",
-        "FirstName": "Angelique"
-      }
-    ],
-    "team2_scores": [
-      {
-        "Minutes": "31",
-        "Set": "1",
-        "Score": "6",
-        "SetWinner": "2",
-        "TB": "0"
-      },
-      {
-        "Minutes": "57",
-        "Set": "2",
-        "Score": "7",
-        "SetWinner": "2",
-        "TB": "0"
-      }
-    ]
-  },
-  {
     "_index": "MS143",
     "details": {
       "CurSpeedKMH": "",
-      "Type": "S",
-      "LineNumber": "43",
-      "ID": "MS143",
-      "CurSpeedMPH": "",
-      "Event": "Men's Singles",
-      "IsMatchPoint": "false",
-      "RoundName": "1st Round",
-      "MaxSets": "5",
-      "IsBreakPoint": "false",
-      "Server": "",
-      "IsSetPoint": "false",
-      "IsTiebreak": "false",
       "Winner": "2",
+      "CurSpeedMPH": "",
       "CurrentSet": "4",
-      "Status": "C"
+      "ID": "MS143",
+      "Event": "Men's Singles",
+      "LineNumber": "43",
+      "Type": "S",
+      "IsTiebreak": "false",
+      "RoundName": "1st Round",
+      "Status": "C",
+      "IsBreakPoint": "false",
+      "IsMatchPoint": "false",
+      "MaxSets": "5",
+      "Server": "",
+      "IsSetPoint": "false"
     },
-    "team1_players": [
-      {
-        "Nationality": "CRO",
-        "Position": "A",
-        "ShortName": "I. Dodig",
-        "ID": "ATPD646",
-        "LastName": "Dodig",
-        "FirstName": "Ivan"
-      }
-    ],
-    "team1_scores": [
-      {
-        "Minutes": "41",
-        "Set": "1",
-        "Score": "3",
-        "SetWinner": "2",
-        "TB": "0"
-      },
-      {
-        "Minutes": "46",
-        "Set": "2",
-        "Score": "4",
-        "SetWinner": "2",
-        "TB": "0"
-      },
-      {
-        "Minutes": "77",
-        "Set": "3",
-        "Score": "7",
-        "SetWinner": "1",
-        "TB": "7"
-      },
-      {
-        "Minutes": "66",
-        "Set": "4",
-        "Score": "5",
-        "SetWinner": "2",
-        "TB": "0"
-      }
-    ],
-    "team2_players": [
-      {
-        "Nationality": "UKR",
-        "Position": "A",
-        "ShortName": "I. Marchenko",
-        "ID": "ATPME89",
-        "LastName": "Marchenko",
-        "FirstName": "Illya"
-      }
-    ],
-    "team2_scores": [
-      {
-        "Minutes": "41",
-        "Set": "1",
-        "Score": "6",
-        "SetWinner": "2",
-        "TB": "0"
-      },
-      {
-        "Minutes": "46",
-        "Set": "2",
-        "Score": "6",
-        "SetWinner": "2",
-        "TB": "0"
-      },
-      {
-        "Minutes": "77",
-        "Set": "3",
-        "Score": "6",
-        "SetWinner": "1",
-        "TB": "4"
-      },
-      {
-        "Minutes": "66",
-        "Set": "4",
-        "Score": "7",
-        "SetWinner": "2",
-        "TB": "0"
-      }
-    ]
+    "team1_players": {
+      "SetsWon": "1",
+      "Number": "1",
+      "EntryStatus": "",
+      "Seed": "1",
+      "Players": [
+        {
+          "Position": "A",
+          "LastName": "Dodig",
+          "Nationality": "CRO",
+          "FirstName": "Ivan",
+          "ShortName": "I. Dodig",
+          "ID": "ATPD646"
+        }
+      ]
+    },
+    "team1_scores": {
+      "GameScore": "30",
+      "Sets": [
+        {
+          "Minutes": "41",
+          "TB": "0",
+          "Score": "3",
+          "Set": "1",
+          "SetWinner": "2"
+        },
+        {
+          "Minutes": "46",
+          "TB": "0",
+          "Score": "4",
+          "Set": "2",
+          "SetWinner": "2"
+        },
+        {
+          "Minutes": "77",
+          "TB": "7",
+          "Score": "7",
+          "Set": "3",
+          "SetWinner": "1"
+        },
+        {
+          "Minutes": "66",
+          "TB": "0",
+          "Score": "5",
+          "Set": "4",
+          "SetWinner": "2"
+        }
+      ]
+    },
+    "team2_players": {
+      "SetsWon": "3",
+      "Number": "2",
+      "EntryStatus": "",
+      "Seed": "2",
+      "Players": [
+        {
+          "Position": "A",
+          "LastName": "Marchenko",
+          "Nationality": "UKR",
+          "FirstName": "Illya",
+          "ShortName": "I. Marchenko",
+          "ID": "ATPME89"
+        }
+      ]
+    },
+    "team2_scores": {
+      "GameScore": "15",
+      "Sets": [
+        {
+          "Minutes": "41",
+          "TB": "0",
+          "Score": "6",
+          "Set": "1",
+          "SetWinner": "2"
+        },
+        {
+          "Minutes": "46",
+          "TB": "0",
+          "Score": "6",
+          "Set": "2",
+          "SetWinner": "2"
+        },
+        {
+          "Minutes": "77",
+          "TB": "4",
+          "Score": "6",
+          "Set": "3",
+          "SetWinner": "1"
+        },
+        {
+          "Minutes": "66",
+          "TB": "0",
+          "Score": "7",
+          "Set": "4",
+          "SetWinner": "2"
+        }
+      ]
+    }
   },
-
-  // ---- The entry below is a doubles match, so we shouldn't show it
+  {
+    "_index": "WS408",
+    "details": {
+      "CurSpeedKMH": "140.0",
+      "Winner": "2",
+      "CurSpeedMPH": "87",
+      "CurrentSet": "2",
+      "ID": "WS408",
+      "Event": "Women's Singles",
+      "LineNumber": "8",
+      "Type": "S",
+      "IsTiebreak": "false",
+      "RoundName": "4th Round",
+      "Status": "C",
+      "IsBreakPoint": "false",
+      "IsMatchPoint": "false",
+      "MaxSets": "3",
+      "Server": "",
+      "IsSetPoint": "false"
+    },
+    "team1_players": {
+      "Seed": "14",
+      "SetsWon": "0",
+      "ChallRemaining": "2",
+      "Number": "1",
+      "EntryStatus": "",
+      "Players": [
+        {
+          "Position": "A",
+          "LastName": "Kvitova",
+          "Nationality": "CZE",
+          "FirstName": "Petra",
+          "ShortName": "P. Kvitova",
+          "ID": "WTA314206"
+        }
+      ]
+    },
+    "team1_scores": {
+      "GameScore": "40",
+      "Sets": [
+        {
+          "Minutes": "31",
+          "TB": "0",
+          "Score": "3",
+          "Set": "1",
+          "SetWinner": "2"
+        },
+        {
+          "Minutes": "57",
+          "TB": "0",
+          "Score": "5",
+          "Set": "2",
+          "SetWinner": "2"
+        }
+      ]
+    },
+    "team2_players": {
+      "Seed": "2",
+      "SetsWon": "2",
+      "ChallRemaining": "2",
+      "Number": "2",
+      "EntryStatus": "",
+      "Players": [
+        {
+          "Position": "A",
+          "LastName": "Kerber",
+          "Nationality": "GER",
+          "FirstName": "Angelique",
+          "ShortName": "A. Kerber",
+          "ID": "WTA311470"
+        }
+      ]
+    },
+    "team2_scores": {
+      "GameScore": "AD",
+      "Sets": [
+        {
+          "Minutes": "31",
+          "TB": "0",
+          "Score": "6",
+          "Set": "1",
+          "SetWinner": "2"
+        },
+        {
+          "Minutes": "57",
+          "TB": "0",
+          "Score": "7",
+          "Set": "2",
+          "SetWinner": "2"
+        }
+      ]
+    }
+  },
   {
     "_index": "ZD201",
     "details": {
       "CurSpeedKMH": "138.4",
-      "Type": "D",
-      "LineNumber": "1",
-      "ID": "ZD201",
-      "CurSpeedMPH": "86",
-      "Event": "Men's Champions Doubles",
-      "IsMatchPoint": "false",
-      "RoundName": "Final",
-      "MaxSets": "3",
-      "IsBreakPoint": "false",
-      "Server": "",
-      "IsSetPoint": "false",
-      "IsTiebreak": "false",
       "Winner": "1",
+      "CurSpeedMPH": "86",
       "CurrentSet": "2",
-      "Status": "C"
+      "ID": "ZD201",
+      "Event": "Men's Champions Doubles",
+      "LineNumber": "1",
+      "Type": "D",
+      "IsTiebreak": "false",
+      "RoundName": "Final",
+      "Status": "C",
+      "IsBreakPoint": "false",
+      "IsMatchPoint": "false",
+      "MaxSets": "3",
+      "Server": "",
+      "IsSetPoint": "false"
     },
-    "team1_players": [
-      {
-        "Nationality": "AUS",
-        "Position": "A",
-        "ShortName": "P. Cash",
-        "ID": "ATPC023",
-        "LastName": "Cash",
-        "FirstName": "Pat"
-      },
-      {
-        "Nationality": "AUS",
-        "Position": "B",
-        "ShortName": "M. Philippoussis",
-        "ID": "ATPP338",
-        "LastName": "Philippoussis",
-        "FirstName": "Mark"
-      }
-    ],
-    "team1_scores": [
-      {
-        "Minutes": "34",
-        "Set": "1",
-        "Score": "6",
-        "SetWinner": "1",
-        "TB": "0"
-      },
-      {
-        "Minutes": "33",
-        "Set": "2",
-        "Score": "6",
-        "SetWinner": "1",
-        "TB": "0"
-      }
-    ],
-    "team2_players": [
-      {
-        "Nationality": "USA",
-        "Position": "A",
-        "ShortName": "J. McEnroe",
-        "ID": "ATPM047",
-        "LastName": "McEnroe",
-        "FirstName": "John"
-      },
-      {
-        "Nationality": "USA",
-        "Position": "B",
-        "ShortName": "P. McEnroe",
-        "ID": "ATPM048",
-        "LastName": "McEnroe",
-        "FirstName": "Patrick"
-      }
-    ],
-    "team2_scores": [
-      {
-        "Minutes": "34",
-        "Set": "1",
-        "Score": "4",
-        "SetWinner": "1",
-        "TB": "0"
-      },
-      {
-        "Minutes": "33",
-        "Set": "2",
-        "Score": "3",
-        "SetWinner": "1",
-        "TB": "0"
-      }
-    ]
+    "team1_players": {
+      "Seed": "",
+      "Players": [
+        {
+          "Position": "A",
+          "LastName": "Cash",
+          "Nationality": "AUS",
+          "FirstName": "Pat",
+          "ShortName": "P. Cash",
+          "ID": "ATPC023"
+        },
+        {
+          "Position": "B",
+          "LastName": "Philippoussis",
+          "Nationality": "AUS",
+          "FirstName": "Mark",
+          "ShortName": "M. Philippoussis",
+          "ID": "ATPP338"
+        }
+      ],
+      "SetsWon": "2",
+      "ChallRemaining": "3",
+      "Number": "1",
+      "EntryStatus": ""
+    },
+    "team1_scores": {
+      "Sets": [
+        {
+          "Minutes": "34",
+          "TB": "0",
+          "Score": "6",
+          "Set": "1",
+          "SetWinner": "1"
+        },
+        {
+          "Minutes": "33",
+          "TB": "0",
+          "Score": "6",
+          "Set": "2",
+          "SetWinner": "1"
+        }
+      ],
+      "GameScore": ""
+    },
+    "team2_players": {
+      "Seed": "",
+      "Players": [
+        {
+          "Position": "A",
+          "LastName": "McEnroe",
+          "Nationality": "USA",
+          "FirstName": "John",
+          "ShortName": "J. McEnroe",
+          "ID": "ATPM047"
+        },
+        {
+          "Position": "B",
+          "LastName": "McEnroe",
+          "Nationality": "USA",
+          "FirstName": "Patrick",
+          "ShortName": "P. McEnroe",
+          "ID": "ATPM048"
+        }
+      ],
+      "SetsWon": "0",
+      "ChallRemaining": "1",
+      "Number": "2",
+      "EntryStatus": ""
+    },
+    "team2_scores": {
+      "Sets": [
+        {
+          "Minutes": "34",
+          "TB": "0",
+          "Score": "4",
+          "Set": "1",
+          "SetWinner": "1"
+        },
+        {
+          "Minutes": "33",
+          "TB": "0",
+          "Score": "3",
+          "Set": "2",
+          "SetWinner": "1"
+        }
+      ],
+      "GameScore": ""
+    }
   }
 ];
 
