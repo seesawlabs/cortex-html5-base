@@ -68,7 +68,7 @@ class View {
    */
   setData(data) {
     this.rows = data.filter(row => {
-      if (row.details.Type !== 'S') {
+      if (row.details.Type !== 'S' || row.details.Status !== 'I') {
         return false;
       }
       return true;
@@ -94,6 +94,13 @@ class View {
     this._render();
   }
 
+  markCurrentSet(CurrentSet) {
+    const currentSetOne = window.document.getElementById(`player-1-point-${CurrentSet}`);
+    const currentSetTwo = window.document.getElementById(`player-2-point-${CurrentSet}`);
+    currentSetOne.classList.add('current-tag');
+    currentSetTwo.classList.add('current-tag');
+  }
+
   addServer(server) {
     const elements = window.document.getElementsByClassName('server-tag');
     Array.from(elements).forEach(tag => {
@@ -106,18 +113,19 @@ class View {
   clearScores(maxSets) {
     const points = window.document.getElementsByClassName('stats-points');
     const pointsList = Array.from(points);
-    const womenSets = 3
+    const womenSets = 3;
     pointsList.forEach(point => {
-      const set = point.id.charAt(point.id.length - 1)
+      const set = point.id.charAt(point.id.length - 1);
       if (maxSets < set) {
         point.classList.add('hide');
       } else {
         point.classList.remove('hide');
       }
 
-      if(maxSets <= womenSets) {
+      if (maxSets <= womenSets) {
         point.classList.add('women');
       }
+      point.classList.remove('current-tag');
       point.innerText = "";
     });
   }
@@ -126,6 +134,9 @@ class View {
     scores.forEach(row => {
       const point = window.document.getElementById(`player-${playerNumber}-point-${row.Set}`);
       point.innerText = row.Score;
+      if (playerNumber === parseInt(row.SetWinner, 10)) {
+        point.classList.add('gray-tag');
+      }
     });
   }
 
@@ -180,12 +191,13 @@ class View {
     this.playerTwoCountry.innerText = `(${row.team2_players.Players[0].Nationality})`;
     this.playerOneScore.innerText = row.team1_scores.GameScore;
     this.playerTwoScore.innerText = row.team2_scores.GameScore;
-    this.playerStatsOneSeed.innerText =`(${row.team1_players.Seed})`;
+    this.playerStatsOneSeed.innerText = `(${row.team1_players.Seed})`;
     this.playerStatsTwoSeed.innerText = `(${row.team2_players.Seed})`;
     this.clearScores(row.details.MaxSets);
     this.loadScores(row.team1_scores.Sets, 1);
     this.loadScores(row.team2_scores.Sets, 2);
     this.addServer(row.details.Server);
+    this.markCurrentSet(row.details.CurrentSet);
   }
 }
 

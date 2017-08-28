@@ -92,7 +92,7 @@ body {
   background-color: #1c468c;
   display: flex;
   flex-direction: column;
-  width: 996px;
+  width: 987px;
   margin: 0 auto;
   font-size: 50px;
 }
@@ -103,7 +103,7 @@ body {
 }
 
 .stats-country-player {
-  padding: 10px 5px;
+  padding: 15px 5px;
   font-size: 32px;
 }
 
@@ -171,8 +171,14 @@ footer {
   margin: 50px 20px;
 }
 
+
 .gray-tag {
-  color: #cdccca;
+  color: #bbbdc0;
+}
+
+.current-tag {
+  background-color: #2b9fd9;
+  color: #fff;
 }
 
 .dark-gray-tag {
