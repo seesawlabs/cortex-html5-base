@@ -58,8 +58,8 @@ body {
 
 .circle-result {
   border-radius: 50%;
-  width: 420px;
-  height: 420px;
+  width: 440px;
+  height: 430px;
   background-color: #fff;
   margin: 50px auto;
   color: black;
@@ -85,14 +85,14 @@ body {
   display: flex;
   flex-direction: row;
   margin: 0 auto;
-  width: 1000px;
+  width: 986px;
 }
 
 .container-stats {
   background-color: #1c468c;
   display: flex;
   flex-direction: column;
-  width: 987px;
+  width: 986px;
   margin: 0 auto;
   font-size: 50px;
 }
@@ -122,7 +122,7 @@ body {
 }
 
 .stats-player .name .seed {
-  font-size: 50px;
+  font-size: 35px;
   color: #bbbdc0;
   font-family: "HelveticaNeue";
 }

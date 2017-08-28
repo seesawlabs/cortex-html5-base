@@ -116,6 +116,7 @@ class View {
     const womenSets = 3;
     pointsList.forEach(point => {
       const set = point.id.charAt(point.id.length - 1);
+      point.classList.remove('women');
       if (maxSets < set) {
         point.classList.add('hide');
       } else {
@@ -135,7 +136,7 @@ class View {
     scores.forEach(row => {
       const point = window.document.getElementById(`player-${playerNumber}-point-${row.Set}`);
       point.innerText = row.Score;
-      if (playerNumber === parseInt(row.SetWinner, 10)) {
+      if (playerNumber !== parseInt(row.SetWinner, 10)) {
         point.classList.add('gray-tag');
       }
     });
