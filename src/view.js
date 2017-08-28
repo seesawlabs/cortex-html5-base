@@ -142,7 +142,7 @@ class View {
   loadScores(scores, playerNumber) {
     scores.forEach(row => {
       const point = window.document.getElementById(`player-${playerNumber}-point-${row.Set}`);
-      point.innerText = row.Score;
+      point.innerText = row.Score.trim();
       if (playerNumber !== parseInt(row.SetWinner, 10)) {
         point.classList.add('gray-tag');
       }
