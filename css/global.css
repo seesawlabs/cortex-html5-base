@@ -35,7 +35,7 @@ body {
 }
 
 .creativeContainer-header {
-  height: 710px;
+  height: 690px;
   font-size: 120px;
   line-height: 122px;
   font-weight: bold;
@@ -58,6 +58,7 @@ body {
   width: 496px;
   height: 496px;
   position: relative;
+  padding: 15px 0px;
 }
 
 .circle-result {
@@ -120,7 +121,7 @@ body {
 }
 
 .stats-player .name {
-  width: 640px;
+  width: 600px;
   padding: 25px 20px;
   border-right: 1px solid #2b9fd9;
 }
@@ -207,7 +208,7 @@ footer {
 
 .server-tag {
   height: 15px;
-  width: 472px;
+  width: 460px;
   background-color: #ffd60c;
   margin: 10px;
   position: absolute;
