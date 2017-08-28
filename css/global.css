@@ -102,7 +102,7 @@ body {
   background-color: #1c468c;
   display: flex;
   flex-direction: column;
-  width: 986px;
+  width: 979px;
   margin: 0 auto;
   font-size: 52px;
 }
@@ -126,8 +126,8 @@ body {
 }
 
 .stats-player .name {
-  min-width: 450px;
-  max-width: 450px;
+  min-width: 447px;
+  max-width: 447px;
   padding: 25px 20px;
   border-right: 1px solid #92d1e6;
 }
@@ -179,9 +179,9 @@ footer {
 }
 
 .ibm-footer {
-  width: 101px;
-  height: 40px;
-  margin: 50px 20px;
+  width: 150px;
+  height: 100px;
+  margin: 20px 20px;
 }
 
 
@@ -218,7 +218,7 @@ footer {
   height: 15px;
   width: 460px;
   background-color: #ffd60c;
-  margin: 10px;
   position: absolute;
-  margin: 2px 20px;
+  top: 20px;
+  left: 16px;
 }
