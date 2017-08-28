@@ -140,6 +140,17 @@ class View {
     });
   }
 
+  addSeed(row) {
+    const seedOne = row.team1_players.Seed;
+    const seedTwo = row.team2_players.Seed;
+    if (seedOne !== "") {
+      this.playerStatsOneSeed.innerText = `(${seedOne})`;
+    }
+    if (seedTwo !== "") {
+      this.playerStatsTwoSeed.innerText = `(${seedTwo})`;
+    }
+  }
+
   /**
    * Update the view before displaying it on the screen.
    *
@@ -191,8 +202,14 @@ class View {
     this.playerTwoCountry.innerText = `(${row.team2_players.Players[0].Nationality})`;
     this.playerOneScore.innerText = row.team1_scores.GameScore;
     this.playerTwoScore.innerText = row.team2_scores.GameScore;
-    this.playerStatsOneSeed.innerText = `(${row.team1_players.Seed})`;
-    this.playerStatsTwoSeed.innerText = `(${row.team2_players.Seed})`;
+
+    if(row.team1_scores.GameScore === "") {
+        this.playerOneScore.innerText = "-"
+    }
+    if(row.team2_scores.GameScore === "") {
+        this.playerTwoScore.innerText = "-"
+    }
+    this.addSeed(row);
     this.clearScores(row.details.MaxSets);
     this.loadScores(row.team1_scores.Sets, 1);
     this.loadScores(row.team2_scores.Sets, 2);
