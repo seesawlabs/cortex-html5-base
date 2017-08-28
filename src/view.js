@@ -125,6 +125,7 @@ class View {
       if (maxSets <= womenSets) {
         point.classList.add('women');
       }
+      point.classList.remove('gray-tag');
       point.classList.remove('current-tag');
       point.innerText = "";
     });
