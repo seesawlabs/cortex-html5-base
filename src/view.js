@@ -203,11 +203,11 @@ class View {
     this.playerOneScore.innerText = row.team1_scores.GameScore;
     this.playerTwoScore.innerText = row.team2_scores.GameScore;
 
-    if(row.team1_scores.GameScore === "") {
-        this.playerOneScore.innerText = "-"
+    if (row.team1_scores.GameScore === "") {
+      this.playerOneScore.innerText = "-";
     }
-    if(row.team2_scores.GameScore === "") {
-        this.playerTwoScore.innerText = "-"
+    if (row.team2_scores.GameScore === "") {
+      this.playerTwoScore.innerText = "-";
     }
     this.addSeed(row);
     this.clearScores(row.details.MaxSets);
