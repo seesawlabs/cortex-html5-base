@@ -9,6 +9,25 @@
       // var gender = "female";
       // var gender = "both";
     </script>
+    <style type="text/css">
+      .overlay {
+        background-image: url(assets/overlay.png);
+        background-position: 0 0;
+        top: 0;
+        left: 0;
+        width: 1080px;
+        height: 1920px;
+        position: absolute;
+        background-size: contain;
+      }
+      .creativeContainer {
+        opacity: .8;
+        z-index: 10;
+      }
+      html, body {
+        overflow: auto !important;
+      }
+    </style>
   </head>
   <body>
     <div id="creativeContainer" class="creativeContainer">
@@ -97,6 +116,7 @@
         <img class="ibm-footer" src="assets/images/ibmLogo.svg" alt="">
       </footer>
     </div>
+    <div class="overlay"></div>
     <script src="bundle.js"></script>
   </body>
 </html>

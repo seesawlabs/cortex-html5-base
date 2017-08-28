@@ -35,14 +35,13 @@ body {
 }
 
 .creativeContainer-header {
-  height: 690px;
-  font-size: 120px;
-  line-height: 122px;
+  height: 694px;
+  font-size: 126px;
   font-weight: bold;
   letter-spacing: -4px;
   padding: 75px 75px 0;
   box-sizing: border-box;
-  line-height: 1.2;
+  line-height: 126px;
 }
 
 .creativeContainer-header-stroke {
@@ -50,15 +49,20 @@ body {
   height: 20px;
   font-size: 0;
   background-color: #fff;
-  margin-bottom: 32px;
+}
+
+#creativeContainer-header-content {
+  top: 52px;
+  position: relative;
+  left: -5px;
+  letter-spacing: -3.2px;
 }
 
 .box-result {
   background-color: #2b9fd9;
-  width: 490px;
+  width: 496px;
   height: 496px;
   position: relative;
-  padding: 15px 0px;
 }
 
 .box-result-border {
