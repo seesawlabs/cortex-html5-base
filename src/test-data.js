@@ -18,7 +18,7 @@ const TEST_DATA = [
       "IsBreakPoint": "false",
       "IsMatchPoint": "false",
       "MaxSets": "5",
-      "Server": "",
+      "Server": "1A",
       "IsSetPoint": "false"
     },
     "team1_players": {
@@ -121,6 +121,125 @@ const TEST_DATA = [
     }
   },
   {
+    "_index": "MS150",
+    "details": {
+      "CurSpeedKMH": "",
+      "Winner": "2",
+      "CurSpeedMPH": "",
+      "CurrentSet": "4",
+      "ID": "MS143",
+      "Event": "Men's Singles",
+      "LineNumber": "43",
+      "Type": "S",
+      "IsTiebreak": "false",
+      "RoundName": "1st Round",
+      "Status": "C",
+      "IsBreakPoint": "false",
+      "IsMatchPoint": "false",
+      "MaxSets": "5",
+      "Server": "2A",
+      "IsSetPoint": "false"
+    },
+    "team1_players": {
+      "SetsWon": "1",
+      "Number": "1",
+      "EntryStatus": "",
+      "Seed": "1",
+      "Players": [
+        {
+          "Position": "A",
+          "LastName": "Sauer",
+          "Nationality": "USA",
+          "FirstName": "Calvin",
+          "ShortName": "C. Sauer",
+          "ID": "ATPD647"
+        }
+      ]
+    },
+    "team1_scores": {
+      "GameScore": "15",
+      "Sets": [
+        {
+          "Minutes": "41",
+          "TB": "0",
+          "Score": "4",
+          "Set": "1",
+          "SetWinner": "2"
+        },
+        {
+          "Minutes": "46",
+          "TB": "0",
+          "Score": "4",
+          "Set": "2",
+          "SetWinner": "2"
+        },
+        {
+          "Minutes": "77",
+          "TB": "7",
+          "Score": "7",
+          "Set": "3",
+          "SetWinner": "1"
+        },
+        {
+          "Minutes": "66",
+          "TB": "0",
+          "Score": "5",
+          "Set": "4",
+          "SetWinner": "2"
+        }
+      ]
+    },
+    "team2_players": {
+      "SetsWon": "3",
+      "Number": "2",
+      "EntryStatus": "",
+      "Seed": "2",
+      "Players": [
+        {
+          "Position": "A",
+          "LastName": "Tennis",
+          "Nationality": "RUS",
+          "FirstName": "Joe",
+          "ShortName": "J. Tennis",
+          "ID": "ATPME90"
+        }
+      ]
+    },
+    "team2_scores": {
+      "GameScore": "15",
+      "Sets": [
+        {
+          "Minutes": "41",
+          "TB": "0",
+          "Score": "6",
+          "Set": "1",
+          "SetWinner": "2"
+        },
+        {
+          "Minutes": "46",
+          "TB": "0",
+          "Score": "6",
+          "Set": "2",
+          "SetWinner": "2"
+        },
+        {
+          "Minutes": "77",
+          "TB": "4",
+          "Score": "6",
+          "Set": "3",
+          "SetWinner": "1"
+        },
+        {
+          "Minutes": "66",
+          "TB": "0",
+          "Score": "7",
+          "Set": "4",
+          "SetWinner": "2"
+        }
+      ]
+    }
+  },
+  {
     "_index": "WS408",
     "details": {
       "CurSpeedKMH": "140.0",
@@ -137,7 +256,7 @@ const TEST_DATA = [
       "IsBreakPoint": "false",
       "IsMatchPoint": "false",
       "MaxSets": "3",
-      "Server": "",
+      "Server": "2A",
       "IsSetPoint": "false"
     },
     "team1_players": {
@@ -230,7 +349,7 @@ const TEST_DATA = [
       "IsBreakPoint": "false",
       "IsMatchPoint": "false",
       "MaxSets": "3",
-      "Server": "",
+      "Server": "2B",
       "IsSetPoint": "false"
     },
     "team1_players": {
