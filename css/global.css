@@ -53,6 +53,7 @@ body {
   background-color: #2b9fd9;
   width: 496px;
   height: 496px;
+  position: relative;
 }
 
 .circle-result {
@@ -199,4 +200,5 @@ footer {
   width: 472px;
   background-color: #ffd60c;
   margin: 10px;
+  position: absolute;
 }

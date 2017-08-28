@@ -26,6 +26,8 @@ class View {
     this.playerTwoCountry = window.document.getElementById('player-2-country');
     this.playerOneScore = window.document.getElementById('player-1-score');
     this.playerTwoScore = window.document.getElementById('player-2-score');
+    this.serverOne = window.document.getElementById('server-1');
+    this.serverTwo = window.document.getElementById('server-2');
   }
 
   /**
@@ -90,6 +92,15 @@ class View {
     }
     this.placeholder.hide();
     this._render();
+  }
+
+  addServer(server) {
+    const elements = window.document.getElementsByClassName('server-tag');
+    Array.from(elements).forEach(tag => {
+      tag.classList.add('hide');
+    });
+    const _server = window.document.getElementById(`server-${server[0]}`);
+    _server.classList.remove('hide');
   }
 
   clearScores(maxSets) {
@@ -174,6 +185,7 @@ class View {
     this.clearScores(row.details.MaxSets);
     this.loadScores(row.team1_scores.Sets, 1);
     this.loadScores(row.team2_scores.Sets, 2);
+    this.addServer(row.details.Server);
   }
 }
 
