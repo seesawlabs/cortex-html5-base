@@ -69,8 +69,9 @@ body {
   color: #004290;
 }
 
-.circle-result .points {
+.circle-result .points span {
   font-size: 160px;
+  line-height: 10px;
 }
 
 .circle-result .points .legend {
@@ -92,7 +93,7 @@ body {
   flex-direction: column;
   width: 996px;
   margin: 0 auto;
-  font-size: 55px;
+  font-size: 50px;
 }
 
 .stats-player {
@@ -102,6 +103,7 @@ body {
 
 .stats-country-player {
   padding: 10px 5px;
+  font-size: 32px;
 }
 
 .stats-border {
@@ -113,9 +115,15 @@ body {
 }
 
 .stats-player .name {
-  width: 496px;
-  padding: 25px 40px;
+  width: 640px;
+  padding: 25px 20px;
   border-right: 1px solid #2b9fd9;
+}
+
+.stats-player .name .seed {
+  font-size: 50px;
+  color: #bbbdc0;
+  font-family: "HelveticaNeue";
 }
 
 .stats-player .stats-points {
@@ -123,6 +131,10 @@ body {
   padding: 25px 10px;
   border-right: 1px solid #2b9fd9;
   text-align: center;
+}
+
+.stats-player .stats-points.women {
+  width: 166.6px;
 }
 
 .stats-player .total {
@@ -170,7 +182,8 @@ footer {
   display: flex;
   flex-direction: row;
   font-size: 38px;
-  margin-top: 51px;
+  margin-top: 55px;
+  padding-bottom: 90px;
 }
 
 .player-container .player {
@@ -179,4 +192,11 @@ footer {
 
 .stats-player .points.last-point {
   border-right: none;
+}
+
+.server-tag {
+  height: 15px;
+  width: 472px;
+  background-color: #ffd60c;
+  margin: 10px;
 }

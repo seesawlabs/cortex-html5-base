@@ -20,8 +20,12 @@ class View {
     this.playerTwo = window.document.getElementById('player-2');
     this.playerStatsOne = window.document.getElementById('stats-player1-name');
     this.playerStatsTwo = window.document.getElementById('stats-player2-name');
+    this.playerStatsOneSeed = window.document.getElementById('stats-player1-seed');
+    this.playerStatsTwoSeed = window.document.getElementById('stats-player2-seed');
     this.playerOneCountry = window.document.getElementById('player-1-country');
     this.playerTwoCountry = window.document.getElementById('player-2-country');
+    this.playerOneScore = window.document.getElementById('player-1-score');
+    this.playerTwoScore = window.document.getElementById('player-2-score');
   }
 
   /**
@@ -88,9 +92,21 @@ class View {
     this._render();
   }
 
-  clearScores() {
+  clearScores(maxSets) {
     const points = window.document.getElementsByClassName('stats-points');
-    Array.from(points).forEach(point => {
+    const pointsList = Array.from(points);
+    const womenSets = 3
+    pointsList.forEach(point => {
+      const set = point.id.charAt(point.id.length - 1)
+      if (maxSets < set) {
+        point.classList.add('hide');
+      } else {
+        point.classList.remove('hide');
+      }
+
+      if(maxSets <= womenSets) {
+        point.classList.add('women');
+      }
       point.innerText = "";
     });
   }
@@ -141,21 +157,23 @@ class View {
     if (this.currentRow >= this.rows.length) {
       this.currentRow = 0;
     }
-    Logger.log(`The view has ${this.rows.length} data rows. ` +
-               `Displaying row #${this.currentRow}.`);
     const row = this.rows[this.currentRow];
     this.currentRow += 1;
     this.eventName.innerText = row.details.Event;
     this.roundName.innerText = row.details.RoundName;
-    this.playerOne.innerText = row.team1_players[0].ShortName;
-    this.playerTwo.innerText = row.team2_players[0].ShortName;
-    this.playerStatsOne.innerText = row.team1_players[0].LastName;
-    this.playerStatsTwo.innerText = row.team2_players[0].LastName;
-    this.playerOneCountry.innerText = `(${row.team1_players[0].Nationality})`;
-    this.playerTwoCountry.innerText = `(${row.team2_players[0].Nationality})`;
-    this.clearScores();
-    this.loadScores(row.team1_scores, 1);
-    this.loadScores(row.team2_scores, 2);
+    this.playerOne.innerText = row.team1_players.Players[0].ShortName;
+    this.playerTwo.innerText = row.team2_players.Players[0].ShortName;
+    this.playerStatsOne.innerText = row.team1_players.Players[0].LastName;
+    this.playerStatsTwo.innerText = row.team2_players.Players[0].LastName;
+    this.playerOneCountry.innerText = `(${row.team1_players.Players[0].Nationality})`;
+    this.playerTwoCountry.innerText = `(${row.team2_players.Players[0].Nationality})`;
+    this.playerOneScore.innerText = row.team1_scores.GameScore;
+    this.playerTwoScore.innerText = row.team2_scores.GameScore;
+    this.playerStatsOneSeed.innerText =`(${row.team1_players.Seed})`;
+    this.playerStatsTwoSeed.innerText = `(${row.team2_players.Seed})`;
+    this.clearScores(row.details.MaxSets);
+    this.loadScores(row.team1_scores.Sets, 1);
+    this.loadScores(row.team2_scores.Sets, 2);
   }
 }
 
