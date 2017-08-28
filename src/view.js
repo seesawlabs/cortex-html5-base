@@ -143,6 +143,8 @@ class View {
   }
 
   addSeed(row) {
+    this.playerStatsOneSeed.innerText = "";
+    this.playerStatsTwoSeed.innerText = "";
     const seedOne = row.team1_players.Seed;
     const seedTwo = row.team2_players.Seed;
     if (seedOne !== "") {

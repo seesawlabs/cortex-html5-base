@@ -23,6 +23,10 @@ body {
   width: 1080px;
   height: 1920px;
   background-color: #1169AA;
+  background: -webkit-linear-gradient(#1169AA, #2b9fd9);
+  background: -o-linear-gradient(#1169AA, #2b9fd9);
+  background: -moz-linear-gradient(#1169AA, #2b9fd9);
+  background: linear-gradient(#1169AA, #2b9fd9);
   font-family: "HelveticaNeue-Bold";
   color: #fff;
   box-sizing: border-box;
