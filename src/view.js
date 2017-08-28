@@ -71,6 +71,13 @@ class View {
       if (row.details.Type !== 'S' || row.details.Status !== 'I') {
         return false;
       }
+
+      if (window.gender === "male") {
+        return row.details.Event.match(/^Men/);
+      } else if (window.gender === "female") {
+        return row.details.Event.match(/^Women/);
+      }
+
       return true;
     });
 

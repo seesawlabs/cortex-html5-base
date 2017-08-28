@@ -61,6 +61,10 @@ body {
   padding: 15px 0px;
 }
 
+.box-result-border {
+  border-left: 1px solid #92d1e6
+}
+
 .circle-result {
   border-radius: 50%;
   width: 440px;
@@ -113,7 +117,7 @@ body {
 }
 
 .stats-border {
-  border-bottom: 1px solid #2b9fd9;
+  border-bottom: 1px solid #92d1e6;
 }
 
 .results-border {
@@ -123,7 +127,7 @@ body {
 .stats-player .name {
   width: 600px;
   padding: 25px 20px;
-  border-right: 1px solid #2b9fd9;
+  border-right: 1px solid #92d1e6;
 }
 
 .stats-player .name .seed {
@@ -135,12 +139,12 @@ body {
 .stats-player .stats-points {
   width: 100px;
   padding: 25px 10px;
-  border-right: 1px solid #2b9fd9;
+  border-right: 1px solid #92d1e6;
   text-align: center;
 }
 
 .stats-player .stats-points.women {
-  width: 166.6px;
+  width: 185.6px;
 }
 
 .stats-player .total {
