@@ -9,7 +9,7 @@
 
 // const FORMAT = 'small';
 
-const IFRAME = 'https://lpac.liveposter.com/load/prod?contentBucket=INT_US_TEST_1080W_1920H&frameid=';
+const IFRAME = 'https://lpac.liveposter.com/load/prod?crtx_mode=skip&contentBucket=INT_US_TEST_1080W_1920H&frameid=';
 
 class View {
   constructor() {
