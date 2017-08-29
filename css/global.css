@@ -144,6 +144,8 @@ body {
   max-width: 493px;
   height: 100px;
   border-right: 1px solid #92d1e6;
+  display: flex;
+  flex-direction: row;
 }
 
 .stats-player .name span {
@@ -229,12 +231,12 @@ footer {
   white-space: nowrap;
   font-size: 34px;
   top: 85px;
-  width: 350px;
-
+  width: 317px;
+  left: 45px;
 }
 
 .player-container .player {
-  padding: 2px;
+  padding: 5px;
   max-width: 250px;
   text-align: center;
   text-overflow: ellipsis;
@@ -252,4 +254,13 @@ footer {
   position: absolute;
   top: 10px;
   left: 16px;
+}
+
+#stats-player1-name,
+#stats-player2-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 385px;
+  display: inline-block;
 }
