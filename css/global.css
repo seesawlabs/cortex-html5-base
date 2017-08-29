@@ -99,8 +99,8 @@ body {
   font-size: 24px;
   text-align: center;
   position: absolute;
-  bottom: 101px;
-  left: 176px;
+  bottom: 102px;
+  left: 175px;
 }
 
 
@@ -118,6 +118,7 @@ body {
   width: 979px;
   margin: 0 auto;
   font-size: 52px;
+  display: none;
 }
 
 .stats-player {
