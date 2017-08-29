@@ -115,10 +115,10 @@ body {
   background-color: #1c468c;
   display: flex;
   flex-direction: column;
-  width: 979px;
-  margin: 0 auto;
-  font-size: 52px;
-  display: none;
+  width: 986px;
+  font-size: 55px;
+  position: absolute;
+  left: 47px;
 }
 
 .stats-player {
@@ -140,10 +140,15 @@ body {
 }
 
 .stats-player .name {
-  min-width: 447px;
-  max-width: 447px;
-  padding: 25px 20px;
+  min-width: 493px;
+  max-width: 493px;
+  height: 100px;
   border-right: 1px solid #92d1e6;
+}
+
+.stats-player .name span {
+  line-height: 111px;
+  padding-left: 30px;
 }
 
 .stats-player .name .seed {
@@ -153,13 +158,11 @@ body {
 }
 
 .stats-player .stats-points {
-  font-size: 130px;
-  position: absolute;
-  top: 143px;
-  left: 126px;
-  text-align: center;
-  width: 138px;
+  width: 100px;
   height: 100px;
+  text-align: center;
+  line-height: 110px;
+  border-right: 1px solid #92d1e6;
 }
 
 .stats-player .stats-points.women {
@@ -196,11 +199,11 @@ footer {
 }
 
 .ibm-footer {
-  width: 290px;
-  height: 89px;
+  width: 115px;
+  height: 50px;
   position: absolute;
-  right: 7px;
-  top: 24px;
+  right: 40px;
+  top: 50px;
 }
 
 
