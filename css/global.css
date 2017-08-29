@@ -223,16 +223,22 @@ footer {
 .player-container {
   display: flex;
   flex-direction: row;
-  font-size: 34px;
-  position: absolute;
-  top: 85px;
-  white-space: nowrap;
-  width: 350px;
+  align-items: center;
   justify-content: center;
+  position: absolute;
+  white-space: nowrap;
+  font-size: 34px;
+  top: 85px;
+  width: 350px;
+
 }
 
 .player-container .player {
-  padding: 10px;
+  padding: 2px;
+  max-width: 250px;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .stats-player .points.last-point {
