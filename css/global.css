@@ -222,6 +222,7 @@ footer {
   font-size: 34px;
   position: absolute;
   top: 85px;
+  white-space: nowrap;
 }
 
 .player-container .player {
