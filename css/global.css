@@ -99,7 +99,7 @@ body {
   font-size: 24px;
   text-align: center;
   position: absolute;
-  bottom: 102px;
+  bottom: 90px;
   left: 172px;
 }
 
@@ -227,6 +227,8 @@ footer {
   position: absolute;
   top: 85px;
   white-space: nowrap;
+  width: 350px;
+  justify-content: center;
 }
 
 .player-container .player {
