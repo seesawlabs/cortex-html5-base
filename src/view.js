@@ -1,22 +1,14 @@
 /* global window */
 
-// import Placeholder from './placeholder.js';
-// import Wetmet from './wetmet';
-// import Logger from './logger';
-
-// import moment from 'moment';
-// import moment from 'moment-timezone';
-
-// const FORMAT = 'small';
-
-const IFRAME = 'https://lpac.liveposter.com/load/prod?crtx_mode=skip&contentBucket=INT_US_TEST_1080W_1920H&frameid=';
+const IFRAME = 'http://linknyc-jetblue.s3-website-us-east-1.amazonaws.com/?crtx_mode=skip&id=';
+// const IFRAME = 'http://localhost:8081/kiosk.html?crtx_mode=skip&id=';
 
 class View {
   constructor() {
     // this.placeholder = new Placeholder();
     this.swapped = false;
     /* TODO: Get default frameid */
-    this.frameid = '10001';
+    this.frameid = null;
     this.createInitialDom();
   }
 
@@ -61,6 +53,7 @@ class View {
   setData(data) {
     // window.document.getElementById('output').value = JSON.stringify(data || {dummy: true});
     this.frameid = data && data.length && data[0]._index;
+    this.frameid = this.frameid.replace(/(-[lr]?)$/ig, '');
   }
 
   /**
@@ -96,6 +89,30 @@ class View {
    * TODO: Implement this method according to your needs.
    */
   updateView() {
+    if (this.frame1.style.zIndex === '20') {
+      this.frame1.contentWindow.postMessage({
+        call: 'sendVisible',
+        value: 'VISIBLE'
+      }, '*');
+    }
+    if (this.frame2.style.zIndex === '20') {
+      this.frame2.contentWindow.postMessage({
+        call: 'sendVisible',
+        value: 'VISIBLE'
+      }, '*');
+    }
+    if (this.frame1.style.zIndex === '10') {
+      this.frame1.contentWindow.postMessage({
+        call: 'sendVisible',
+        value: 'HIDDEN'
+      }, '*');
+    }
+    if (this.frame2.style.zIndex === '10') {
+      this.frame2.contentWindow.postMessage({
+        call: 'sendVisible',
+        value: 'HIDDEN'
+      }, '*');
+    }
   }
 
   /**
@@ -139,31 +156,20 @@ class View {
   }
 
   createInitialDom() {
-    // window.document.body.className += ` ${FORMAT}-format`;
     this.div = window.document.getElementById('container');
     this.frame1 = this.create('iframe', 'content1');
+    this.frame1.name = 'frame1-hidden';
     this.frame1.width = '100%';
     this.frame1.height = '100%';
     this.div.appendChild(this.frame1);
 
     this.frame2 = this.create('iframe', 'content2');
+    this.frame2.name = 'frame2-hidden';
     this.frame2.width = '100%';
     this.frame2.height = '100%';
     this.div.appendChild(this.frame2);
 
     this.render();
-
-    //
-    // this.div.className += ` ${FORMAT}-format`;
-    // this.div
-    //   .style.backgroundImage = `url(./assets/images/${FORMAT}-format.jpg)`;
-    // this.videoContainer = this.create('div', 'video');
-    // this.video = this.create('video', 'content');
-    // this.video.autoplay = true;
-    // this.videoContainer.appendChild(this.video);
-    //
-    // this.div.appendChild(this.videoContainer);
-    // this.updateView();
   }
 }
 
