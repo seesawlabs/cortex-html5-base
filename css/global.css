@@ -261,6 +261,16 @@ footer {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 385px;
+  max-width: 382px;
   display: inline-block;
+}
+
+#event-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-height: 247px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  padding-top: 5px;
 }

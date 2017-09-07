@@ -745,7 +745,7 @@ const GOOD_DATA = [
       "IsTiebreak": "false",
       "CurSpeedKMH": "135.2",
       "RoundName": "1st Round",
-      "Event": "Women's Singles",
+      "Event": "Women's Collegiate Invitational",
       "IsBreakPoint": "false",
       "MaxSets": "3",
       "Type": "S",
@@ -1050,7 +1050,7 @@ const GOOD_DATA = [
       "IsTiebreak": "false",
       "CurSpeedKMH": "",
       "RoundName": "1st Round",
-      "Event": "Women's Singles",
+      "Event": "Women's Collegiate Invitational",
       "IsBreakPoint": "false",
       "MaxSets": "3",
       "Type": "S",
@@ -1229,7 +1229,7 @@ const GOOD_DATA = [
       "IsTiebreak": "false",
       "CurSpeedKMH": "135.2",
       "RoundName": "1st Round",
-      "Event": "Women's Singles",
+      "Event": "Women's Collegiate Invitational",
       "IsBreakPoint": "false",
       "MaxSets": "3",
       "Type": "S",
@@ -2306,7 +2306,7 @@ const GOOD_DATA = [
       "GameScore": "",
       "Points": "",
       "Sets": [
-        
+
       ]
     },
     "team1_players": {
@@ -2331,7 +2331,7 @@ const GOOD_DATA = [
       "GameScore": "",
       "Points": "",
       "Sets": [
-        
+
       ]
     }
   },
